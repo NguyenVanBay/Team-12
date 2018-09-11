@@ -6,13 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bài tập lớn nhóm 12</title>
-    <link rel="stylesheet" href="css/style.css">
     <link href="font/css/fontawesome.css" rel="stylesheet">
     <link href="font/css/brands.css" rel="stylesheet">
     <link href="font/css/solid.css" rel="stylesheet">
+
+    <!-- mystyle -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style_pc.css">
+    <link rel="stylesheet" href="css/style_mobile.css">
+
 </head>
 
 <body>
+        
 
     <div id="header-top-area">
         <div class="language-area">
@@ -47,11 +53,11 @@
         </div> <!-- end logo -->
 
         <div class="my-cart">
-            <ul>
+            <ul id="cart">
                 <li id="icon-cart">
-                    <a href="#"><i class="fa fa-shopping-cart"></i>My Cart</a>
-                    <span>2</span>
-                    <!-- <div class="mini-cart-sub">
+                    <a href="#"><i class="fa fa-shopping-cart"></i>My Cart <span>2</span></a>
+                    
+                    <div id="mini-cart-sub">
                         <div class="cart-product">
                             <div class="single-cart">
                                 <div class="cart-img">
@@ -62,7 +68,7 @@
                                     <p>1 x £60.00</p>
                                 </div>
                                 <div class="cart-icon">
-                                    <a href="#"><i class="fa fa-remove"></i></a>
+                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
                                 </div>
                             </div>
                             <div class="single-cart">
@@ -74,18 +80,30 @@
                                     <p>1 x £52.00</p>
                                 </div>
                                 <div class="cart-icon">
-                                    <a href="#"><i class="fa fa-remove"></i></a>
+                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
                                 </div>
                             </div>
+
+                            <div class="single-cart">
+                                <div class="cart-img">
+                                    <a href="#"><img src="img/3.1.jpg" alt="book"></a>
+                                </div>
+                                <div class="cart-info">
+                                    <h5><a href="#">Chaz Kangeroo Hoodie</a></h5>
+                                    <p>1 x £52.00</p>
+                                </div>
+                                <div class="cart-icon">
+                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="cart-bottom">
+                                <a class="view-cart" href="cart.html">view cart</a>
+                                <a href="checkout.html">Check out</a>
+                            </div>
                         </div>
-                        <div class="cart-totals">
-                            <h5>Total <span>£12.00</span></h5>
-                        </div>
-                        <div class="cart-bottom">
-                            <a class="view-cart" href="cart.html">view cart</a>
-                            <a href="checkout.html">Check out</a>
-                        </div>
-                    </div> -->
+                        
+                    </div>
                 </li>
             </ul>
         </div> <!-- end cart -->
@@ -239,6 +257,8 @@
             </div>
         </div> <!-- end footer-bottom -->
     </footer>
+
+    <script src="js/my.js"></script>
 
 </body>
 
