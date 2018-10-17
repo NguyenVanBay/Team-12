@@ -87,3 +87,48 @@
     color: #fff;
     text-decoration: none;
 }
+
+/* css layout sidebar and container */
+
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 30%;
+}
+
+.content {
+    width: 70%;
+}
+
+span.new {
+    position: absolute;
+    background: red;
+    color: #fff;
+    left: -1px;
+    top: -1px;
+    padding: 5px 16px;
+    font-size: 12px;
+}
+
+span.hot {
+    position: absolute;
+    background: orange;
+    color: #fff;
+    left: -1px;
+    top: -1px;
+    padding: 5px 16px;
+    font-size: 12px;
+}
+
+span.giamgia {
+    position: absolute;
+    background: blue;
+    color: #fff;
+    left: -1px;
+    top: -1px;
+    padding: 5px 16px;
+    font-size: 12px;
+}

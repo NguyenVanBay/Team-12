@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Game Tinh Tong</title>
+</head>
+<body>
+
+    <p id="soThuNhat"></p>
+    <p id="phepTinh"></p>
+    <p id="soThuHai"></p>
+    <a id="luaChonMot" style="width: 100px; height :100px; background: red;"></a>
+    <a id="luaChonHai" style="width: 100px; height :100px; background: red;"></a>
+
+    <button onclick="startGame();">Start Game</button>
+    
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+
+    <script>
+
+    function startGame() {
+        // (function lapLai() {
+        //     setTimeout(lapLai, time)
+        //     come();
+        // })();
+
+        tinhToan();
+
+        console.log("out");
+    }
+
+    function tinhToan() {
+
+        var timeStar = $.now();
+        document.getElementById("soThuNhat").innerHTML = 12;
+        document.getElementById("soThuNhat").innerHTML = 13;
+        document.getElementById("phepTinh").innerHTML = "+";
+        document.getElementById("luaChonMot").innerHTML = 25;
+        document.getElementById("luaChonHai").innerHTML = 26;
+
+        setTimeout(function() {
+            alert("baykacn2");
+        }, 1000);
+    }
+
+    
+    
+
+    </script>
+
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+
+</body>
+</html>
