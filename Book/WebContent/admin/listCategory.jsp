@@ -32,7 +32,7 @@
 			<div class="col-md-12">
 				<!-- DATA TABLE -->
 				<div>
-					<h3 class="title-5 m-b-35" style="float: left; margin-left: 37px;">Userssss</h3>
+					<h3 class="title-5 m-b-35" style="float: left; margin-left: 37px;">Người dùng</h3>
 					<a href="addCategory"
 						style="float: right; margin-right: 100px; color: #fff;"
 						class="btn btn-success">Add Category</a>

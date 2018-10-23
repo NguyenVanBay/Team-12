@@ -33,7 +33,8 @@
 					<strong>Thêm</strong> Sản phẩm
 				</div>
 				<div class="card-body card-block">
-					<form action="/Book/admin/addProduct" method="post" enctype="multipart/form-data">
+					<form action="/Book/admin/addProduct" method="post"
+						enctype="multipart/form-data">
 
 						<div class="row form-group">
 							<div class="col col-md-3">
@@ -116,7 +117,45 @@
 
 						<div class="row form-group">
 							<div class="col col-md-3">
-								<label for="file-input" class=" form-control-label">Ảnh thumbnail</label>
+								<label for="text-input" class=" form-control-label">Giới
+									thiệu</label>
+							</div>
+							<div class="col-12 col-md-9">
+								<input type="text" id="text-input" name="title"
+									placeholder="Giới thiệu tổng quan" class="form-control">
+								<small class="form-text text-muted">Giới thiệu sách</small>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col col-md-3">
+								<label for="textarea-input" class=" form-control-label">Mô
+									tả</label>
+							</div>
+							<div class="col-12 col-md-9">
+								<textarea name="description" id="textarea-input" rows="9"
+									placeholder="Mô tả" class="form-control"></textarea>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col col-md-3">
+								<label for="select" class=" form-control-label">Sản phẩm</label>
+							</div>
+							<div class="col-12 col-md-9">
+								<select name="type" id="select" class="form-control">
+									<option value="new">Mới</option>
+									<option value="hot">Nổi bật</option>
+									<option value="sellMultiple">Bán chạy</option>
+								</select>
+							</div>
+						</div>
+
+
+						<div class="row form-group">
+							<div class="col col-md-3">
+								<label for="file-input" class=" form-control-label">Ảnh
+									thumbnail</label>
 							</div>
 							<div class="col-12 col-md-9">
 								<input type="file" id="file-input" name="thubnail"
@@ -126,27 +165,30 @@
 
 						<div class="row form-group">
 							<div class="col col-md-3">
-								<label for="file-input" class=" form-control-label">Ảnh 1</label>
+								<label for="file-input" class=" form-control-label">Ảnh
+									1</label>
 							</div>
 							<div class="col-12 col-md-9">
 								<input type="file" id="file-input" name="image1"
 									class="form-control-file">
 							</div>
 						</div>
-						
+
 						<div class="row form-group">
 							<div class="col col-md-3">
-								<label for="file-input" class=" form-control-label">Ảnh 2</label>
+								<label for="file-input" class=" form-control-label">Ảnh
+									2</label>
 							</div>
 							<div class="col-12 col-md-9">
 								<input type="file" id="file-input" name="image2"
 									class="form-control-file">
 							</div>
 						</div>
-						
+
 						<div class="row form-group">
 							<div class="col col-md-3">
-								<label for="file-input" class=" form-control-label">Ảnh 3</label>
+								<label for="file-input" class=" form-control-label">Ảnh
+									3</label>
 							</div>
 							<div class="col-12 col-md-9">
 								<input type="file" id="file-input" name="image3"

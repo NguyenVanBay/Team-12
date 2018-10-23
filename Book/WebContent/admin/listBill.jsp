@@ -1,11 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.Bill"%>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <jsp:include page="include/head.jsp"></jsp:include>
+
+<%
+	ArrayList<Bill> bills = (ArrayList) request.getAttribute("bills");
+%>
+
 </head>
 
 <body class="animsition">
@@ -24,153 +31,98 @@
 			<!-- MAIN CONTENT-->
 			<div class="col-md-12">
 				<!-- DATA TABLE -->
-
 				<div>
-					<h3 class="title-5 m-b-35" style="float: left; margin-left: 37px;">Bills</h3> <a href="addBill.jsp" style="color: #fff;float: right; margin-right: 100px;" class="btn btn-success">Add Bill</a>
-				</div>				<div class="table-responsive table-responsive-data2">
+					<h3 class="title-5 m-b-35" style="float: left; margin-left: 37px;">Đơn
+						hàng</h3>
+				</div>
+				<div class="table-responsive table-responsive-data2">
 					<table class="table table-data2">
 						<thead>
 							<tr>
-								<th><label class="au-checkbox"> <input
-										type="checkbox"> <span class="au-checkmark"></span>
-								</label></th>
-								<th>name</th>
-								<th>email</th>
-								<th>description</th>
-								<th>date</th>
-								<th>status</th>
-								<th>price</th>
+								<th>id</th>
+								<th>Khách hàng</th>
+								<th>Địa chỉ</th>
+								<th>Số điện thoại</th>
+								<th>Tổng tiền</th>
+								<th>Trạng thái đơn hàng</th>
 								<th></th>
+								<th>
 							</tr>
 						</thead>
 						<tbody>
+
+							<%
+								for (Bill b : bills) {
+							%>
 							<tr class="tr-shadow">
-								<td><label class="au-checkbox"> <input
-										type="checkbox"> <span class="au-checkmark"></span>
-								</label></td>
-								<td>Lori Lynch</td>
-								<td><span class="block-email">lori@example.com</span></td>
-								<td class="desc">Samsung S8 Black</td>
-								<td>2018-09-27 02:12</td>
-								<td><span class="status--process">Processed</span></td>
-								<td>$679.00</td>
+								<td><%=b.getId()%></td>
+								<td><span><%=b.getCustomer()%></span></td>
+								<td><%=b.getAddress()%></td>
+								<td><%=b.getPhone()%></td>
+								<td><%=b.getSumMoney()%></td>
+								<td>
+									<%
+										if (b.getStatus() == 1) {
+									%> <p style="color: yellow">Đã giao hàng</p> <%
+										} else if (b.getStatus() == 2) {
+									%> <p style="color: blue">Đang giao hàng</p> <%
+										}  else if (b.getStatus() == 0) {
+									%> <p style="color: red">Đang chờ duyệt</p> <%
+										} else {
+									%><p style="color: gray"> Đơn hàng bị hủy</p> <%
+										}
+									%>
+								</td>
 								<td>
 									<div class="table-data-feature">
-										<button class="item" data-toggle="tooltip"
-											data-placement="top" title="" data-original-title="Send">
-											<i class="zmdi zmdi-mail-send"></i>
-										</button>
-										<button class="item" data-toggle="tooltip"
-											data-placement="top" title="" data-original-title="Edit">
-											<i class="zmdi zmdi-edit"></i>
-										</button>
-										<button class="item" data-toggle="tooltip"
-											data-placement="top" title="" data-original-title="Delete">
-											<i class="zmdi zmdi-delete"></i>
-										</button>
-										<button class="item" data-toggle="tooltip"
-											data-placement="top" title="" data-original-title="More">
-											<i class="zmdi zmdi-more"></i>
-										</button>
+										<a href="detailBill?id=<%=b.getId()%>" class="item"
+											data-toggle="tooltip" data-placement="top" title=""
+											data-original-title="chi tiết"> <i class="fa fa-edit"></i>
+										</a>
+										<%
+											if (b.getStatus() == 1) {
+										%>
+										<a href="editBill?id=<%=b.getId()%>&status=2" class="item"
+											data-toggle="tooltip" data-placement="top" title=""
+											data-original-title="đang giao hàng"> <i class="fa fa-fighter-jet"></i>
+										</a>
+										<a href="editBill?id=<%=b.getId()%>&status=3" class="item"
+											data-toggle="tooltip" data-placement="top" title=""
+											data-original-title="hủy đơn hàng"> <i class="fa  fa-times"></i>
+										</a>
+										<%
+											} else if (b.getStatus() == 2) {
+										%>
+										<a href="editBill?id=<%=b.getId()%>&status=1" class="item"
+											data-toggle="tooltip" data-placement="top" title=""
+											data-original-title="đã giao hàng"> <i class="fa fa-check"></i>
+										</a>
+										<a href="editBill?id=<%=b.getId()%>&status=3" class="item"
+											data-toggle="tooltip" data-placement="top" title=""
+											data-original-title="hủy đơn hàng"> <i class="fa  fa-times"></i>
+										</a>
+										<%
+											} else {
+										%>
+										<a href="editBill?id=<%=b.getId()%>&status=1" class="item"
+											data-toggle="tooltip" data-placement="top" title=""
+											data-original-title="đã giao hàng"> <i class="fa fa-check"></i>
+										</a>
+										<a href="editBill?id=<%=b.getId()%>&status=2" class="item"
+											data-toggle="tooltip" data-placement="top" title=""
+											data-original-title="đang giao hàng"> <i class="fa fa-fighter-jet"></i>
+										</a>
+										<%
+											}
+										%>
 									</div>
 								</td>
 							</tr>
+
+							<%
+								}
+							%>
 							<tr class="spacer"></tr>
-							<tr class="tr-shadow">
-								<td><label class="au-checkbox"> <input
-										type="checkbox"> <span class="au-checkmark"></span>
-								</label></td>
-								<td>Lori Lynch</td>
-								<td><span class="block-email">john@example.com</span></td>
-								<td class="desc">iPhone X 64Gb Grey</td>
-								<td>2018-09-29 05:57</td>
-								<td><span class="status--process">Processed</span></td>
-								<td>$999.00</td>
-								<td>
-									<div class="table-data-feature">
-										<button class="item" data-toggle="tooltip"
-											data-placement="top" title="" data-original-title="Send">
-											<i class="zmdi zmdi-mail-send"></i>
-										</button>
-										<button class="item" data-toggle="tooltip"
-											data-placement="top" title="" data-original-title="Edit">
-											<i class="zmdi zmdi-edit"></i>
-										</button>
-										<button class="item" data-toggle="tooltip"
-											data-placement="top" title="" data-original-title="Delete">
-											<i class="zmdi zmdi-delete"></i>
-										</button>
-										<button class="item" data-toggle="tooltip"
-											data-placement="top" title="" data-original-title="More">
-											<i class="zmdi zmdi-more"></i>
-										</button>
-									</div>
-								</td>
-							</tr>
-							<tr class="spacer"></tr>
-							<tr class="tr-shadow">
-								<td><label class="au-checkbox"> <input
-										type="checkbox"> <span class="au-checkmark"></span>
-								</label></td>
-								<td>Lori Lynch</td>
-								<td><span class="block-email">lyn@example.com</span></td>
-								<td class="desc">iPhone X 256Gb Black</td>
-								<td>2018-09-25 19:03</td>
-								<td><span class="status--denied">Denied</span></td>
-								<td>$1199.00</td>
-								<td>
-									<div class="table-data-feature">
-										<button class="item" data-toggle="tooltip"
-											data-placement="top" title="" data-original-title="Send">
-											<i class="zmdi zmdi-mail-send"></i>
-										</button>
-										<button class="item" data-toggle="tooltip"
-											data-placement="top" title="" data-original-title="Edit">
-											<i class="zmdi zmdi-edit"></i>
-										</button>
-										<button class="item" data-toggle="tooltip"
-											data-placement="top" title="" data-original-title="Delete">
-											<i class="zmdi zmdi-delete"></i>
-										</button>
-										<button class="item" data-toggle="tooltip"
-											data-placement="top" title="" data-original-title="More">
-											<i class="zmdi zmdi-more"></i>
-										</button>
-									</div>
-								</td>
-							</tr>
-							<tr class="spacer"></tr>
-							<tr class="tr-shadow">
-								<td><label class="au-checkbox"> <input
-										type="checkbox"> <span class="au-checkmark"></span>
-								</label></td>
-								<td>Lori Lynch</td>
-								<td><span class="block-email">doe@example.com</span></td>
-								<td class="desc">Camera C430W 4k</td>
-								<td>2018-09-24 19:10</td>
-								<td><span class="status--process">Processed</span></td>
-								<td>$699.00</td>
-								<td>
-									<div class="table-data-feature">
-										<button class="item" data-toggle="tooltip"
-											data-placement="top" title="" data-original-title="Send">
-											<i class="zmdi zmdi-mail-send"></i>
-										</button>
-										<button class="item" data-toggle="tooltip"
-											data-placement="top" title="" data-original-title="Edit">
-											<i class="zmdi zmdi-edit"></i>
-										</button>
-										<button class="item" data-toggle="tooltip"
-											data-placement="top" title="" data-original-title="Delete">
-											<i class="zmdi zmdi-delete"></i>
-										</button>
-										<button class="item" data-toggle="tooltip"
-											data-placement="top" title="" data-original-title="More">
-											<i class="zmdi zmdi-more"></i>
-										</button>
-									</div>
-								</td>
-							</tr>
 						</tbody>
 					</table>
 				</div>

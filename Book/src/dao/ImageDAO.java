@@ -5,6 +5,7 @@
  */
 package dao;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import connect.DBConnect;
+import controller.AddProduct;
 import model.Image;
 import model.Product;
 
@@ -184,28 +186,57 @@ public class ImageDAO {
 	}
 
 	// delete list image.
-	public void deleteListImage(ArrayList<Image> listImage) {
-		
-		Connection connection = DBConnect.getConnection();
-		String query = "delete from images where id = ?";
-		
-		for (Image image : listImage) {
+		public void deleteListImage(ArrayList<Image> listImage) {
+			
+			Connection connection = DBConnect.getConnection();
+			String query = "delete from images where id = ?";
+			
+			for (Image image : listImage) {
+
+				try {
+					PreparedStatement preparedStmt = connection.prepareStatement(query);
+					preparedStmt.setLong(1, image.getId());
+					preparedStmt.execute();
+
+				} catch (SQLException ex) {
+					Logger.getLogger(ImageDAO.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
 
 			try {
-				PreparedStatement preparedStmt = connection.prepareStatement(query);
-				preparedStmt.setLong(1, image.getId());
-				preparedStmt.execute();
-
-			} catch (SQLException ex) {
-				Logger.getLogger(ImageDAO.class.getName()).log(Level.SEVERE, null, ex);
+				connection.close();
+			} catch (SQLException e) {
 			}
 		}
+		
+		// delete list image.
+		public void deleteImageByIdProduct(Long idProduct) {
+			
+			Product product = new ProductDAO().getProductById(idProduct);
+			
+			Connection connection = DBConnect.getConnection();
+			String query = "delete from images where id_product = ?";
+			
+			PreparedStatement preparedStmt;
+			try {
+				preparedStmt = connection.prepareStatement(query);
+				preparedStmt.setLong(1, idProduct);
+				preparedStmt.execute();
+				connection.close();
 
-		try {
-			connection.close();
-		} catch (SQLException e) {
+				File file = new File(AddProduct.UPLOAD_DIRECTORY + product.getThumbnail().getName());     
+		        file.delete();
+				
+		        for (Image image : product.getListImage()) {
+		        	file = new File(AddProduct.UPLOAD_DIRECTORY + image.getName());     
+			        file.delete();
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-	}
 
 	public static void main(String[] args) {
 		new ImageDAO().getImageByProductIdAndType(1, 1).get(0);

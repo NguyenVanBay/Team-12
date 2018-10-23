@@ -1,0 +1,36 @@
+table, tr, td {
+    border: 1px solid #999;
+    background: #fff;
+    justify-content: center;
+    width: 100%;
+}
+
+tr {
+}
+
+table img {
+    width: 120px;
+    margin: 17px;
+}
+
+td {
+    width: 30%;
+    text-align: center;
+}
+
+form button {
+    background: red;
+    border: none;
+    padding: 5px 10px;
+    margin: 5px;
+    color: #fff;
+}
+
+table image {
+    width: 50px;
+}
+
+.list-product {
+    width: 90%;
+    margin: 5%;
+}

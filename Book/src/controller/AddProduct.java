@@ -24,7 +24,7 @@ import model.Product;
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
 public class AddProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIRECTORY = "F:\\PTIT\\ki1nam4\\laptrinhweb\\font-end-12\\Book\\WebContent\\admin\\upload";
+	public static final String UPLOAD_DIRECTORY = "F:\\PTIT\\ki1nam4\\laptrinhweb\\font-end-12\\Book\\WebContent\\admin\\upload";
 
 
 	public AddProduct() {
@@ -54,6 +54,9 @@ public class AddProduct extends HttpServlet {
 		String publicAt = request.getParameter("publicAt");
 		String count = request.getParameter("count");
 		String price = request.getParameter("price");
+		String title = request.getParameter("title");
+		String description = request.getParameter("description");
+		String type = request.getParameter("type");
 	
 		long milliseconds = 0;
 		SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
@@ -63,13 +66,6 @@ public class AddProduct extends HttpServlet {
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
-
-		System.out.println(userName);
-		System.out.println(idCategory);
-		System.out.println(author);
-		System.out.println(publicAt);
-		System.out.println(count);
-		System.out.println(price);
 		
 		Product p = new Product();
 		p.setName(userName);
@@ -78,6 +74,9 @@ public class AddProduct extends HttpServlet {
 		p.setCategory(new Category(Long.parseLong(idCategory)));
 		p.setCount(Long.parseLong(count));
 		p.setPublicAt(new Timestamp(milliseconds));
+		p.setTitle(title);
+		p.setDescription(description);
+		p.setType(type);
 		
 		String nameImg = "image" + new Date().getTime();
 		

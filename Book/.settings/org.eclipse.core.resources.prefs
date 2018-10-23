@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/admin/listBill.jsp=UTF-8
+encoding//WebContent/home.html=UTF-8
+encoding//src/dao/BillDetailDAO.java=UTF-8
 encoding//src/dao/ImageDAO.java=UTF-8

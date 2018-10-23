@@ -1,235 +1,231 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	version="3.1">
-	<display-name>Book</display-name>
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
-	</welcome-file-list>
-	
-	
-	
-	<!-- Mapping User -->
-	<!-- mapping servlet -->
-	<servlet>
-		<servlet-name>ListUser</servlet-name>
-		<servlet-class>controller.ListUser</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>ListUser</servlet-name>
-		<url-pattern>/admin/listUser</url-pattern>
-	</servlet-mapping>
-
-
-	<servlet>
-		<servlet-name>AddUser</servlet-name>
-		<servlet-class>controller.AddUser</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>AddUser</servlet-name>
-		<url-pattern>/admin/addUser</url-pattern>
-	</servlet-mapping>
-
-
-	<servlet>
-		<servlet-name>EditUser</servlet-name>
-		<servlet-class>controller.EditUser</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>EditUser</servlet-name>
-		<url-pattern>/admin/editUser</url-pattern>
-	</servlet-mapping>
-
-
-	<servlet>
-		<servlet-name>DeleteUser</servlet-name>
-		<servlet-class>controller.DeleteUser</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>DeleteUser</servlet-name>
-		<url-pattern>/admin/deleteUser</url-pattern>
-	</servlet-mapping>
-	<!-- mapping jsp -->
-	<servlet>
-		<servlet-name>list user jsp</servlet-name>
-		<jsp-file>/admin/listUser.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>list user jsp</servlet-name>
-		<url-pattern>/admin/danh-sach-nguoi-dung</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>add user jsp</servlet-name>
-		<jsp-file>/admin/addUser.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>add user jsp</servlet-name>
-		<url-pattern>/admin/them-nguoi-dung</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>sua user jsp</servlet-name>
-		<jsp-file>/admin/editUser.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>sua user jsp</servlet-name>
-		<url-pattern>/admin/sua-nguoi-dung</url-pattern>
-	</servlet-mapping>
-
-	<!-- mapping caetegory -->
-	<!-- mapping servlet -->
-
-	<servlet>
-		<servlet-name>ListCategory</servlet-name>
-		<servlet-class>controller.ListCategory</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>ListCategory</servlet-name>
-		<url-pattern>/admin/listCategory</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>AddCategory</servlet-name>
-		<servlet-class>controller.AddCategory</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>AddCategory</servlet-name>
-		<url-pattern>/admin/addCategory</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>EditCategory</servlet-name>
-		<servlet-class>controller.EditCategory</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>EditCategory</servlet-name>
-		<url-pattern>/admin/editCategory</url-pattern>
-	</servlet-mapping>
-
-
-	<servlet>
-		<servlet-name>DeleteCategory</servlet-name>
-		<servlet-class>controller.DeleteCategory</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>DeleteCategory</servlet-name>
-		<url-pattern>/admin/deleteCategory</url-pattern>
-	</servlet-mapping>
-
-	<!-- mapping jsp -->
-
-	<servlet>
-		<servlet-name>danh sach the loai jsp</servlet-name>
-		<jsp-file>/admin/listCategory.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>danh sach the loai jsp</servlet-name>
-		<url-pattern>/admin/danh-sach-the-loai</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>them the loai jsp</servlet-name>
-		<jsp-file>/admin/addCategory.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>them the loai jsp</servlet-name>
-		<url-pattern>/admin/them-the-loai</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>sua the loai jsp</servlet-name>
-		<jsp-file>/admin/editCategory.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>sua the loai jsp</servlet-name>
-		<url-pattern>/admin/sua-the-loai</url-pattern>
-	</servlet-mapping>
-
-
-	<!-- mapping product -->
-	<!-- mapping servlet -->
-
-
-	<servlet>
-		<servlet-name>ListProduct</servlet-name>
-		<servlet-class>controller.ListProduct</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>ListProduct</servlet-name>
-		<url-pattern>/admin/listProduct</url-pattern>
-	</servlet-mapping>
-
-
-	<servlet>
-		<servlet-name>AddProduct</servlet-name>
-		<servlet-class>controller.AddProduct</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>AddProduct</servlet-name>
-		<url-pattern>/admin/addProduct</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>EditProduct</servlet-name>
-		<servlet-class>controller.EditProduct</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>EditProduct</servlet-name>
-		<url-pattern>/admin/editProduct</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>DeleteProduct</servlet-name>
-		<servlet-class>controller.DeleteProduct</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>DeleteProduct</servlet-name>
-		<url-pattern>/admin/deleteProduct</url-pattern>
-	</servlet-mapping>
-
-	<!-- mapping jsp -->
-
-	<servlet>
-		<servlet-name>danh sach san pham jsp</servlet-name>
-		<jsp-file>/admin/listProduct.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>danh sach san pham jsp</servlet-name>
-		<url-pattern>/admin/danh-sach-san-pham</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>them san pham jsp</servlet-name>
-		<jsp-file>/admin/addProduct.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>them san pham jsp</servlet-name>
-		<url-pattern>/admin/them-san-pham</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>sua san pham jsp</servlet-name>
-		<jsp-file>/admin/editProduct.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>sua san pham jsp</servlet-name>
-		<url-pattern>/admin/sua-san-pham</url-pattern>
-	</servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>Book</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>ListUser</servlet-name>
+    <servlet-class>controller.ListUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListUser</servlet-name>
+    <url-pattern>/admin/listUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddUser</servlet-name>
+    <servlet-class>controller.AddUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddUser</servlet-name>
+    <url-pattern>/admin/addUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditUser</servlet-name>
+    <servlet-class>controller.EditUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditUser</servlet-name>
+    <url-pattern>/admin/editUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteUser</servlet-name>
+    <servlet-class>controller.DeleteUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteUser</servlet-name>
+    <url-pattern>/admin/deleteUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>list user jsp</servlet-name>
+    <jsp-file>/admin/listUser.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>list user jsp</servlet-name>
+    <url-pattern>/admin/danh-sach-nguoi-dung</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>add user jsp</servlet-name>
+    <jsp-file>/admin/addUser.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>add user jsp</servlet-name>
+    <url-pattern>/admin/them-nguoi-dung</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>sua user jsp</servlet-name>
+    <jsp-file>/admin/editUser.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sua user jsp</servlet-name>
+    <url-pattern>/admin/sua-nguoi-dung</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListCategory</servlet-name>
+    <servlet-class>controller.ListCategory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListCategory</servlet-name>
+    <url-pattern>/admin/listCategory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddCategory</servlet-name>
+    <servlet-class>controller.AddCategory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddCategory</servlet-name>
+    <url-pattern>/admin/addCategory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditCategory</servlet-name>
+    <servlet-class>controller.EditCategory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditCategory</servlet-name>
+    <url-pattern>/admin/editCategory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteCategory</servlet-name>
+    <servlet-class>controller.DeleteCategory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteCategory</servlet-name>
+    <url-pattern>/admin/deleteCategory</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>danh sach the loai jsp</servlet-name>
+    <jsp-file>/admin/listCategory.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>danh sach the loai jsp</servlet-name>
+    <url-pattern>/admin/danh-sach-the-loai</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>them the loai jsp</servlet-name>
+    <jsp-file>/admin/addCategory.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>them the loai jsp</servlet-name>
+    <url-pattern>/admin/them-the-loai</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>sua the loai jsp</servlet-name>
+    <jsp-file>/admin/editCategory.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sua the loai jsp</servlet-name>
+    <url-pattern>/admin/sua-the-loai</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListProduct</servlet-name>
+    <servlet-class>controller.ListProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListProduct</servlet-name>
+    <url-pattern>/admin/listProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddProduct</servlet-name>
+    <servlet-class>controller.AddProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddProduct</servlet-name>
+    <url-pattern>/admin/addProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditProduct</servlet-name>
+    <servlet-class>controller.EditProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditProduct</servlet-name>
+    <url-pattern>/admin/editProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteProduct</servlet-name>
+    <servlet-class>controller.DeleteProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteProduct</servlet-name>
+    <url-pattern>/admin/deleteProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>danh sach san pham jsp</servlet-name>
+    <jsp-file>/admin/listProduct.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>danh sach san pham jsp</servlet-name>
+    <url-pattern>/admin/danh-sach-san-pham</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>them san pham jsp</servlet-name>
+    <jsp-file>/admin/addProduct.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>them san pham jsp</servlet-name>
+    <url-pattern>/admin/them-san-pham</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>sua san pham jsp</servlet-name>
+    <jsp-file>/admin/editProduct.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sua san pham jsp</servlet-name>
+    <url-pattern>/admin/sua-san-pham</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ListBill</servlet-name>
+    <servlet-class>controller.ListBill</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListBill</servlet-name>
+    <url-pattern>/admin/listBill</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DetailBill</servlet-name>
+    <servlet-class>controller.DetailBill</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailBill</servlet-name>
+    <url-pattern>/admin/detailBill</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditBill</servlet-name>
+    <servlet-class>controller.EditBill</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditBill</servlet-name>
+    <url-pattern>/admin/editBill</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>danh sach don hang jsp</servlet-name>
+    <jsp-file>/admin/listBill.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>danh sach don hang jsp</servlet-name>
+    <url-pattern>/admin/danh-sach-don-hang</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>sua don hang jsp</servlet-name>
+    <jsp-file>/admin/editBill.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sua don hang jsp</servlet-name>
+    <url-pattern>/admin/sua-don-hang</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>chi tiet don hang jsp</servlet-name>
+    <jsp-file>/admin/detailBill.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>chi tiet don hang jsp</servlet-name>
+    <url-pattern>/admin/chi-tiet-don-hang</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>60</session-timeout>
+  </session-config>
 </web-app>

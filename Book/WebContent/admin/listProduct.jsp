@@ -35,7 +35,7 @@
 				<div>
 					<h3 class="title-5 m-b-35" style="float: left; margin-left: 37px;">Userssss</h3>
 					<a href="addProduct" style="float: right; margin-right: 100px; color: #fff;"
-						class="btn btn-success">Add User</a>
+						class="btn btn-success">Add Product</a>
 				</div>
 				<div class="table-responsive table-responsive-data2">
 					<table class="table table-data2">
@@ -47,7 +47,9 @@
 								<th>Năm xuất bản</th>
 								<th>Số lượng</th>
 								<th>Giá</th>
+								<th>Loại</th>
 								<th>Thể loại</th>
+								<th>Giới thiệu</th>
 								<th>Thumbnail</th>
 								<th></th>
 							</tr>
@@ -64,7 +66,9 @@
 								<td><%= p.getPublicAt() %></td>
 								<td><%= p.getCount() %></td>
 								<td><%= p.getPrice() %> VND</td>
+								<td><%= p.getType() %></td>
 								<td><%= p.getCategory().getName() %></td>
+								<td><%= p.getTitle() %></td>
 								<td><img class="img img-responsive" style="height: 150px;" src="/Book/admin/upload/<%= p.getThumbnail().getName() %>"/></td>
 								<td>
 									<div class="table-data-feature">

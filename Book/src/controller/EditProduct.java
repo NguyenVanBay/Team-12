@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import dao.CategoryDAO;
 import dao.ProductDAO;
 import model.Category;
-import model.Image;
 import model.Product;
 
 public class EditProduct extends HttpServlet {
@@ -44,13 +43,17 @@ public class EditProduct extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String id = request.getParameter("id");
 		String userName = request.getParameter("name");
 		String idCategory = request.getParameter("idCategory");
 		String author = request.getParameter("author");
 		String publicAt = request.getParameter("publicAt");
 		String count = request.getParameter("count");
 		String price = request.getParameter("price");
-	
+		String title = request.getParameter("title");
+		String description = request.getParameter("description");
+		String type = request.getParameter("type");
+		
 		long milliseconds = 0;
 		SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
 		try {
@@ -59,55 +62,22 @@ public class EditProduct extends HttpServlet {
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
+		
+		Product product = new ProductDAO().getProductById(Long.parseLong(id));
+		
+		product.setName(userName);
+		product.setCategory(new Category(Long.parseLong(idCategory)));
+		product.setAuthor(author);
+		product.setCount(Long.parseLong(count));
+		product.setPrice(Double.parseDouble(price));
+		product.setPublicAt(new Timestamp(milliseconds));
+		product.setTitle(title);
+		product.setDescription(description);
+		product.setType(type);
+		
+		new ProductDAO().editProduct(product);
 
-		System.out.println(userName);
-		System.out.println(idCategory);
-		System.out.println(author);
-		System.out.println(publicAt);
-		System.out.println(count);
-		System.out.println(price);
-		
-		Product p = new Product();
-		p.setName(userName);
-		p.setPrice(Double.parseDouble(price));
-		p.setAuthor(author);
-		p.setCategory(new Category(Long.parseLong(idCategory)));
-		p.setCount(Long.parseLong(count));
-		p.setPublicAt(new Timestamp(milliseconds));
-		
-		String nameImg = "image" + new Date().getTime();
-		
-		Image thumbnail = new Image();
-		thumbnail.setName(nameImg + "1.png");
-		thumbnail.setType((long)1);
-		
-		p.setThumbnail(thumbnail);
-		
-		ArrayList<Image> listImg = new ArrayList<>();
-		
-		Image img1 = new Image();
-		img1.setName(nameImg + "2.png");
-		img1.setType((long)2);
-		
-		Image img2 = new Image();
-		img2.setName(nameImg + "3.png");
-		img2.setType((long)2);
-		
-		Image img3 = new Image();
-		img3.setName(nameImg + "4.png");
-		img3.setType((long)2);
-		
-		listImg.add(img1);
-		listImg.add(img2);
-		listImg.add(img3);
-		
-		p.setListImage(listImg);
-		
-		System.out.println(p.toString());
-		
-		new ProductDAO().insertProduct(p);
-
-		response.sendRedirect("/Book/admin/listCategory");
+		response.sendRedirect("/Book/admin/listProduct");
 
 	}
 }

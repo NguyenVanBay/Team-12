@@ -32,9 +32,9 @@
 			<div class="col-md-12">
 				<!-- DATA TABLE -->
 				<div>
-					<h3 class="title-5 m-b-35" style="float: left; margin-left: 37px;">Userssss</h3>
+					<h3 class="title-5 m-b-35" style="float: left; margin-left: 37px;">Nhân viên</h3>
 					<a href="addUser" style="float: right; margin-right: 100px; color: #fff;"
-						class="btn btn-success">Add User</a>
+						class="btn btn-success">Thêm Nhân viên</a>
 				</div>
 				<div class="table-responsive table-responsive-data2">
 					<table class="table table-data2">

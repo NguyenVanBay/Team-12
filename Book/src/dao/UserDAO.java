@@ -84,7 +84,7 @@ public class UserDAO {
 	// check login.
 	public User login(String email, String password) {
 		Connection con = DBConnect.getConnection();
-		String sql = "select * from users where user_email='?' and user_pass='?'";
+		String sql = "select * from users where email=? and password=?";
 		PreparedStatement ps;
 		try {
 			ps = (PreparedStatement) con.prepareStatement(sql);
@@ -179,6 +179,9 @@ public class UserDAO {
 	}
 
 	public static void main(String[] args) {
-		new UserDAO().deleteById(Long.parseLong("8"));
+		User user = new UserDAO().login("nguyenvanbay.no1@gmail.com", "123");
+		System.out.println(user.getName());
+		System.out.println(user.getEmail());
+		System.err.println(user.getPassword());
 	}
 }

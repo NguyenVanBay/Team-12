@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CategoryDAO;
 import model.Category;
@@ -27,10 +28,16 @@ public class AddCategory extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		HttpSession session = request.getSession();
+		if (null == session.getAttribute("email")) {
+			response.sendRedirect("/Book/admin/Login");
+		}
+
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
-		
+
 		String name = request.getParameter("name");
 		Category c = new Category();
 		c.setName(name);

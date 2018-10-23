@@ -35,8 +35,8 @@ public class BillDetail {
 		return count;
 	}
 
-	public void setCount(Long count) {
-		this.count = count;
+	public void setCount(long i) {
+		this.count = i;
 	}
 
 	public double getPrice() {

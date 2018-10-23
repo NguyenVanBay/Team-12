@@ -7,7 +7,7 @@ package model;
 
 /**
  *
- * @author TUNGDUONG
+ * @author NVB
  */
 public class Item {
 

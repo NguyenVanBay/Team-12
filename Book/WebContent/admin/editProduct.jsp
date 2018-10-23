@@ -3,10 +3,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Category"%>
 <%@page import="model.Product"%>
+<%@page import="model.Image"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Locale"%>
-
 
 <%
 	ArrayList<Category> categorys = (ArrayList) request.getAttribute("categorys");
@@ -40,6 +40,8 @@
 				</div>
 				<div class="card-body card-block">
 					<form action="/Book/admin/editProduct" method="post">
+
+						<input name="id" type="text" value="<%=product.getId()%>" />
 
 						<div class="row form-group">
 							<div class="col col-md-3">
@@ -128,6 +130,71 @@
 									value="<%=product.getPrice()%>" placeholder="Giá tiền"
 									class="form-control"> <small
 									class="form-text text-muted">Nhập giá tiền</small>
+							</div>
+						</div>
+
+
+						<div class="row form-group">
+							<div class="col col-md-3">
+								<label for="text-input" class=" form-control-label">Giới
+									thiệu</label>
+							</div>
+							<div class="col-12 col-md-9">
+								<input type="text" id="text-input" name="title" value="<%= product.getTitle() %>"
+									placeholder="Giới thiệu tổng quan" class="form-control">
+								<small class="form-text text-muted">Giới thiệu sách</small>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col col-md-3">
+								<label for="textarea-input" class=" form-control-label">Mô
+									tả</label>
+							</div>
+							<div class="col-12 col-md-9">
+								<textarea name="description" id="textarea-input" rows="9" 
+									placeholder="Mô tả" class="form-control"><%= product.getDescription() %></textarea>
+							</div>
+						</div>
+						
+						<div class="row form-group">
+							<div class="col col-md-3">
+								<label for="select" class=" form-control-label">Sản phẩm</label>
+							</div>
+							<div class="col-12 col-md-9">
+								<select name="type" id="select" class="form-control">
+									<option <%=(product.getType().equals("new")) ? "selected" : ""%> value="new">Mới</option>
+									<option <%=(product.getType().equals("hot")) ? "selected" : ""%> value="hot">Nổi bật</option>
+									<option <%=(product.getType().equals("sellMultiple")) ? "selected" : ""%> value="sellMultiple">Bán chạy</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col col-md-3">
+								<label for="text-input" class=" form-control-label">Thumbnail</label>
+							</div>
+							<div class="col-12 col-md-9">
+								<img class="img img-responsive" style="height: 150px;"
+									src="/Book/admin/upload/<%=product.getThumbnail().getName()%>" />
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col col-md-3">
+								<label for="text-input" class=" form-control-label">List
+									Ảnh</label>
+							</div>
+							<div class="col-12 col-md-9">
+								<%
+									for (Image i : product.getListImage()) {
+								%>
+								<img class="img img-responsive"
+									style="height: 150px; width: auto; margin-right: 15px; margin-top: 15px;"
+									src="/Book/admin/upload/<%=i.getName()%>" />
+								<%
+									}
+								%>
 							</div>
 						</div>
 
