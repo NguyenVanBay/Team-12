@@ -43,7 +43,7 @@ public class UserDAO {
 	// add User.
 	public boolean insertUser(User u) {
 		Connection connection = DBConnect.getConnection();
-		String sql = "INSERT INTO users(name, email, password, address, phone) VALUES(?,?,?,?,?)";
+		String sql = "INSERT INTO users(name, email, password, address, phone, role) VALUES(?,?,?,?,?,?)";
 		try {
 			PreparedStatement ps = connection.prepareCall(sql);
 			ps.setString(1, u.getName());
@@ -51,6 +51,7 @@ public class UserDAO {
 			ps.setString(3, u.getPassword());
 			ps.setString(4, u.getAddress());
 			ps.setString(5, u.getPhone());
+			ps.setLong(6, u.getRole());
 			ps.executeUpdate();
 			connection.close();
 			return true;
@@ -63,7 +64,7 @@ public class UserDAO {
 	// edit User by id.
 	public boolean editUser(User u) {
 		Connection connection = DBConnect.getConnection();
-		String sql = "UPDATE users set name = ?, email = ?, password = ?, address= ? , phone= ? WHERE id = ?";
+		String sql = "UPDATE users set name = ?, email = ?, password = ?, address= ? , phone= ? , role= ? WHERE id = ?";
 		try {
 			PreparedStatement ps = connection.prepareCall(sql);
 			ps.setString(1, u.getName());
@@ -71,7 +72,8 @@ public class UserDAO {
 			ps.setString(3, u.getPassword());
 			ps.setString(4, u.getAddress());
 			ps.setString(5, u.getPhone());
-			ps.setLong(6, u.getId());
+			ps.setLong(6, u.getRole());
+			ps.setLong(7, u.getId());
 			ps.executeUpdate();
 			connection.close();
 			return true;
@@ -81,10 +83,10 @@ public class UserDAO {
 		return false;
 	}
 
-	// check login.
-	public User login(String email, String password) {
+	// check login user.
+	public User loginUser(String email, String password) {
 		Connection con = DBConnect.getConnection();
-		String sql = "select * from users where email=? and password=?";
+		String sql = "select * from users where email=? and password=? and role= '0'";
 		PreparedStatement ps;
 		try {
 			ps = (PreparedStatement) con.prepareStatement(sql);
@@ -99,6 +101,8 @@ public class UserDAO {
 				u.setAddress(rs.getString("address"));
 				u.setPhone(rs.getString("phone"));
 				u.setEmail(rs.getString("email"));
+				u.setRole(rs.getLong("role"));
+				
 				con.close();
 				return u;
 			}
@@ -107,15 +111,45 @@ public class UserDAO {
 		}
 		return null;
 	}
+	
+	// check login.
+		public User loginAdmin(String email, String password) {
+			Connection con = DBConnect.getConnection();
+			String sql = "select * from users where email=? and password=? and role!= '0'";
+			PreparedStatement ps;
+			try {
+				ps = (PreparedStatement) con.prepareStatement(sql);
+				ps.setString(1, email);
+				ps.setString(2, password);
+				ResultSet rs = ps.executeQuery();
+				if (rs.next()) {
+					User u = new User();
+					u.setId(rs.getLong("id"));
+					u.setName(rs.getString("name"));
+					u.setPassword(rs.getString("password"));
+					u.setAddress(rs.getString("address"));
+					u.setPhone(rs.getString("phone"));
+					u.setEmail(rs.getString("email"));
+					u.setRole(rs.getLong("role"));
+					
+					con.close();
+					return u;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
 
 	public User getUserById(long userID) {
+		User u = new User();
 		try {
 			Connection connection = DBConnect.getConnection();
 			String sql = "SELECT * FROM users WHERE id = ?";
 			PreparedStatement ps = connection.prepareCall(sql);
 			ps.setLong(1, userID);
 			ResultSet rs = ps.executeQuery();
-			User u = new User();
+			
 			while (rs.next()) {
 
 				u.setId(rs.getLong("id"));
@@ -124,22 +158,23 @@ public class UserDAO {
 				u.setAddress(rs.getString("address"));
 				u.setPhone(rs.getString("phone"));
 				u.setEmail(rs.getString("email"));
+				u.setRole(rs.getLong("role"));
 			}
 			connection.close();
 			return u;
 		} catch (SQLException ex) {
 			Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return null;
+		return u;
 	}
 
-	public ArrayList<User> getAll() {
+	public ArrayList<User> getAllCustomer() {
 
 		ArrayList<User> allUser = new ArrayList<>();
 
 		try {
 			Connection connection = DBConnect.getConnection();
-			String sql = "SELECT * FROM users";
+			String sql = "SELECT * FROM users where role = 0";
 			PreparedStatement ps = connection.prepareCall(sql);
 
 			ResultSet rs = ps.executeQuery();
@@ -152,6 +187,7 @@ public class UserDAO {
 				u.setAddress(rs.getString("address"));
 				u.setPhone(rs.getString("phone"));
 				u.setEmail(rs.getString("email"));
+				u.setRole(rs.getLong("role"));
 				allUser.add(u);
 			}
 			connection.close();
@@ -159,7 +195,37 @@ public class UserDAO {
 		} catch (SQLException ex) {
 			Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return null;
+		return allUser;
+	}
+	
+	public ArrayList<User> getAllUser() {
+
+		ArrayList<User> allUser = new ArrayList<>();
+
+		try {
+			Connection connection = DBConnect.getConnection();
+			String sql = "SELECT * FROM users where role != 0";
+			PreparedStatement ps = connection.prepareCall(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				User u = new User();
+				u.setId(rs.getLong("id"));
+				u.setName(rs.getString("name"));
+				u.setPassword(rs.getString("password"));
+				u.setAddress(rs.getString("address"));
+				u.setPhone(rs.getString("phone"));
+				u.setEmail(rs.getString("email"));
+				u.setRole(rs.getLong("role"));
+				allUser.add(u);
+			}
+			connection.close();
+			return allUser;
+		} catch (SQLException ex) {
+			Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return allUser;
 	}
 
 	public void deleteById(Long id) {
@@ -179,9 +245,62 @@ public class UserDAO {
 	}
 
 	public static void main(String[] args) {
-		User user = new UserDAO().login("nguyenvanbay.no1@gmail.com", "123");
-		System.out.println(user.getName());
-		System.out.println(user.getEmail());
-		System.err.println(user.getPassword());
+		User user = new UserDAO().loginUser("nguyenvanbay@gmail.com", "123");
+		if(user != null) {
+			System.out.println(user.getName());
+			System.out.println(user.getEmail());
+			System.err.println(user.getPassword());
+		}
+	}
+
+	public ArrayList<User> getWhere(String name, String email, String phone, String role) {
+		
+		String sql = "SELECT * FROM users where 1 = 1 ";
+		
+		if(name != "") {
+			sql += " AND name like '%" + name + "%'";
+		}
+		
+		if(email != "") {
+			sql += " AND email like '%" + email + "%'";
+		}
+		
+		if(phone != "") {
+			sql += " AND phone = " + phone;
+		}
+		
+		if(!role.equals("0")) {
+			
+			sql += " AND role = " + role;
+		}
+		
+		System.out.println(sql);
+		
+		ArrayList<User> allUser = new ArrayList<>();
+
+		try {
+			Connection connection = DBConnect.getConnection();
+			
+			PreparedStatement ps = connection.prepareCall(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				User u = new User();
+				u.setId(rs.getLong("id"));
+				u.setName(rs.getString("name"));
+				u.setPassword(rs.getString("password"));
+				u.setAddress(rs.getString("address"));
+				u.setPhone(rs.getString("phone"));
+				u.setEmail(rs.getString("email"));
+				u.setRole(rs.getLong("role"));
+				allUser.add(u);
+			}
+			connection.close();
+			return allUser;
+		} catch (SQLException ex) {
+			Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return allUser;
 	}
 }

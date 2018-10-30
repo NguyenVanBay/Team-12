@@ -10,6 +10,15 @@ public class Bill {
 	private double sumMoney;
 	private Long status;
 	ArrayList<BillDetail> listBillDetail;
+	private Long createBy;
+
+	public Long getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(Long createBy) {
+		this.createBy = createBy;
+	}
 
 	public Bill() {
 		// TODO Auto-generated constructor stub

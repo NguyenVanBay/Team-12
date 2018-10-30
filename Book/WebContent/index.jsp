@@ -16,77 +16,32 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Bài tập lớn nhóm 12</title>
-<link href="font/css/fontawesome.css" rel="stylesheet">
-<link href="font/css/brands.css" rel="stylesheet">
-<link href="font/css/solid.css" rel="stylesheet">
 
-<!-- mystyle -->
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/style_pc.css">
-<link rel="stylesheet" href="css/style_mobile.css">
+<jsp:include page="include/head.jsp"></jsp:include>
+
 <link rel="stylesheet" href="css/home.css">
 
 </head>
 
 <body>
 
+	<!-- menu top -->
+	<jsp:include page="include/menu-area.jsp"></jsp:include>
+	<!-- end menu top -->
 
-	<div id="header-top-area">
-		<div class="language-area">
-			<ul>
-				<li id="language-pr"><img src="img/1.jpg" alt="flag"><a
-					href="#">Việt Nam<i class="fa fa-angle-down"></i></a></li>
-				<li id="currency-pr"><a href="#">Việt Nam VND<i
-						class="fa fa-angle-down"></i></a></li>
-			</ul>
-		</div>
-
-		<div class="account-area">
-			<ul>
-				<li><a href="register.html">Tài khoản</a></li>
-				<li><a href="checkout.html">Đăng nhập</a></li>
-				<li><a href="login.html">Đăng kí</a></li>
-				<li><a href="login.html">Xem giỏ hàng</a></li>
-			</ul>
-		</div>
-	</div>
-	<!-- end header-top-area -->
-
-	<div class="menu-area">
-		<nav id="menu">
-			<ul id="nav">
-				<li><a href="index.html">Trang chủ</a></li>
-
-				<li><a href="index.html">Tin tức</a></li>
-
-
-				<li><a href="index.html">Giới thiệu</a></li>
-
-
-				<li><a href="index.html">Liên hệ</a></li>
-			</ul>
-		</nav>
-	</div>
-	<!-- end menu area -->
-
-	<div class="slider-area">
-		<div class="slider-img">
-			<div class="single-slider"></div>
-		</div>
-	</div>
+	<!-- slider area -->
+	<jsp:include page="include/slide.jsp"></jsp:include>
 	<!-- end slide-area -->
 
-	<div class="infomation">
-		<h3>Châm ngôn về sách</h3>
-		<p>Người đọc quá nhiều và dùng tới bộ óc quá ít sẽ rơi vào thói
-			quen suy nghĩ lười biếng.</p>
-	</div>
+	<!-- infomation -->
+	<jsp:include page="include/infomation.jsp"></jsp:include>
+	<!-- end infomation -->
+
+
 
 	<div class="container">
+
+		<!-- menu left -->
 		<div class="sidebar">
 			<nav id="menu-sidebar">
 				<ul id="nav-sidebar">
@@ -103,6 +58,7 @@
 				</ul>
 			</nav>
 		</div>
+		<!-- end menu left -->
 
 
 
@@ -122,12 +78,12 @@
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<form action="/Book/DetailProduct" method="post">
+							<form action="/Book/chi-tiet-san-pham" method="post">
 								<input type="hidden" name="command" value="list" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Chi tiết</button>
 							</form>
-							<form action="/Book/CartServlet" method="post">
+							<form action="/Book/add-to-cart" method="post">
 								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Mua</button>
@@ -144,10 +100,10 @@
 				%>
 			</div>
 
-			<div class="quangcao">
-				<img src="img/vanphong1.png" alt=""> <img
-					src="img/vanphong2.jpg" alt="">
-			</div>
+			<!-- infomation -->
+			<jsp:include page="include/quangcao.jsp"></jsp:include>
+			<!-- end infomation -->
+
 
 			<div class="banchay">
 
@@ -163,12 +119,12 @@
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<form action="/Book/DetailProduct" method="post">
+							<form action="/Book/chi-tiet-san-pham" method="post">
 								<input type="hidden" name="command" value="list" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Chi tiết</button>
 							</form>
-							<form action="/Book/CartServlet" method="post">
+							<form action="/Book/add-to-cart" method="post">
 								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Mua</button>
@@ -185,10 +141,9 @@
 				%>
 			</div>
 
-			<div class="quangcao">
-				<img src="img/vanphong1.png" alt=""> <img
-					src="img/vanphong2.jpg" alt="">
-			</div>
+			<!-- infomation -->
+			<jsp:include page="include/quangcao.jsp"></jsp:include>
+			<!-- end infomation -->
 
 			<div class="banchay">
 
@@ -205,12 +160,12 @@
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<form action="/Book/DetailProduct" method="post">
+							<form action="/Book/chi-tiet-san-pham" method="post">
 								<input type="hidden" name="command" value="list" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Chi tiết</button>
 							</form>
-							<form action="/Book/CartServlet" method="post">
+							<form action="/Book/add-to-cart" method="post">
 								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Mua</button>
@@ -230,111 +185,16 @@
 
 	</div>
 
-	<footer>
-		<div class="footer-top">
-			<div class="footer-top-menu bb-2">
-				<nav>
-					<ul>
-						<li><a href="#">home</a></li>
-						<li><a href="#">Enable Cookies</a></li>
-						<li><a href="#">Privacy and Cookie Policy</a></li>
-						<li><a href="#">contact us</a></li>
-						<li><a href="#">blog</a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-		<!-- end footer-top -->
-
-
-		<div class="footer-mid">
-			<div class="footer-description">
-				<div class="simple-footer-bottom">
-					<div class="footer-title">
-						<h3>Products</h3>
-					</div>
-
-					<div>
-						<ul>
-							<li><a href="about.html">About us</a></li>
-							<li><a href="#">Prices drop </a></li>
-							<li><a href="#">New products</a></li>
-							<li><a href="#">Best sales</a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="simple-footer-bottom">
-					<div class="footer-title">
-						<h3>Products</h3>
-					</div>
-
-					<div>
-						<ul>
-							<li><a href="about.html">About us</a></li>
-							<li><a href="#">Prices drop </a></li>
-							<li><a href="#">New products</a></li>
-							<li><a href="#">Best sales</a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="simple-footer-bottom">
-					<div class="footer-title">
-						<h3>Products</h3>
-					</div>
-
-					<div>
-						<ul>
-							<li><a href="about.html">About us</a></li>
-							<li><a href="#">Prices drop </a></li>
-							<li><a href="#">New products</a></li>
-							<li><a href="#">Best sales</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-
-			<div class="footer-contact">
-				<div class="footer-title">
-					<h3>Thôn tin cửa hàng</h3>
-				</div>
-
-				<div class="footer-contact-detail">
-					<p class="adress">
-						<span>Địa chỉ</span> Nguyễn trãi hà đông hà nội
-					</p>
-					<p>
-						<span>SDT :</span> (+1)866-540-3229
-					</p>
-					<p>
-						<span>Email:</span> nguyenvanbay.no1@gmail.com
-					</p>
-				</div>
-			</div>
-			<!-- end footer-contact -->
-		</div>
-		<!-- footer-mid-end -->
-
-		<div class="footer-bottom">
-			<div class="copy-right-area">
-				<p>
-					Copyright ©<a href="#">Koparion</a>. All Right Reserved.
-				</p>
-			</div>
-			<div class="payment-img text-right">
-				<a href="#"><img src="img/1.png" alt="payment"></a>
-			</div>
-		</div>
-		<!-- end footer-bottom -->
-	</footer>
-
+	<!-- menu top -->
+	<jsp:include page="include/footer.jsp"></jsp:include>
+	<!-- end menu top -->
+	
 	<%
 		if (request.getAttribute("type") == "success") {
 	%>
 	<script type="text/javascript">
-   		alert("Mua hàng thàng công. chúng tôi sẽ liên lạc cho bạn sớm."); 
-    </script>
+		alert("Mua hàng thàng công. chúng tôi sẽ liên lạc cho bạn sớm.");
+	</script>
 	<%
 		}
 	%>

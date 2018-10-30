@@ -50,6 +50,23 @@
 									class="form-text text-muted">Nhập họ tên</small>
 							</div>
 						</div>
+						
+						<div class="row form-group">
+							<div class="col col-md-3">
+								<label for="selectSm" class=" form-control-label">Chức vụ</label>
+							</div>
+							<div class="col-12 col-md-9">
+								<select name="role" id="SelectLm"
+									class="form-control-sm form-control">
+									
+									<option value="4">Giám đốc</option>
+									<option value="1">Quản lý nhân viên</option>
+									<option value="2">Quản lý sản phẩm</option>
+									<option value="3">Quản lý đơn hàng</option>
+									
+								</select>
+							</div>
+						</div>
 
 						<div class="row form-group">
 							<div class="col col-md-3">

@@ -2,6 +2,14 @@
     
 }
 
+.account-area li {
+    display: block;
+}
+
+.account-area li {
+    display: inline-block;
+}
+
 .quangcao {
     display: flex;
     margin-bottom: 15px;

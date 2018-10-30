@@ -21,76 +21,31 @@
 
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Bài tập lớn nhóm 12</title>
-<link href="font/css/fontawesome.css" rel="stylesheet">
-<link href="font/css/brands.css" rel="stylesheet">
-<link href="font/css/solid.css" rel="stylesheet">
 
-<!-- mystyle -->
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/style_pc.css">
-<link rel="stylesheet" href="css/style_mobile.css">
+<jsp:include page="include/head.jsp"></jsp:include>
+
 <link rel="stylesheet" href="css/home.css">
 
 </head>
 
 <body>
 
+	<!-- menu top -->
+	<jsp:include page="include/menu-area.jsp"></jsp:include>
+	<!-- end menu top -->
 
-	<div id="header-top-area">
-		<div class="language-area">
-			<ul>
-				<li id="language-pr"><img src="img/1.jpg" alt="flag"><a
-					href="#">Việt Nam<i class="fa fa-angle-down"></i></a></li>
-				<li id="currency-pr"><a href="#">Việt Nam VND<i
-						class="fa fa-angle-down"></i></a></li>
-			</ul>
-		</div>
-
-		<div class="account-area">
-			<ul>
-				<li><a href="register.html">Tài khoản</a></li>
-				<li><a href="checkout.html">Đăng nhập</a></li>
-				<li><a href="login.html">Đăng kí</a></li>
-				<li><a href="login.html">Xem giỏ hàng</a></li>
-			</ul>
-		</div>
-	</div>
-	<!-- end header-top-area -->
-
-	<div class="menu-area">
-		<nav id="menu">
-			<ul id="nav">
-				<li><a href="index.html">Trang chủ</a></li>
-
-				<li><a href="index.html">Tin tức</a></li>
-
-
-				<li><a href="index.html">Giới thiệu</a></li>
-
-
-				<li><a href="index.html">Liên hệ</a></li>
-			</ul>
-		</nav>
-	</div>
-	<!-- end menu area -->
-
-	<div class="slider-area">
-		<div class="slider-img">
-			<div class="single-slider"></div>
-		</div>
-	</div>
+	<!-- slider area -->
+	<jsp:include page="include/slide.jsp"></jsp:include>
 	<!-- end slide-area -->
 
-	<div class="infomation">
-		<h3>Châm ngôn về sách</h3>
-		<p>Người đọc quá nhiều và dùng tới bộ óc quá ít sẽ rơi vào thói
-			quen suy nghĩ lười biếng.</p>
-	</div>
+	<!-- infomation -->
+	<jsp:include page="include/infomation.jsp"></jsp:include>
+	<!-- end infomation -->
 
 	<div class="container">
+
+
+		<!-- menu left -->
 		<div class="sidebar">
 			<nav id="menu-sidebar">
 				<ul id="nav-sidebar">
@@ -107,6 +62,7 @@
 				</ul>
 			</nav>
 		</div>
+		<!-- end menu left -->
 
 
 
@@ -124,7 +80,18 @@
 					</div>
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
-						<a href="detail.html">Chi tiết</a><a href="cart.html">Mua</a>
+						<div class="btn-select">
+							<form action="/Book/chi-tiet-san-pham" method="post">
+								<input type="hidden" name="command" value="list" /> <input
+									type="hidden" name="productId" value="<%=p.getId()%>" />
+								<button type="submit">Chi tiết</button>
+							</form>
+							<form action="/Book/add-to-cart" method="post">
+								<input type="hidden" name="command" value="plus" /> <input
+									type="hidden" name="productId" value="<%=p.getId()%>" />
+								<button type="submit">Mua</button>
+							</form>
+						</div>
 						<div class="price"><%=p.getPrice()%>
 							VND
 						</div>

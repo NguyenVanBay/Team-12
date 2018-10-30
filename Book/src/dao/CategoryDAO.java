@@ -25,10 +25,11 @@ public class CategoryDAO {
 	// add Category.
 	public boolean insertCategory(Category c) {
 		Connection connection = DBConnect.getConnection();
-		String sql = "INSERT INTO categorys(name) VALUES(?)";
+		String sql = "INSERT INTO categorys(name, create_by) VALUES(?, ?)";
 		try {
 			PreparedStatement ps = connection.prepareCall(sql);
 			ps.setString(1, c.getName());
+			ps.setLong(2, c.getCreateBy());
 			ps.executeUpdate();
 			connection.close();
 			return true;
@@ -56,24 +57,26 @@ public class CategoryDAO {
 	}
 
 	public Category getCategoryById(long id) {
+		Category c = new Category();
 		try {
 			Connection connection = DBConnect.getConnection();
 			String sql = "SELECT * FROM categorys WHERE id = ?";
 			PreparedStatement ps = connection.prepareCall(sql);
 			ps.setLong(1, id);
 			ResultSet rs = ps.executeQuery();
-			Category c = new Category();
+			
 			while (rs.next()) {
 
 				c.setId(rs.getLong("id"));
 				c.setName(rs.getString("name"));
+				c.setCreateBy(rs.getLong("create_by"));
 			}
 			connection.close();
 			return c;
 		} catch (SQLException ex) {
 			Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return null;
+		return c;
 	}
 
 	public ArrayList<Category> getAll() {
@@ -91,6 +94,7 @@ public class CategoryDAO {
 				Category c = new Category();
 				c.setId(rs.getLong("id"));
 				c.setName(rs.getString("name"));
+				c.setCreateBy(rs.getLong("create_by"));
 				allCategory.add(c);
 			}
 			connection.close();
@@ -98,7 +102,7 @@ public class CategoryDAO {
 		} catch (SQLException ex) {
 			Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return null;
+		return allCategory;
 	}
 
 	public void deleteById(Long id) {
@@ -119,5 +123,36 @@ public class CategoryDAO {
 
 	public static void main(String[] args) {
 		new CategoryDAO().deleteById(Long.parseLong("8"));
+	}
+
+	public ArrayList<Category> getWhere(String name) {
+
+		ArrayList<Category> allCategory = new ArrayList<>();
+		String sql = "SELECT * FROM categorys where 1 = 1 ";
+		
+		if(name != "") {
+			sql += " AND name like '%" + name + "%'";
+		}
+
+		try {
+			Connection connection = DBConnect.getConnection();
+			
+			PreparedStatement ps = connection.prepareCall(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Category c = new Category();
+				c.setId(rs.getLong("id"));
+				c.setName(rs.getString("name"));
+				c.setCreateBy(rs.getLong("create_by"));
+				allCategory.add(c);
+			}
+			connection.close();
+			return allCategory;
+		} catch (SQLException ex) {
+			Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return allCategory;
 	}
 }

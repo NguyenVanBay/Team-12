@@ -14,7 +14,7 @@ import model.Cart;
 import model.Item;
 import model.Product;
 
-@WebServlet("/CartServlet")
+@WebServlet("/add-to-cart")
 public class CartServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -64,7 +64,7 @@ public class CartServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		session.setAttribute("cart", cart);
-		response.sendRedirect("/Book/ListCart");
+		response.sendRedirect("/Book/danh-sach-gio-hang");
 	}
 
 }

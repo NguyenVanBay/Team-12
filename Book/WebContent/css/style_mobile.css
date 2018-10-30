@@ -1,4 +1,4 @@
-/* mÃƒÆ’Ã‚Â n hÃƒÆ’Ã‚Â¬nh nhÃƒÂ¡Ã‚Â»Ã‚Â hÃƒâ€ Ã‚Â¡n iphone x */
+/* mÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â n hÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¬nh nhÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â hÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡n iphone x */
 @media only screen and (min-width: 0px) and (max-width: 768px) {
     
     * {
@@ -21,7 +21,6 @@
 #menu ul li a {
     text-decoration:  none;
     text-transform:  uppercase;
-    color:  #fff;
     padding: 10px;
     display: block;
 }

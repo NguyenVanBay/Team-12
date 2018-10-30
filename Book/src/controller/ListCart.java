@@ -17,7 +17,7 @@ import model.Item;
 /**
  * Servlet implementation class ListCart
  */
-@WebServlet("/ListCart")
+@WebServlet("/danh-sach-gio-hang")
 public class ListCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -38,22 +38,21 @@ public class ListCart extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		Cart cart = (Cart) session.getAttribute("cart");
-		
-ArrayList<Item> listItem = new ArrayList<>();
-		
+
+		ArrayList<Item> listItem = new ArrayList<>();
+
 		if (cart == null) {
 			cart = new Cart();
 			session.setAttribute("cart", cart);
 		} else {
 			session.setAttribute("cart", cart);
-			cart.getCartItems().forEach((key, value)-> {
+			cart.getCartItems().forEach((key, value) -> {
 				listItem.add(value);
 				System.out.println(key);
 				System.out.println(value.getProduct().getName());
 				System.out.println(value.getQuantity());
 			});
 		}
-		
 
 		request.setAttribute("listItem", listItem);
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/listCart.jsp");

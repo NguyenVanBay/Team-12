@@ -63,15 +63,18 @@
 								<td>
 									<%
 										if (b.getStatus() == 1) {
-									%> <p style="color: yellow">Đã giao hàng</p> <%
-										} else if (b.getStatus() == 2) {
-									%> <p style="color: blue">Đang giao hàng</p> <%
-										}  else if (b.getStatus() == 0) {
-									%> <p style="color: red">Đang chờ duyệt</p> <%
-										} else {
-									%><p style="color: gray"> Đơn hàng bị hủy</p> <%
-										}
 									%>
+									<p style="color: yellow">Đã giao hàng</p> <%
+ 	} else if (b.getStatus() == 2) {
+ %>
+									<p style="color: blue">Đang giao hàng</p> <%
+ 	} else if (b.getStatus() == 0) {
+ %>
+									<p style="color: red">Đang chờ duyệt</p> <%
+ 	} else {
+ %><p style="color: gray">Đơn hàng bị hủy</p> <%
+ 	}
+ %>
 								</td>
 								<td>
 									<div class="table-data-feature">
@@ -84,33 +87,48 @@
 										%>
 										<a href="editBill?id=<%=b.getId()%>&status=2" class="item"
 											data-toggle="tooltip" data-placement="top" title=""
-											data-original-title="đang giao hàng"> <i class="fa fa-fighter-jet"></i>
-										</a>
-										<a href="editBill?id=<%=b.getId()%>&status=3" class="item"
+											data-original-title="đang giao hàng"> <i
+											class="fa fa-fighter-jet"></i>
+										</a> <a href="editBill?id=<%=b.getId()%>&status=3" class="item"
 											data-toggle="tooltip" data-placement="top" title=""
-											data-original-title="hủy đơn hàng"> <i class="fa  fa-times"></i>
+											data-original-title="hủy đơn hàng"> <i
+											class="fa  fa-times"></i>
 										</a>
 										<%
 											} else if (b.getStatus() == 2) {
 										%>
 										<a href="editBill?id=<%=b.getId()%>&status=1" class="item"
 											data-toggle="tooltip" data-placement="top" title=""
-											data-original-title="đã giao hàng"> <i class="fa fa-check"></i>
-										</a>
-										<a href="editBill?id=<%=b.getId()%>&status=3" class="item"
+											data-original-title="đã giao hàng"> <i
+											class="fa fa-check"></i>
+										</a> <a href="editBill?id=<%=b.getId()%>&status=3" class="item"
 											data-toggle="tooltip" data-placement="top" title=""
-											data-original-title="hủy đơn hàng"> <i class="fa  fa-times"></i>
+											data-original-title="hủy đơn hàng"> <i
+											class="fa  fa-times"></i>
+										</a>
+										<%
+											} else if (b.getStatus() == 3) {
+										%>
+										<a href="editBill?id=<%=b.getId()%>&status=1" class="item"
+											data-toggle="tooltip" data-placement="top" title=""
+											data-original-title="đã giao hàng"> <i
+											class="fa fa-check"></i>
+										</a> <a href="editBill?id=<%=b.getId()%>&status=3" class="item"
+											data-toggle="tooltip" data-placement="top" title=""
+											data-original-title="hủy đơn hàng"> <i
+											class="fa  fa-times"></i>
 										</a>
 										<%
 											} else {
 										%>
 										<a href="editBill?id=<%=b.getId()%>&status=1" class="item"
 											data-toggle="tooltip" data-placement="top" title=""
-											data-original-title="đã giao hàng"> <i class="fa fa-check"></i>
-										</a>
-										<a href="editBill?id=<%=b.getId()%>&status=2" class="item"
+											data-original-title="đã giao hàng"> <i
+											class="fa fa-check"></i>
+										</a> <a href="editBill?id=<%=b.getId()%>&status=2" class="item"
 											data-toggle="tooltip" data-placement="top" title=""
-											data-original-title="đang giao hàng"> <i class="fa fa-fighter-jet"></i>
+											data-original-title="đang giao hàng"> <i
+											class="fa fa-fighter-jet"></i>
 										</a>
 										<%
 											}

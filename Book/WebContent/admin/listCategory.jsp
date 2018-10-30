@@ -7,9 +7,9 @@
 <html lang="en">
 
 <head>
-<jsp:include page="include/head.jsp"></jsp:include>
+	<jsp:include page="include/head.jsp"></jsp:include>
 
-<%
+	<%
 	ArrayList<Category> categorys = (ArrayList) request.getAttribute("categorys");
 %>
 
@@ -31,12 +31,27 @@
 			<!-- MAIN CONTENT-->
 			<div class="col-md-12">
 				<!-- DATA TABLE -->
-				<div>
-					<h3 class="title-5 m-b-35" style="float: left; margin-left: 37px;">Người dùng</h3>
-					<a href="addCategory"
-						style="float: right; margin-right: 100px; color: #fff;"
-						class="btn btn-success">Add Category</a>
+
+				<div class="bg-while">
+					<h3>Thể loại</h3>
+					<a href="addCategory">Thêm thể loại</a>
+					<hr>
+
+					<form action="/Book/admin/listCategory" method="get">
+
+						<div class="row seach-content">
+
+							<div class="col-md-3 form-group">
+								<input name="name" value="<%= (request.getParameter("name") == "" || request.getParameter("name") == null) ? "" : request.getParameter("name") %>" class="form-control-sm form-control" placeholder="Nhập thể loại">
+							</div>
+
+							<div class="col-md-4 form-group">
+								<button class="col-sm-offset-8 btn btn-success btn-sm" type="submit">Tìm kiếm</button>
+							</div>
+						</div>
+					</form>
 				</div>
+
 				<div class="table-responsive table-responsive-data2">
 					<table class="table table-data2">
 						<thead>
@@ -52,16 +67,17 @@
 								for (Category c : categorys) {
 							%>
 							<tr class="tr-shadow">
-								<td><%=c.getId()%></td>
-								<td><span><%=c.getName()%></span></td>
+								<td>
+									<%=c.getId()%>
+								</td>
+								<td><span>
+										<%=c.getName()%></span></td>
 								<td>
 									<div class="table-data-feature">
-										<a href="editCategory?id=<%=c.getId()%>" class="item"
-											data-toggle="tooltip" data-placement="top" title=""
-											data-original-title="Sửa"> <i class="zmdi zmdi-edit"></i>
-										</a> <a href="deleteCategory?id=<%=c.getId()%>" class="item"
-											data-toggle="tooltip" data-placement="top" title=""
-											data-original-title="xóa"> <i class="zmdi zmdi-delete"></i>
+										<a href="editCategory?id=<%=c.getId()%>" class="item" data-toggle="tooltip" data-placement="top" title=""
+										 data-original-title="Sửa"> <i class="zmdi zmdi-edit"></i>
+										</a> <a href="deleteCategory?id=<%=c.getId()%>" class="item" data-toggle="tooltip" data-placement="top" title=""
+										 data-original-title="xóa"> <i class="zmdi zmdi-delete"></i>
 										</a>
 									</div>
 								</td>

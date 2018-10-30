@@ -17,13 +17,13 @@ import model.User;
  * Servlet implementation class LoginController
  */
 @WebServlet("/admin/Login")
-public class LoginController extends HttpServlet {
+public class LoginAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginController() {
+	public LoginAdmin() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -47,25 +47,37 @@ public class LoginController extends HttpServlet {
 		String type = request.getParameter("type");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+
+		HttpSession session = request.getSession();
+
 		
-		if(type.equals("login")) {
-			User u = new UserDAO().login(email, password);
-			if (u.equals(null)) {
+		if (type.equals("login")) {
+			if (new UserDAO().loginAdmin(email, password) == null) {
+
 				response.sendRedirect("/Book/admin/Login");
+
+			} else {
+
+				User u = new UserDAO().loginAdmin(email, password);
+				
+				session.setAttribute("idAdmin", u.getId());
+				session.setAttribute("email", email);
+				session.setAttribute("password", password);
+				session.setAttribute("userName", u.getName());
+				session.setAttribute("role", u.getRole().toString());
+
+				response.sendRedirect("/Book/admin/dasboard");
 			}
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("email", email);
-			session.setAttribute("password", password);
-			session.setAttribute("userName", u.getName());
-			
-			response.sendRedirect("/Book/admin/dasboard");
+
 		} else {
-			HttpSession session = request.getSession();
-			session.invalidate();
+			
+			session.removeAttribute( "email" );
+			session.removeAttribute( "password" );
+			session.removeAttribute( "userName" );
+			
 			response.sendRedirect("/Book/admin/Login");
 		}
-		
+
 	}
 
 }

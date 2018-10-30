@@ -6,6 +6,15 @@ public class Category {
 	private Long id;
 	private String name;
 	private ArrayList<Product> listProduct;
+	private Long createBy;
+	
+	public Long getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(Long createBy) {
+		this.createBy = createBy;
+	}
 
 	public Category() {
 	}

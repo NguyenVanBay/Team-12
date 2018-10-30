@@ -250,3 +250,18 @@ li:hover a {
     transition-delay: 0.2s;
  }
                  
+
+ 
+form#form {
+    display: inline-block;
+    float: right;
+}
+
+form#form button {
+    display: inline;
+    border: none;
+    color: #fff;
+    background: none;
+    padding: 0px;
+    margin: 0px;
+}

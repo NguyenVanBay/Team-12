@@ -2,6 +2,13 @@
     
 }
 
+form button {
+    border: none;
+    padding: 5px 12px;
+    background: red;
+    color: #fff;
+}
+
 .input-group {
     margin-bottom: 18px;
 }

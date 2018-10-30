@@ -5,7 +5,7 @@
 <html lang="en">
 
 <head>
-<jsp:include page="include/head.jsp"></jsp:include>
+	<jsp:include page="include/head.jsp"></jsp:include>
 </head>
 
 <body class="animsition">
@@ -35,9 +35,24 @@
 									tên </label>
 							</div>
 							<div class="col-12 col-md-9">
-								<input type="text" id="text-input" name="name"
-									placeholder="Họ Tên" class="form-control"> <small
-									class="form-text text-muted">Nhập họ tên</small>
+								<input type="text" id="text-input" name="name" placeholder="Họ Tên" class="form-control"> <small class="form-text text-muted">Nhập
+									họ tên</small>
+							</div>
+						</div>
+
+						<div class="row form-group">
+							<div class="col col-md-3">
+								<label for="selectSm" class=" form-control-label">Chức vụ</label>
+							</div>
+							<div class="col-12 col-md-9">
+								<select name="role" id="SelectLm" class="form-control-sm form-control">
+
+									<option value="4">Giám đốc</option>
+									<option value="1">Quản lý nhân viên</option>
+									<option value="2">Quản lý sản phẩm</option>
+									<option value="3">Quản lý đơn hàng</option>
+
+								</select>
 							</div>
 						</div>
 
@@ -46,9 +61,8 @@
 								<label for="text-input" class=" form-control-label">email</label>
 							</div>
 							<div class="col-12 col-md-9">
-								<input type="text" id="text-input" name="email"
-									placeholder="Email" class="form-control"> <small
-									class="form-text text-muted">Nhập email</small>
+								<input type="text" id="text-input" name="email" placeholder="Email" class="form-control"> <small class="form-text text-muted">Nhập
+									email</small>
 							</div>
 						</div>
 
@@ -58,9 +72,8 @@
 									khẩu</label>
 							</div>
 							<div class="col-12 col-md-9">
-								<input type="password" id="password" name="password"
-									placeholder="Mật khẩu" class="form-control"> <small
-									class="form-text text-muted">Nhập mật khẩu</small>
+								<input type="password" id="password" name="password" placeholder="Mật khẩu" class="form-control"> <small class="form-text text-muted">Nhập
+									mật khẩu</small>
 							</div>
 						</div>
 
@@ -70,9 +83,8 @@
 									lại mật khẩu</label>
 							</div>
 							<div class="col-12 col-md-9">
-								<input type="password" id="text-input" name="re-password"
-									placeholder="Nhập lại mật khẩu" class="form-control"> <small
-									class="form-text text-muted">Nhập lại mật khẩu</small>
+								<input type="password" id="text-input" name="re-password" placeholder="Nhập lại mật khẩu" class="form-control">
+								<small class="form-text text-muted">Nhập lại mật khẩu</small>
 							</div>
 						</div>
 
@@ -82,9 +94,8 @@
 									điện thoại</label>
 							</div>
 							<div class="col-12 col-md-9">
-								<input type="text" id="text-input" name="phone"
-									placeholder="Số điện thoại" class="form-control"> <small
-									class="form-text text-muted">Nhập số điện thoại</small>
+								<input type="text" id="text-input" name="phone" placeholder="Số điện thoại" class="form-control"> <small class="form-text text-muted">Nhập
+									số điện thoại</small>
 							</div>
 						</div>
 
@@ -94,10 +105,11 @@
 									chỉ</label>
 							</div>
 							<div class="col-12 col-md-9">
-								<textarea name="address" id="textarea-input" rows="9"
-									placeholder="Địa chỉ..." class="form-control"></textarea>
+								<textarea name="address" id="textarea-input" rows="9" placeholder="Địa chỉ..." class="form-control"></textarea>
 							</div>
 						</div>
+
+
 
 						<div class="card-footer">
 							<button type="submit" class="btn btn-primary btn-sm">

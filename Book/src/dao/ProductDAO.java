@@ -27,7 +27,7 @@ public class ProductDAO {
 	// add Product.
 	public boolean insertProduct(Product p) {
 		Connection connection = DBConnect.getConnection();
-		String sql = "INSERT INTO products(name, author, public, count, price, id_category, title, description, type) VALUES(?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO products(name, author, public, count, price, id_category, title, description, type, create_by) VALUES(?,?,?,?,?,?,?,?,?,?)";
 		
 		Long id = (long)0;
 		
@@ -42,6 +42,7 @@ public class ProductDAO {
 			ps.setString(7, p.getTitle());
 			ps.setString(8, p.getDescription());
 			ps.setString(9, p.getType());
+			ps.setLong(10, p.getCreateBy());
 			ps.executeUpdate();
 
 			ResultSet rs = ps.getGeneratedKeys();
@@ -92,13 +93,15 @@ public class ProductDAO {
 	}
 
 	public Product getProductById(long id) {
+		Product p = new Product();
+		
 		try {
 			Connection connection = DBConnect.getConnection();
 			String sql = "SELECT * FROM products WHERE id = ?";
 			PreparedStatement ps = connection.prepareCall(sql);
 			ps.setLong(1, id);
 			ResultSet rs = ps.executeQuery();
-			Product p = new Product();
+			
 			
 			Long categoryId = (long) 0;
 			
@@ -129,7 +132,7 @@ public class ProductDAO {
 		} catch (SQLException ex) {
 			Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return null;
+		return p;
 	}
 
 	public ArrayList<Product> getAll() {
@@ -179,7 +182,7 @@ public class ProductDAO {
 		} catch (SQLException ex) {
 			Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return null;
+		return allProduct;
 	}
 	
 
@@ -230,7 +233,7 @@ public class ProductDAO {
 		} catch (SQLException ex) {
 			Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return null;
+		return allProduct;
 	}
 
 	public void deleteById(Long id) {
@@ -254,6 +257,80 @@ public class ProductDAO {
 		}
 	}
 
+
+	public ArrayList<Product> getWhere(String name, String author, String title, String priceFrom, String priceTo,
+			String idCategory) {
+		ArrayList<Product> allProduct = new ArrayList<>();
+		ArrayList<Long> allCategory = new ArrayList<>();
+
+		try {
+			Connection connection = DBConnect.getConnection();
+			String sql = "SELECT * FROM products where 1 = 1 ";
+			
+			if(name != "") {
+				sql += " AND name like '%" + name + "%'";
+			}
+			
+			if(author != "") {
+				sql += " AND author like '%" + author + "%'";
+			}
+			
+			if(title != "") {
+				sql += " AND title like '%" + title + "%'";
+			}
+			
+			if(idCategory != "-1") {
+				sql += " AND id_category = " + idCategory + "";
+			}
+			
+			if(priceFrom != "" && priceTo != "") {
+				sql += " AND price BETWEEN "+ priceFrom +" AND " + priceTo +" ";
+			}
+			
+			System.out.println(sql);
+			
+			PreparedStatement ps = connection.prepareCall(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Product p = new Product();
+				p.setId(rs.getLong("id"));
+				p.setName(rs.getString("name"));
+				p.setAuthor(rs.getString("author"));
+				p.setPublicAt(rs.getTimestamp("public"));
+				p.setCount(rs.getLong("count"));
+				p.setPrice(rs.getDouble("price"));
+				p.setTitle(rs.getString("title"));
+				p.setDescription(rs.getString("description"));
+				p.setType(rs.getString("type"));
+				allProduct.add(p);
+				allCategory.add(rs.getLong("id_category"));
+				
+			}
+			connection.close();
+
+			for (int i = 0; i < allProduct.size(); i++) {
+
+				Product p = allProduct.get(i);
+
+				Category category = new CategoryDAO().getCategoryById(allCategory.get(i));
+				ArrayList<Image> listImage = new ImageDAO().getImageByProductIdAndType(p.getId(), 2);
+				Image thumbnail = new ImageDAO().getImageByProductIdAndType(p.getId(), 1).get(0);
+
+				p.setCategory(category);
+				p.setListImage(listImage);
+				p.setThumbnail(thumbnail);
+				allProduct.set(i, p);
+			}
+
+			return allProduct;
+		} catch (SQLException ex) {
+			Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return allProduct;
+	}
+	
 	public static void main(String[] args) {
 		new ProductDAO().deleteById((long)18);
 	}
