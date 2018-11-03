@@ -51,6 +51,8 @@ public class EditBill extends HttpServlet {
 			response.sendRedirect("/Book/admin/Login");
 		} else {
 
+			request.setCharacterEncoding("UTF-8");
+			
 			String id = request.getParameter("id");
 			String address = request.getParameter("address");
 			String email = request.getParameter("email");

@@ -4,9 +4,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Bài tập lớn nhóm 12</title>
-<link href="font/css/fontawesome.css" rel="stylesheet">
-<link href="font/css/brands.css" rel="stylesheet">
-<link href="font/css/solid.css" rel="stylesheet">
 
 <!-- mystyle -->
 <link rel="stylesheet" href="css/style.css">

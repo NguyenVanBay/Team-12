@@ -1,7 +1,27 @@
+
+* {
+	padding: 0px;
+}
+
+.list-detail-img {
+    height: 353px;
+}
+
+.btn-img {
+    padding-top: 10px;
+}
+
+.w3-content.w3-display-container {
+    flex-grow: 1;
+    padding: 0px 78px;
+}
 .details label {
     font-size:  1rem;
     display:  inline-block;
     margin-right:  16px;
+    color: #000 !important;
+    font-family: cursive;
+    font-size: 22px;
 }
 
 .details input[type="number"], .details button {
@@ -20,10 +40,12 @@
     font-size:  20px;
 }
 
-.details a, .details p {
+.details a, .details p, details label {
     display: block;
     margin: 18px 0px;
     font-size: 1rem;
+    text-transform: lowercase;
+    font-family: cursive;
 }
 
 .details h3 {
@@ -42,4 +64,11 @@
         display:  flex;
         padding: 10px;
     }
+}
+
+.mySlides {display:none;}
+
+.w3-content.w3-display-container > img {
+    height: 234px;
+    width: auto;
 }

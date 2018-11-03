@@ -2,6 +2,11 @@
     
 }
 
+ul#nav {
+    display: flex;
+    font-size: 1.1rem;
+}
+
 .account-area li {
     display: block;
 }
@@ -23,8 +28,8 @@
 #nav-sidebar a {
     color: #000;
     text-decoration: none;
-    padding: 2px;
-    margin-left: 5px;
+    font-size: 0.8rem !important;
+    text-transform: uppercase !important;
 }
 
 a.btn-seach {
@@ -32,11 +37,9 @@ a.btn-seach {
 }
 
 #nav-sidebar li {
-    padding-top: 25px;
-    padding-left: 41px;
+    padding: 12px;
     text-transform: uppercase;
     text-decoration: none;
-    color: #000;
 }
 
 .icon img {
@@ -100,7 +103,7 @@ a.btn-seach {
 }
 
 .detail-product p {
-    font-size: 13px;
+    font-size: 0.7rem;
     color: #000;
     margin: 20px 0px 8px 0px;
     text-transform: uppercase;

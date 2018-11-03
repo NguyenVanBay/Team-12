@@ -9,9 +9,6 @@
 	ArrayList<Product> products = (ArrayList) request.getAttribute("products");
 %>
 
-<%
-	ArrayList<Category> categorys = (ArrayList) request.getAttribute("categorys");
-%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,9 +26,7 @@
 	<jsp:include page="include/menu-area.jsp"></jsp:include>
 	<!-- end menu top -->
 
-	<!-- slider area -->
-	<jsp:include page="include/slide.jsp"></jsp:include>
-	<!-- end slide-area -->
+	
 
 	<!-- infomation -->
 	<jsp:include page="include/infomation.jsp"></jsp:include>
@@ -40,29 +35,21 @@
 
 
 	<div class="container">
+	
+	
 
 		<!-- menu left -->
-		<div class="sidebar">
-			<nav id="menu-sidebar">
-				<ul id="nav-sidebar">
-					<li id="danh-muc"><a href="#">Danh mục</a></li>
-
-					<%
-						for (Category c : categorys) {
-					%>
-					<li><a href="loai-sach?id=<%=c.getId()%>"><%=c.getName()%></a></li>
-					<%
-						}
-					%>
-
-				</ul>
-			</nav>
-		</div>
+		<jsp:include page="include/sidebar.jsp"></jsp:include>
 		<!-- end menu left -->
 
 
 
 		<div class="content">
+		
+		<!-- slider area -->
+	<jsp:include page="include/slide.jsp"></jsp:include>
+	<!-- end slide-area -->
+		
 			<div class="banchay">
 
 				<h3>Sản phẩm nổi bật</h3>

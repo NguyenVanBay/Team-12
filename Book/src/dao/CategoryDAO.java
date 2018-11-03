@@ -41,6 +41,9 @@ public class CategoryDAO {
 
 	// edit Category by id.
 	public boolean editCategory(Category c) {
+		
+		System.out.println("ten la  "+ c.getName());
+		
 		Connection connection = DBConnect.getConnection();
 		String sql = "UPDATE categorys set name = ? WHERE id = ?";
 		try {

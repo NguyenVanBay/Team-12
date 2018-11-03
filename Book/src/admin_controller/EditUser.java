@@ -47,6 +47,7 @@ public class EditUser extends HttpServlet {
 			// User is not logged in.
 			response.sendRedirect("/Book/admin/Login");
 		} else {
+			request.setCharacterEncoding("UTF-8");
 
 			String id = request.getParameter("id");
 			String address = request.getParameter("address");

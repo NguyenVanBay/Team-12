@@ -77,6 +77,8 @@ public class Profile extends HttpServlet {
 			// User is not logged in.
 			response.sendRedirect("/Book/admin/Login");
 		} else {
+			
+			request.setCharacterEncoding("UTF-8");
 
 			String address = request.getParameter("address");
 			String email = request.getParameter("email");

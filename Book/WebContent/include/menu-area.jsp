@@ -2,15 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!-- menu area -->
 <div id="header-top-area">
-	<div class="language-area">
-		<ul>
-			<li id="language-pr"><img src="img/1.jpg" alt="flag"><a
-				href="#">Việt Nam<i class="fa fa-angle-down"></i></a></li>
-			<li id="currency-pr"><a href="#">Việt Nam VND<i
-					class="fa fa-angle-down"></i></a></li>
-		</ul>
-	</div>
-
+	
 	<div class="account-area">
 		<ul>
 			<%
@@ -22,7 +14,7 @@
 			%>
 
 			
-			<li style="float: right">
+			<li>
 				<form id="form" action="/Book/dang-nhap-dang-ki" method="post">
 					<input type="hidden" name="type" value="logout" />
 					<button  class="btn btn-success" type="submit">Logout</button>

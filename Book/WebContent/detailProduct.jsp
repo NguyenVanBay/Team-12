@@ -33,42 +33,62 @@
 	<div class="container">
 
 		<!-- menu left -->
-		<div class="sidebar">
-			<nav id="menu-sidebar">
-				<ul id="nav-sidebar">
-					<li id="danh-muc"><a href="#">Danh mục</a></li>
-
-					<%
-						for (Category c : categorys) {
-					%>
-					<li><a href="loai-sach?id=<%=c.getId()%>"><%=c.getName()%></a></li>
-					<%
-						}
-					%>
-
-				</ul>
-			</nav>
-		</div>
+		<jsp:include page="include/sidebar.jsp"></jsp:include>
 		<!-- end menu left -->
 
 
 
 		<div class="content">
+
 			<div class="detail-product">
-				<div class="detail-img">
-					<img class="img img-responsive"
-						src="/Book/admin/upload/<%=product.getThumbnail().getName()%>" />
-					<hr>
-					<%
-						for (Image i : product.getListImage()) {
-					%>
-					<img class="img img-responsive"
-						style="height: 150px; width: auto; margin-right: 15px; margin-top: 15px;"
-						src="/Book/admin/upload/<%=i.getName()%>" />
-					<%
-						}
-					%>
+
+
+				<div class="w3-content w3-display-container">
+					<div class="list-detail-img">
+						<img class="mySlides" style="width: 100%"
+							src="/Book/admin/upload/<%=product.getThumbnail().getName()%>" />
+						<%
+							for (Image i : product.getListImage()) {
+						%>
+						<img class="mySlides" style="width: 100%"
+							src="/Book/admin/upload/<%=i.getName()%>" />
+						<%
+							}
+						%>
+					</div>
+					<div class="btn-img">
+						<button class="w3-button w3-black w3-display-left"
+							onclick="plusDivs(-1)">&#10094;</button>
+						<button class="w3-button w3-black w3-display-right"
+							onclick="plusDivs(1)">&#10095;</button>
+					</div>
 				</div>
+
+				<script>
+					var slideIndex = 1;
+					showDivs(slideIndex);
+
+					function plusDivs(n) {
+						showDivs(slideIndex += n);
+					}
+
+					function showDivs(n) {
+						var i;
+						var x = document.getElementsByClassName("mySlides");
+						if (n > x.length) {
+							slideIndex = 1
+						}
+						if (n < 1) {
+							slideIndex = x.length
+						}
+						for (i = 0; i < x.length; i++) {
+							x[i].style.display = "none";
+						}
+						x[slideIndex - 1].style.display = "block";
+					}
+				</script>
+
+
 				<div class="details">
 					<h3><%=product.getName()%></h3>
 					<a href=""><%=product.getCategory().getName()%></a>
@@ -83,12 +103,12 @@
 					<p><%=format.format(product.getPublicAt())%></p>
 					<p><%=product.getTitle()%></p>
 					<p><%=product.getDescription()%></p>
-					
+
 					<form action="/Book/cart" method="post">
-					<label>Số lượng</label>
-						<input type="hidden" name="command" value="plus" />
-						<input type="hidden" name="productId" value="<%=product.getId()%>" />
-						<input type="text" required name="count"/>
+						<label>Số lượng</label> <input type="hidden" name="command"
+							value="plus" /> <input type="hidden" name="productId"
+							value="<%=product.getId()%>" /> <input type="text" required
+							name="count" />
 						<button type="submit">Mua</button>
 					</form>
 
