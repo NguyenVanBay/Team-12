@@ -8,7 +8,9 @@
 <%@page import="model.Cart"%>
 <%@page import="model.Item"%>
 <%@ page import="java.util.HashMap"%>
+<%@ page import="java.text.DecimalFormat"%>
 <%@ page import="java.util.*"%>
+
 
 <%
 	ArrayList<Product> products = (ArrayList) request.getAttribute("products");
@@ -43,53 +45,61 @@
 	<div class="container">
 
 		<div class="list-product">
-
-			<table>
-				<tr>
-					<td>Ảnh</td>
-					<td>Số lượng</td>
-					<td>Giá</td>
-					<td></td>
-				</tr>
-
-				<%
-					for (Item i : listItem) {
-				%>
-				<form action="/Book/UpdateCart" method="post">
-				<tr>
-					<td><img
-						src="/Book/admin/upload/<%=i.getProduct().getThumbnail().getName()%>"
-						alt=""></td>
-					<td><%=i.getQuantity()%></td>
-					<td><%=i.getProduct().getPrice()%></td>
-					<td>
-						
-							<button type="submit">update</button>
-					</td>
+			<form id="formCart" action="/Book/cart" method="post">
+				<input type="hidden" name="command" value="edit" />
+				<table>
+					<tr>
+						<td>Ảnh</td>
+						<td>Số lượng</td>
+						<td>Giá</td>
+					</tr>
 					
-					<td>
-							<button type="submit">update</button>
-						
-					</td>
-				</tr>
-				</form>
-				<%
-					}
-				%>
-			</table>
+					<% 
+					
+					DecimalFormat formatter = new DecimalFormat("###,###,###.00");
+					
+						for (Item i : listItem) {
+					%>
 
-			<form action="/Book/Checkout" method="get">
-				<button type="submit">CheckOut</button>
+					<tr>
+						<td><img
+							src="/Book/admin/upload/<%=i.getProduct().getThumbnail().getName()%>"
+							alt=""></td>
+						<td><input name="soLuong<%=i.getProduct().getId()%>"
+							value="<%=i.getQuantity()%>" /></td>
+						<td style="color: red"><%=formatter.format(i.getProduct().getPrice())%> VND</td>
+					</tr>
+
+					<%
+						}
+					%>
+				</table>
 			</form>
+
+
+
+			<button id="updateCart">Cập nhật giỏ hàng</button>
+			<form id="checkout" action="/Book/Checkout" method="get">
+				<button id="checkout-btn" type="submit">CheckOut</button>
+			</form>
+
+			<script>
+				var form = document.getElementById("formCart");
+
+				document.getElementById("updateCart").addEventListener("click",
+						function() {
+							form.submit();
+						});
+			</script>
 
 		</div>
 
 	</div>
-	
+
 	<!-- footer -->
 	<jsp:include page="include/footer.jsp"></jsp:include>
 	<!-- end footer -->
-	
+
 	<script src="js/my.js"></script>
 
 </body>

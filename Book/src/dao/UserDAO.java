@@ -25,7 +25,7 @@ public class UserDAO {
 	// check email exists.
 	public boolean checkEmail(String email) {
 		Connection connection = DBConnect.getConnection();
-		String sql = "SELECT * FROM users WHERE email = '?'";
+		String sql = "SELECT email FROM users WHERE email = ?";
 		try {
 			PreparedStatement ps = connection.prepareCall(sql);
 			ps.setString(1, email);
@@ -55,6 +55,7 @@ public class UserDAO {
 			ps.executeUpdate();
 			connection.close();
 			return true;
+			
 		} catch (SQLException ex) {
 			Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -64,16 +65,15 @@ public class UserDAO {
 	// edit User by id.
 	public boolean editUser(User u) {
 		Connection connection = DBConnect.getConnection();
-		String sql = "UPDATE users set name = ?, email = ?, password = ?, address= ? , phone= ? , role= ? WHERE id = ?";
+		String sql = "UPDATE users set name = ?, email = ?, address= ? , phone= ? , role= ? WHERE id = ?";
 		try {
 			PreparedStatement ps = connection.prepareCall(sql);
 			ps.setString(1, u.getName());
 			ps.setString(2, u.getEmail());
-			ps.setString(3, u.getPassword());
-			ps.setString(4, u.getAddress());
-			ps.setString(5, u.getPhone());
-			ps.setLong(6, u.getRole());
-			ps.setLong(7, u.getId());
+			ps.setString(3, u.getAddress());
+			ps.setString(4, u.getPhone());
+			ps.setLong(5, u.getRole());
+			ps.setLong(6, u.getId());
 			ps.executeUpdate();
 			connection.close();
 			return true;
@@ -244,14 +244,6 @@ public class UserDAO {
 		}
 	}
 
-	public static void main(String[] args) {
-		User user = new UserDAO().loginUser("nguyenvanbay@gmail.com", "123");
-		if(user != null) {
-			System.out.println(user.getName());
-			System.out.println(user.getEmail());
-			System.err.println(user.getPassword());
-		}
-	}
 
 	public ArrayList<User> getWhere(String name, String email, String phone, String role) {
 		
@@ -303,4 +295,12 @@ public class UserDAO {
 		}
 		return allUser;
 	}
+	
+	public static void main(String[] args) {
+		if(new UserDAO().checkEmail("nguyenvanbay@gmail.com")) {
+			System.err.println("co");
+		}
+	}
+
+	
 }

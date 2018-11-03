@@ -67,7 +67,7 @@ a.btn-seach {
 }
 
 .img-product img {
-    width: 97%;
+    width: 60%;
 }
 
 .product {
@@ -85,11 +85,11 @@ a.btn-seach {
     text-decoration: none;
     color:  #fff;
     text-transform:  uppercase;
-    border: 1px solid #FFC107;
-    background: #FF9800;
+    background: #ffeb3b;
     padding: 4px 5px;
-    margin-left: 5px;
-    border-radius: 4px;
+    margin-right: 5px;
+    border-radius: 3px;
+    font-size: 12px;
 }
 
 .price {
@@ -97,15 +97,13 @@ a.btn-seach {
     font-size: 16px;
     margin-top: 16px;
     margin-bottom: 10px;
-    font-family: cursive;
 }
 
 .detail-product p {
-    font-size: 1rem;
-    margin-bottom: 7px;
+    font-size: 13px;
     color: #000;
-    font-family: cursive;
-    margin-bottom: 20px;
+    margin: 20px 0px 8px 0px;
+    text-transform: uppercase;
 }
 
 @media only screen and (min-width: 0px) and (max-width: 768px) {

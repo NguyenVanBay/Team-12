@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import admin_controller.AddProduct;
 import connect.DBConnect;
-import controller.AddProduct;
 import model.Image;
 import model.Product;
 

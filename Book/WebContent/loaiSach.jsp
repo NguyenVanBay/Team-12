@@ -81,12 +81,10 @@
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<form action="/Book/chi-tiet-san-pham" method="post">
-								<input type="hidden" name="command" value="list" /> <input
-									type="hidden" name="productId" value="<%=p.getId()%>" />
+							<form action="/Book/chi-tiet-san-pham?id<%= p.getId() %>" method="get">
 								<button type="submit">Chi tiết</button>
 							</form>
-							<form action="/Book/add-to-cart" method="post">
+							<form action="/Book/cart" method="post">
 								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Mua</button>

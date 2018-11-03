@@ -11,7 +11,7 @@
   </welcome-file-list>
   <servlet>
     <servlet-name>ListUser</servlet-name>
-    <servlet-class>controller.ListUser</servlet-class>
+    <servlet-class>admin_controller.ListUser</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ListUser</servlet-name>
@@ -19,7 +19,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AddUser</servlet-name>
-    <servlet-class>controller.AddUser</servlet-class>
+    <servlet-class>admin_controller.AddUser</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AddUser</servlet-name>
@@ -27,7 +27,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>EditUser</servlet-name>
-    <servlet-class>controller.EditUser</servlet-class>
+    <servlet-class>admin_controller.EditUser</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>EditUser</servlet-name>
@@ -35,7 +35,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>DeleteUser</servlet-name>
-    <servlet-class>controller.DeleteUser</servlet-class>
+    <servlet-class>admin_controller.DeleteUser</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteUser</servlet-name>
@@ -67,7 +67,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>ListCategory</servlet-name>
-    <servlet-class>controller.ListCategory</servlet-class>
+    <servlet-class>admin_controller.ListCategory</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ListCategory</servlet-name>
@@ -75,7 +75,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AddCategory</servlet-name>
-    <servlet-class>controller.AddCategory</servlet-class>
+    <servlet-class>admin_controller.AddCategory</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AddCategory</servlet-name>
@@ -83,7 +83,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>EditCategory</servlet-name>
-    <servlet-class>controller.EditCategory</servlet-class>
+    <servlet-class>admin_controller.EditCategory</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>EditCategory</servlet-name>
@@ -91,7 +91,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>DeleteCategory</servlet-name>
-    <servlet-class>controller.DeleteCategory</servlet-class>
+    <servlet-class>admin_controller.DeleteCategory</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteCategory</servlet-name>
@@ -123,7 +123,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>ListProduct</servlet-name>
-    <servlet-class>controller.ListProduct</servlet-class>
+    <servlet-class>admin_controller.ListProduct</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ListProduct</servlet-name>
@@ -131,7 +131,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AddProduct</servlet-name>
-    <servlet-class>controller.AddProduct</servlet-class>
+    <servlet-class>admin_controller.AddProduct</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AddProduct</servlet-name>
@@ -139,7 +139,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>EditProduct</servlet-name>
-    <servlet-class>controller.EditProduct</servlet-class>
+    <servlet-class>admin_controller.EditProduct</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>EditProduct</servlet-name>
@@ -147,7 +147,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>DeleteProduct</servlet-name>
-    <servlet-class>controller.DeleteProduct</servlet-class>
+    <servlet-class>admin_controller.DeleteProduct</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DeleteProduct</servlet-name>
@@ -179,7 +179,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>ListBill</servlet-name>
-    <servlet-class>controller.ListBill</servlet-class>
+    <servlet-class>admin_controller.ListBill</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ListBill</servlet-name>
@@ -187,7 +187,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>DetailBill</servlet-name>
-    <servlet-class>controller.DetailBill</servlet-class>
+    <servlet-class>admin_controller.DetailBill</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DetailBill</servlet-name>
@@ -195,7 +195,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>EditBill</servlet-name>
-    <servlet-class>controller.EditBill</servlet-class>
+    <servlet-class>admin_controller.EditBill</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>EditBill</servlet-name>

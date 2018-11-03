@@ -2,105 +2,97 @@
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Category"%>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<jsp:include page="include/head.jsp"></jsp:include>
-
-	<%
+<%
 	ArrayList<Category> categorys = (ArrayList) request.getAttribute("categorys");
 %>
 
+<!doctype html>
+<html class="no-js" lang="vi">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Bài tập lớn nhóm 12</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Google Fonts
+		============================================ -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+	<!-- font awesome CSS
+		============================================ -->
+	<link rel="stylesheet" href="css1/font-awesome.min.css">
+
+	<link rel="stylesheet" href="css1/style.css">
+	<link rel="stylesheet" href="css1/list.css">
 </head>
 
-<body class="animsition">
-	<div class="page-wrapper">
-
-		<!-- MENU SIDEBAR-->
-		<jsp:include page="include/menusidebar.jsp"></jsp:include>
-		<!-- END MENU SIDEBAR-->
-
-		<!-- PAGE CONTAINER-->
-		<div class="page-container">
-			<!-- HEADER DESKTOP-->
-			<jsp:include page="include/header.jsp"></jsp:include>
-			<!-- HEADER DESKTOP-->
-
-			<!-- MAIN CONTENT-->
-			<div class="col-md-12">
-				<!-- DATA TABLE -->
-
-				<div class="bg-while">
-					<h3>Thể loại</h3>
-					<a href="addCategory">Thêm thể loại</a>
-					<hr>
-
-					<form action="/Book/admin/listCategory" method="get">
-
-						<div class="row seach-content">
-
-							<div class="col-md-3 form-group">
-								<input name="name" value="<%= (request.getParameter("name") == "" || request.getParameter("name") == null) ? "" : request.getParameter("name") %>" class="form-control-sm form-control" placeholder="Nhập thể loại">
-							</div>
-
-							<div class="col-md-4 form-group">
-								<button class="col-sm-offset-8 btn btn-success btn-sm" type="submit">Tìm kiếm</button>
-							</div>
-						</div>
-					</form>
-				</div>
-
-				<div class="table-responsive table-responsive-data2">
-					<table class="table table-data2">
-						<thead>
-							<tr>
-								<th>id</th>
-								<th>Thể loại</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-
-							<%
-								for (Category c : categorys) {
-							%>
-							<tr class="tr-shadow">
-								<td>
-									<%=c.getId()%>
-								</td>
-								<td><span>
-										<%=c.getName()%></span></td>
-								<td>
-									<div class="table-data-feature">
-										<a href="editCategory?id=<%=c.getId()%>" class="item" data-toggle="tooltip" data-placement="top" title=""
-										 data-original-title="Sửa"> <i class="zmdi zmdi-edit"></i>
-										</a> <a href="deleteCategory?id=<%=c.getId()%>" class="item" data-toggle="tooltip" data-placement="top" title=""
-										 data-original-title="xóa"> <i class="zmdi zmdi-delete"></i>
-										</a>
-									</div>
-								</td>
-							</tr>
-
-							<%
-								}
-							%>
-							<tr class="spacer"></tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- END DATA TABLE -->
+<body>
+	<!-- menu-top -->
+	<jsp:include page="include/menu-top.jsp"></jsp:include>
+	<div class="container">
+		<div class="bg-while">
+			<div class="top">
+				<h3>Thể loại</h3>
+				<a href="addCategory">Thêm thể loại</a>
 			</div>
-			<!-- END MAIN CONTENT-->
-			<!-- END PAGE CONTAINER-->
+
+			<form action="/Book/admin/listCategory" method="get">
+
+				<div class="seach-content">
+
+					<div class="form-group">
+						<input name="name" value="<%= (request.getParameter(" name")=="" || request.getParameter("name")==null) ? "" :
+						 request.getParameter("name") %>" class="form-control-sm form-control" placeholder="Nhập thể loại">
+					</div>
+
+					<div class="form-group">
+						<button type="submit">Tìm kiếm</button>
+					</div>
+				</div>
+			</form>
 		</div>
 
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Thể loại</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<%
+							for (Category c : categorys) {
+						%>
+					<tr class="tr-shadow">
+						<td>
+							<%=c.getId()%>
+						</td>
+						<td><span>
+								<%=c.getName()%></span></td>
+						<td style="width: 100px;">
+							<div class="table-feature">
+								<a href="editCategory?id=<%=c.getId()%>" class="item tooltip">
+									<i class="fa fa-pencil-square"></i>
+									<span class="tooltiptext">Sửa thể loại</span>
+								</a>
+								<a href="deleteCategory?id=<%=c.getId()%>" class="item tooltip">
+									<i class="fa fa-recycle"></i>
+									<span class="tooltiptext">Xóa thể loại</span>
+								</a>
+							</div>
+						</td>
+					</tr>
+
+					<%
+							}
+						%>
+				</tbody>
+			</table>
+		</div>
 	</div>
-
-	<jsp:include page="include/filejs.jsp"></jsp:include>
-
 </body>
 
 </html>
-<!-- end document-->

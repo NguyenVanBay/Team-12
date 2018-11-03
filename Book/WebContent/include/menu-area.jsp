@@ -22,10 +22,10 @@
 			%>
 
 			
-			<li>
+			<li style="float: right">
 				<form id="form" action="/Book/dang-nhap-dang-ki" method="post">
 					<input type="hidden" name="type" value="logout" />
-					<button class="btn btn-success" type="submit">Logout</button>
+					<button  class="btn btn-success" type="submit">Logout</button>
 				</form>
 			</li>
 			
@@ -46,15 +46,15 @@
 <div class="menu-area">
 	<nav id="menu">
 		<ul id="nav">
-			<li><a href="index.html">Trang chủ</a></li>
+			<li><a href="/Book/home">Trang chủ</a></li>
 
-			<li><a href="index.html">Tin tức</a></li>
-
-
-			<li><a href="index.html">Giới thiệu</a></li>
+			<li><a href="/Book/tintuc.jsp">Tin tức</a></li>
 
 
-			<li><a href="index.html">Liên hệ</a></li>
+			<li><a href="/Book/gioithieu.jsp">Giới thiệu</a></li>
+
+
+			<li><a href="/Book/lienhe.jsp">Liên hệ</a></li>
 		</ul>
 	</nav>
 </div>

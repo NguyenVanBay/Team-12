@@ -36,7 +36,7 @@ public class Cart {
         boolean check = cartItems.containsKey(key);
         if (check) {
             int quantity_old = item.getQuantity();
-            item.setQuantity(quantity_old + 1);
+            item.setQuantity(quantity_old);
             cartItems.put(key, item);
         } else {
             cartItems.put(key, item);
@@ -68,16 +68,6 @@ public class Cart {
     // count item
     public int countItem() {
         return cartItems.size();
-    }
-
-    // sum total 
-    public double totalCart() {
-        double count = 0;
-        // count = price * quantity
-//        for (Map.Entry<Long, Item> list : cartItems.entrySet()) {
-//            count += list.getValue().getProduct().getProductPrice() * list.getValue().getQuantity();
-//        }
-        return count;
     }
 
 }

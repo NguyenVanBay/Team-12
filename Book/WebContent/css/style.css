@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+.account-area li {
+    margin-top: -4px;
+}
+
 .btn-select {
     display: flex;
     justify-content: center;
@@ -29,7 +33,7 @@ nav#menu {
 
 .infomation {
     text-align: center;
-    padding: 50px;
+    padding-top: 20px;
 }
 
 .infomation h3 {
@@ -42,15 +46,23 @@ nav#menu {
 }
 
 .detail-img img {
-    width:  100%;
+    width: 60%;
 }
 
 .details {
     width:  60%;
 }
 
+.details input {
+    width: 100%;
+    height: 28px;
+    padding: 0px 10px;
+    margin-top: 12px;
+}
+
 .detail-img {
-    width:  40%;
+    width: 50%;
+    padding-right: 40px;
 }
 
 
@@ -254,7 +266,6 @@ li:hover a {
  
 form#form {
     display: inline-block;
-    float: right;
 }
 
 form#form button {
@@ -263,5 +274,30 @@ form#form button {
     color: #fff;
     background: none;
     padding: 0px;
-    margin: 0px;
+}
+
+.form-group input {
+    height: 25px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 90%;
+    margin: 50px;
+    background: #fff;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f6f8fa;
 }

@@ -12,7 +12,7 @@
     <div class="page-wrapper">
         
         <!-- MENU SIDEBAR-->
-        <jsp:include page="include/menusidebar.jsp"></jsp:include>
+        <jsp:include page="include/menu-top.jsp"></jsp:include>
         <!-- END MENU SIDEBAR-->
 
         <!-- PAGE CONTAINER-->

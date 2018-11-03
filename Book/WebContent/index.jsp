@@ -78,12 +78,9 @@
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<form action="/Book/chi-tiet-san-pham" method="post">
-								<input type="hidden" name="command" value="list" /> <input
-									type="hidden" name="productId" value="<%=p.getId()%>" />
-								<button type="submit">Chi tiết</button>
-							</form>
-							<form action="/Book/add-to-cart" method="post">
+							<a href="/Book/chi-tiet-san-pham?id=<%=p.getId()%>">Chi
+								tiết sản phẩm</a>
+							<form action="/Book/cart" method="post">
 								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Mua</button>
@@ -119,12 +116,9 @@
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<form action="/Book/chi-tiet-san-pham" method="post">
-								<input type="hidden" name="command" value="list" /> <input
-									type="hidden" name="productId" value="<%=p.getId()%>" />
-								<button type="submit">Chi tiết</button>
-							</form>
-							<form action="/Book/add-to-cart" method="post">
+							<a href="/Book/chi-tiet-san-pham?id=<%=p.getId()%>">Chi
+								tiết sản phẩm</a>
+							<form action="/Book/cart" method="post">
 								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Mua</button>
@@ -160,13 +154,11 @@
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<form action="/Book/chi-tiet-san-pham" method="post">
-								<input type="hidden" name="command" value="list" /> <input
-									type="hidden" name="productId" value="<%=p.getId()%>" />
-								<button type="submit">Chi tiết</button>
-							</form>
-							<form action="/Book/add-to-cart" method="post">
-								<input type="hidden" name="command" value="plus" /> <input
+							<a href="/Book/chi-tiet-san-pham?id=<%=p.getId()%>">Chi
+								tiết sản phẩm</a>
+							<form action="/Book/cart" method="post">
+								<input type="hidden" name="command" value="plus" />
+								<input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Mua</button>
 							</form>
@@ -188,16 +180,6 @@
 	<!-- menu top -->
 	<jsp:include page="include/footer.jsp"></jsp:include>
 	<!-- end menu top -->
-	
-	<%
-		if (request.getAttribute("type") == "success") {
-	%>
-	<script type="text/javascript">
-		alert("Mua hàng thàng công. chúng tôi sẽ liên lạc cho bạn sớm.");
-	</script>
-	<%
-		}
-	%>
 
 	<script src="js/my.js"></script>
 

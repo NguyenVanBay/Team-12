@@ -106,6 +106,8 @@ public class ProductDAO {
 			Long categoryId = (long) 0;
 			
 			while (rs.next()) {
+				
+				categoryId = rs.getLong("id_category");
 		
 				p.setId(rs.getLong("id"));
 				p.setName(rs.getString("name"));

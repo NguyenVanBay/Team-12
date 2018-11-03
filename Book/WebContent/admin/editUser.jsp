@@ -7,137 +7,88 @@
 	User user = (User) request.getAttribute("user");
 %>
 
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="vi">
 
 <head>
-<jsp:include page="include/head.jsp"></jsp:include>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Bài tập lớn nhóm 12</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Google Fonts
+		============================================ -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+	<!-- font awesome CSS
+		============================================ -->
+	<link rel="stylesheet" href="css1/font-awesome.min.css">
+
+	<link rel="stylesheet" href="css1/style.css">
+	<link rel="stylesheet" href="css1/add.css">
 </head>
 
-<body class="animsition">
-	<div class="page-wrapper">
+<body>
+	<!-- menu-top -->
+	<jsp:include page="include/menu-top.jsp"></jsp:include>
+	<div class="container">
 
-		<!-- MENU SIDEBAR-->
-		<jsp:include page="include/menusidebar.jsp"></jsp:include>
-		<!-- END MENU SIDEBAR-->
-
-		<!-- PAGE CONTAINER-->
-		<div class="page-container">
-			<!-- HEADER DESKTOP-->
-			<jsp:include page="include/header.jsp"></jsp:include>
-			<!-- HEADER DESKTOP-->
-
-			<!-- MAIN CONTENT-->
-			<div class="card">
-				<div class="card-header">
-					<strong>Sửa</strong> User
-					<%=user.getName()%>
-				</div>
-				<div class="card-body card-block">
-					<form action="/Book/admin/editUser" method="post">
-
-						<input type="hidden" name="id" value="<%=user.getId()%>">
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="text-input" class=" form-control-label">Họ
-									tên </label>
-							</div>
-							<div class="col-12 col-md-9">
-								<input type="text" id="text-input" name="name"
-									value="<%=user.getName()%>" placeholder="Họ Tên"
-									class="form-control"> <small
-									class="form-text text-muted">Nhập họ tên</small>
-							</div>
-						</div>
-						
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="selectSm" class=" form-control-label">Chức vụ</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<select name="role" id="SelectLm"
-									class="form-control-sm form-control">
-									
-									<option value="4">Giám đốc</option>
-									<option value="1">Quản lý nhân viên</option>
-									<option value="2">Quản lý sản phẩm</option>
-									<option value="3">Quản lý đơn hàng</option>
-									
-								</select>
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="text-input" class=" form-control-label">email</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<input type="text" id="text-input" name="email"
-									value="<%=user.getEmail()%>" placeholder="Email"
-									class="form-control"> <small
-									class="form-text text-muted">Nhập email</small>
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="text-input" class=" form-control-label">Mật
-									khẩu</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<input type="password" id="password" name="password"
-									placeholder="Mật khẩu" class="form-control"> <small
-									class="form-text text-muted">Nhập mật khẩu</small>
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="text-input" class=" form-control-label">Số
-									điện thoại</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<input type="text" id="text-input" name="phone"
-									value="<%=user.getPhone()%>" placeholder="Số điện thoại"
-									class="form-control"> <small
-									class="form-text text-muted">Nhập số điện thoại</small>
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="textarea-input" class=" form-control-label">Địa
-									chỉ</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<textarea name="address" id="textarea-input" rows="9"
-									placeholder="Địa chỉ..." class="form-control"><%=user.getAddress()%></textarea>
-							</div>
-						</div>
-
-						<div class="card-footer">
-							<button type="submit" class="btn btn-primary btn-sm">
-								<i class="fa fa-dot-circle-o"></i> Submit
-							</button>
-							<button type="reset" class="btn btn-danger btn-sm">
-								<i class="fa fa-ban"></i> Reset
-							</button>
-						</div>
-
-					</form>
-				</div>
-
-			</div>
-			<!-- END MAIN CONTENT-->
-			<!-- END PAGE CONTAINER-->
+		<div class="top">
+			<h3>Sửa nhân viên :
+				<%=user.getName()%>
+			</h3>
+			<a href="listUser">Danh sách nhân viên</a>
 		</div>
 
+		<form action="/Book/admin/editUser" method="post">
+
+			<input type="hidden" name="id" value="<%=user.getId()%>">
+
+			<div class="form-group">
+				<label for="text-input">Họ
+					tên </label>
+				<input type="text" name="name" value="<%=user.getName()%>" placeholder="Họ Tên">
+			</div>
+
+			<div class=" form-group">
+				<label>Chức vụ</label>
+				<select name="role">
+					<option value="4">Giám đốc</option>
+					<option value="1">Quản lý nhân viên</option>
+					<option value="2">Quản lý sản phẩm</option>
+					<option value="3">Quản lý đơn hàng</option>
+
+				</select>
+			</div>
+
+			<div class=" form-group">
+				<label>email</label>
+				<input type="text" name="email" value="<%=user.getEmail()%>" placeholder="Email">
+			</div>
+
+			<div class=" form-group">
+				<label>Số
+					điện thoại</label>
+				<input type="text" id="text-input" name="phone" value="<%=user.getPhone()%>" placeholder="Số điện thoại">
+			</div>
+
+			<div class=" form-group">
+				<label>Địa
+					chỉ</label>
+				<textarea name="address" placeholder="Địa chỉ..."><%=user.getAddress()%></textarea>
+			</div>
+
+			<div class="card-footer">
+				<label></label>
+				<button type="submit">
+					<i class="fa fa-dot-circle-o"></i> Submit
+				</button>
+				<button type="reset">
+					<i class="fa fa-ban"></i> Reset
+				</button>
+			</div>
+
+		</form>
 	</div>
-
-	<jsp:include page="include/filejs.jsp"></jsp:include>
-
 </body>
 
 </html>
-<!-- end document-->

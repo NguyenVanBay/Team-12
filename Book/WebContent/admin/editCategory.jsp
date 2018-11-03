@@ -6,74 +6,57 @@
 <%
 	Category category = (Category) request.getAttribute("category");
 %>
-
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="vi">
 
 <head>
-<jsp:include page="include/head.jsp"></jsp:include>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Bài tập lớn nhóm 12</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Google Fonts
+		============================================ -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+	<!-- font awesome CSS
+		============================================ -->
+	<link rel="stylesheet" href="css1/font-awesome.min.css">
+
+	<link rel="stylesheet" href="css1/style.css">
+	<link rel="stylesheet" href="css1/add.css">
 </head>
 
-<body class="animsition">
-	<div class="page-wrapper">
+<body>
+	<!-- menu-top -->
+	<jsp:include page="include/menu-top.jsp"></jsp:include>
+	<div class="container">
 
-		<!-- MENU SIDEBAR-->
-		<jsp:include page="include/menusidebar.jsp"></jsp:include>
-		<!-- END MENU SIDEBAR-->
-
-		<!-- PAGE CONTAINER-->
-		<div class="page-container">
-			<!-- HEADER DESKTOP-->
-			<jsp:include page="include/header.jsp"></jsp:include>
-			<!-- HEADER DESKTOP-->
-
-			<!-- MAIN CONTENT-->
-			<div class="card">
-				<div class="card-header">
-					<strong>Sửa</strong> Thể loại
-					<%=category.getName()%>
-				</div>
-				<div class="card-body card-block">
-					<form action="/Book/admin/editCategory" method="post">
-
-						<input type="hidden" name="id" value="<%= category.getId()%>">
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="text-input" class=" form-control-label">Họ
-									tên </label>
-							</div>
-							<div class="col-12 col-md-9">
-								<input type="text" id="text-input" name="name"
-									value="<%=category.getName()%>" placeholder="Thể loại"
-									class="form-control"> <small
-									class="form-text text-muted">Nhập thể loại</small>
-							</div>
-						</div>
-
-						
-						<div class="card-footer">
-							<button type="submit" class="btn btn-primary btn-sm">
-								<i class="fa fa-dot-circle-o"></i> Submit
-							</button>
-							<button type="reset" class="btn btn-danger btn-sm">
-								<i class="fa fa-ban"></i> Reset
-							</button>
-						</div>
-
-					</form>
-				</div>
-
-			</div>
-			<!-- END MAIN CONTENT-->
-			<!-- END PAGE CONTAINER-->
+		<div class="top">
+			<h3>sửa thể loại sách :
+				<%=category.getName()%>
+			</h3>
+			<a href="listCategory">Danh sách thể loại</a>
 		</div>
+		
+		<form action="/Book/admin/editCategory" method="post">
+			<input type="hidden" name="id" value="<%= category.getId()%>">
+			<div class="form-group">
+				<label for="text-input" class=" form-control-label"> Tên thể loại</label>
+				<input type="text" id="text-input" name="name" value="<%=category.getName()%>">
+			</div>
 
+			<div class="card-footer">
+				<label></label>
+				<button type="submit" class="btn btn-primary btn-sm">
+					<i class="fa fa-dot-circle-o"></i> Submit
+				</button>
+				<button type="reset" class="btn btn-danger btn-sm">
+					<i class="fa fa-ban"></i> Reset
+				</button>
+			</div>
+
+		</form>
 	</div>
-
-	<jsp:include page="include/filejs.jsp"></jsp:include>
-
 </body>
 
 </html>
-<!-- end document-->

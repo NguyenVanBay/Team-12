@@ -1,42 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="vi">
 
 <head>
-<jsp:include page="include/head.jsp"></jsp:include>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Bài tập lớn nhóm 12</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google Fonts
+		============================================ -->
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900"
+	rel="stylesheet">
+<!-- font awesome CSS
+		============================================ -->
+<link rel="stylesheet" href="css1/font-awesome.min.css">
 
-
-
+<link rel="stylesheet" href="css1/style.css">
+<link rel="stylesheet" href="css1/dasboard.css">
 </head>
 
-<body class="animsition">
-	<div class="page-wrapper">
-
-		<!-- MENU SIDEBAR-->
-		<jsp:include page="include/menusidebar.jsp"></jsp:include>
-		<!-- END MENU SIDEBAR-->
-
-		<!-- PAGE CONTAINER-->
-		<div class="page-container">
-			<!-- HEADER DESKTOP-->
-			<jsp:include page="include/header.jsp"></jsp:include>
-
-
-			<div style="justify-content: center;">
-				<h3 class="title-5 m-t-35" style="float: left; margin-left: 37px;">Ứng
-					dụng quản lý bán hàng.</h3>
-			</div>
-
-		</div>
-
+<body>
+	<!-- menu-top -->
+<jsp:include page="include/menu-top.jsp"></jsp:include>
+	<div class="container">
+		<h3>Phần mềm quản lý bán hàng</h3>
 	</div>
-
-	<jsp:include page="include/filejs.jsp"></jsp:include>
-
 </body>
 
 </html>
-<!-- end document-->

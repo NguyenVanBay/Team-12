@@ -7,217 +7,233 @@
 	ArrayList<Category> categorys = (ArrayList) request.getAttribute("categorys");
 %>
 
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="vi">
 
 <head>
-<jsp:include page="include/head.jsp"></jsp:include>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Bài tập lớn nhóm 12</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Google Fonts
+		============================================ -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+	<!-- font awesome CSS
+		============================================ -->
+	<link rel="stylesheet" href="css1/font-awesome.min.css">
+
+	<link rel="stylesheet" href="css1/style.css">
+	<link rel="stylesheet" href="css1/add.css">
 </head>
 
-<body class="animsition">
-	<div class="page-wrapper">
+<body>
+	<!-- menu-top -->
+	<jsp:include page="include/menu-top.jsp"></jsp:include>
+	<div class="container">
 
-		<!-- MENU SIDEBAR-->
-		<jsp:include page="include/menusidebar.jsp"></jsp:include>
-		<!-- END MENU SIDEBAR-->
-
-		<!-- PAGE CONTAINER-->
-		<div class="page-container">
-			<!-- HEADER DESKTOP-->
-			<jsp:include page="include/header.jsp"></jsp:include>
-			<!-- HEADER DESKTOP-->
-
-			<!-- MAIN CONTENT-->
-			<div class="card">
-				<div class="card-header">
-					<strong>Thêm</strong> Sản phẩm
-				</div>
-				<div class="card-body card-block">
-					<form action="/Book/admin/addProduct" method="post"
-						enctype="multipart/form-data">
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="text-input" class=" form-control-label">Tên
-									sản phẩm</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<input type="text" id="text-input" name="name"
-									placeholder="Tên sản phẩm" class="form-control"> <small
-									class="form-text text-muted">Nhập tên sản phẩm</small>
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="selectSm" class=" form-control-label">Thể
-									loại</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<select name="idCategory" id="SelectLm"
-									class="form-control-sm form-control">
-									<%
-										for (Category c : categorys) {
-									%>
-									<option value="<%=c.getId()%>"><%=c.getName()%></option>
-									<%
-										}
-									%>
-								</select>
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="text-input" class=" form-control-label">Tác
-									giả</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<input type="text" id="text-input" name="author"
-									placeholder="Tác giả" class="form-control"> <small
-									class="form-text text-muted">Nhập tác giả</small>
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="text-input" class=" form-control-label">Thời
-									gian xuất bản</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<input type="date" id="text-input" name="publicAt"
-									placeholder="Giá tiền" class="form-control"> <small
-									class="form-text text-muted"></small>
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="text-input" class=" form-control-label">Số
-									lượng</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<input type="text" id="password" name="count"
-									placeholder="Số lượng" class="form-control"> <small
-									class="form-text text-muted">Nhập Số lượng</small>
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="text-input" class=" form-control-label">Giá
-									tiền</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<input type="text" id="text-input" name="price"
-									placeholder="Giá tiền" class="form-control"> <small
-									class="form-text text-muted">Nhập giá tiền</small>
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="text-input" class=" form-control-label">Giới
-									thiệu</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<input type="text" id="text-input" name="title"
-									placeholder="Giới thiệu tổng quan" class="form-control">
-								<small class="form-text text-muted">Giới thiệu sách</small>
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="textarea-input" class=" form-control-label">Mô
-									tả</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<textarea name="description" id="textarea-input" rows="9"
-									placeholder="Mô tả" class="form-control"></textarea>
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="select" class=" form-control-label">Sản phẩm</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<select name="type" id="select" class="form-control">
-									<option value="new">Mới</option>
-									<option value="hot">Nổi bật</option>
-									<option value="sellMultiple">Bán chạy</option>
-								</select>
-							</div>
-						</div>
-
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="file-input" class=" form-control-label">Ảnh
-									thumbnail</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<input type="file" id="file-input" name="thubnail"
-									class="form-control-file">
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="file-input" class=" form-control-label">Ảnh
-									1</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<input type="file" id="file-input" name="image1"
-									class="form-control-file">
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="file-input" class=" form-control-label">Ảnh
-									2</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<input type="file" id="file-input" name="image2"
-									class="form-control-file">
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col col-md-3">
-								<label for="file-input" class=" form-control-label">Ảnh
-									3</label>
-							</div>
-							<div class="col-12 col-md-9">
-								<input type="file" id="file-input" name="image3"
-									class="form-control-file">
-							</div>
-						</div>
-
-						<div class="card-footer">
-							<button type="submit" class="btn btn-primary btn-sm">
-								<i class="fa fa-dot-circle-o"></i> Submit
-							</button>
-							<button type="reset" class="btn btn-danger btn-sm">
-								<i class="fa fa-ban"></i> Reset
-							</button>
-						</div>
-
-					</form>
-				</div>
-
-			</div>
-			<!-- END MAIN CONTENT-->
-			<!-- END PAGE CONTAINER-->
+		<div class="top">
+			<h3>Thêm sản phẩm
+			</h3>
+			<a href="listProduct">Danh sách sản phẩm</a>
 		</div>
 
+		<form action="/Book/admin/addProduct" method="post" enctype="multipart/form-data">
+
+			<div class="form-group">
+				<label for="text-input" class=" form-control-label">Tên
+					sản phẩm</label>
+				<input type="text" id="nameProduct" name="name" onfocusout="checkParam()" placeholder="Tên sản phẩm">
+				<div>
+					<p id="nameProductEr" class="er-red"></p>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="selectSm" class=" form-control-label">Thể
+					loại</label>
+				<select name="idCategory">
+					<%
+							for (Category c : categorys) {
+						%>
+					<option value="<%=c.getId()%>">
+						<%=c.getName()%>
+					</option>
+					<%
+							}
+						%>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label for="text-input" class=" form-control-label">Tác
+					giả</label>
+				<input type="text" id="nameAuthor" name="author" onfocusout="checkParam()" placeholder="Tác giả" class="form-control">
+				<div>
+					<p id="nameAuthorEr" class="er-red"></p>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="text-input" class=" form-control-label">Thời
+					gian xuất bản</label>
+
+				<input type="date" id="namePublicAt" name="publicAt" onfocusout="checkParam()" placeholder="Giá tiền" class="form-control">
+				<div>
+					<p id="namePublicAtEr" class="er-red"></p>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="text-input" class=" form-control-label">Số
+					lượng</label>
+				<input type="text" id="nameCount" name="count" onfocusout="checkParam()" placeholder="Số lượng" class="form-control">
+				<div>
+					<p id="nameCountEr" class="er-red"></p>
+				</div>
+			</div>
+
+			<div class=" form-group">
+				<label for="text-input" class=" form-control-label">Giá
+					tiền</label>
+				<input type="text" id="namePrice" name="price" onfocusout="checkParam()" placeholder="Giá tiền" class="form-control">
+				<div>
+					<p id="namePriceEr" class="er-red"></p>
+				</div>
+			</div>
+
+
+			<div class=" form-group">
+				<label for="text-input" class=" form-control-label">Giới
+					thiệu</label>
+				<input type="text" id="nameTitle" name="title" onfocusout="checkParam()" placeholder="Giới thiệu tổng quan" class="form-control">
+				<div>
+					<p id="nametitleEr" class="er-red"></p>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="textarea-input" class=" form-control-label">Mô
+					tả</label>
+				<textarea name="description" id="nameDescription" onfocusout="checkParam()" rows="9" placeholder="Mô tả" class="form-control"></textarea>
+				<div>
+					<p id="nameDescriptionEr" class="er-red"></p>
+				</div>
+			</div>
+
+			<div class=" form-group">
+				<label for="select" class=" form-control-label">Sản phẩm</label>
+				<select name="type" id="select" class="form-control">
+					<option value="new">Mới</option>
+					<option value="hot">Nổi bật</option>
+					<option value="sellMultiple">Bán chạy</option>
+				</select>
+			</div>
+
+
+			<div class="form-group">
+				<label for="file-input">Ảnh
+					thumbnail</label>
+				<input type="file" id="file-input" name="thubnail" class="form-control-file">
+
+			</div>
+
+			<div class=" form-group">
+				<label for="file-input">Ảnh
+					1</label>
+				<input type="file" id="file-input" name="image1" class="form-control-file">
+
+			</div>
+
+			<div class=" form-group">
+				<label for="file-input">Ảnh
+					2</label>
+				<input type="file" id="file-input" name="image2" class="form-control-file">
+			</div>
+
+			<div class=" form-group">
+				<label for="file-input">Ảnh
+					2</label>
+				<input type="file" id="file-input" name="image3" class="form-control-file">
+			</div>
+
+			<div class="card-footer">
+				<label></label>
+				<button type="submit" class="btn btn-primary btn-sm">
+					<i class="fa fa-dot-circle-o"></i> Submit
+				</button>
+				<button type="reset" class="btn btn-danger btn-sm">
+					<i class="fa fa-ban"></i> Reset
+				</button>
+			</div>
+
+		</form>
+
+		<script>
+			function checkParam() {
+
+				// chuẩn hóa đầu vào
+				var nameProduct = document.getElementById("nameProduct").value.trim();
+				var nameAuthor = document.getElementById("nameAuthor").value.trim();
+				var nameCount = document.getElementById("nameCount").value.trim();
+				var nameDescription = document.getElementById("nameDescription").value.trim();
+				var namePrice = document.getElementById("namePrice").value.trim();
+				var namePublicAt = document.getElementById("namePublicAt").value.trim();
+				var nameTitle = document.getElementById("nameTitle").value.trim();
+
+				// name
+				if (nameProduct == "") {
+					document.getElementById("nameProductEr").innerHTML = "Chưa nhập tên sản phẩm";
+
+				} else {
+					document.getElementById("nameProductEr").innerHTML = "";
+				}
+
+
+				if (nameAuthor == "") {
+					document.getElementById("nameAuthorEr").innerHTML = "Chưa nhập tên tác giả";
+
+				} else {
+					document.getElementById("nameAuthorEr").innerHTML = "";
+				}
+
+				if (nameCount == "") {
+					document.getElementById("nameCountEr").innerHTML = "Chưa nhập số lượng sản phẩm";
+
+				} else {
+					document.getElementById("nameCountEr").innerHTML = "";
+				}
+
+				if (nameDescription == "") {
+					document.getElementById("nameDescriptionEr").innerHTML = "Chưa nhập mô tả sản phẩm";
+
+				} else {
+					document.getElementById("nameDescriptionEr").innerHTML = "";
+				}
+
+				if (namePrice == "") {
+					document.getElementById("namePriceEr").innerHTML = "Chưa nhập giá sản phẩm";
+
+				} else {
+					document.getElementById("namePriceEr").innerHTML = "";
+				}
+
+				if (namePublicAt == "") {
+					document.getElementById("namePublicAtEr").innerHTML = "Chưa nhập năm xuất bản";
+
+				} else {
+					document.getElementById("namePublicAtEr").innerHTML = "";
+				}
+
+				if (nameTitle == "") {
+					document.getElementById("nametitleEr").innerHTML = "Chưa nhập tiêu đề sản phẩm";
+
+				} else {
+					document.getElementById("nametitleEr").innerHTML = "";
+				}
+			}
+		</script>
 	</div>
-
-	<jsp:include page="include/filejs.jsp"></jsp:include>
-
 </body>
 
 </html>
-<!-- end document-->
