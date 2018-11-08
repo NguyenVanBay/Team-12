@@ -1,0 +1,11 @@
+.header-desktop {
+	margin-bottom: 20px;
+}
+
+.bg-while {
+	background: #fff;
+	height: 100%;
+	padding: 10px 36px;
+}
+
+.seach-content input {border-radius: 3px !important;}

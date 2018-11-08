@@ -1,0 +1,250 @@
+@media only screen and (min-width: 769px) and (max-width: 1800px) {
+
+    * {
+        padding: 0px; margin: 0px;
+    }
+
+    .footer-bottom {
+        margin: 40px;
+        border-top:  1px solid #fff;
+        padding: 18px;
+        display:  flex;
+    }
+
+    .footer-top-menu ul {
+        justify-content:  center;
+        align-items:  center;
+    }
+
+    footer {
+        background-color: #222222;
+    }
+
+    .slider-area p {
+        color:  #fff;
+        font-size: 40px;
+    }
+
+    #nav li {
+        display:  inline-block;
+        margin-left: 91px;
+        padding: 15px;
+        background-color:  #fff;
+    }
+
+    #nav li a {
+        text-decoration:  none;
+        color:  #000;
+        text-transform:  uppercase;
+        display: block;
+    }
+
+
+    #nav li:hover a {
+        color: #499e46;
+    }
+
+    #icon-cart {
+    }
+
+    #icon-cart a {
+        color: #000;
+        text-transform:  uppercase;
+        text-decoration:  none;
+    }
+
+    #header-top-area {
+        display:  flex;
+        background-color: #499e46;
+        padding: 7px 50px;
+    }
+
+    .language-area {
+        flex: 1;
+    }
+
+    .account-area {flex:  1;}
+
+    #header-top-area ul {
+        list-style-type:  none;
+    }
+
+    #header-top-area ul li {
+        display: inline;
+    }
+
+    .account-area ul li a {
+        float: right;
+        color: #fff;
+        text-decoration: none;
+        display: inline-block;
+        margin-right: 20px;
+    }
+
+    .language-area ul li a {
+        color: #fff;
+        text-decoration: none;
+        display: inline-block;
+        margin-right: 20px;
+    }
+
+    .header-mid-area {
+        background: #ffffff url(../img/27.jpg) repeat scroll 0 0;
+        display: flex;
+        padding: 30px;
+    }
+
+    .header-search , .logo-area, .my-cart {
+        flex: 1;
+        align-self: center;
+    }
+
+        
+    .header-search form {
+        display:  block;
+        position: relative;
+    }
+
+    .header-search input, .header-search a {
+        display: inline-block;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 5px 0px 0px 5px;
+        color:  #fff;
+    }
+
+    .header-search a {
+        background: #499e46;
+        height: 31px;
+        border: none;
+        position:  absolute;
+        border-radius: 0px 5px 5px 0px;
+    }
+
+    #language-pr img {
+        margin-right: 9px;
+    }
+
+    #language-pr a i, #currency-pr a i {
+        display: inline-block;
+        margin: 0px 15px;
+    }
+
+    
+    .my-cart ul {
+        list-style:  none;
+    }
+
+    #icon-cart {
+        position: relative;
+    }
+
+    .my-cart >ul > li > a > i {
+        font-size: 40px;
+        padding-right: 30px;
+        color: #999;
+    }
+
+    .my-cart span {
+        position:  absolute;
+        top: 25px;
+        left: 30px;
+        width: 25px;
+        height:  25px;
+        line-height:  25px;
+        text-align: center;
+        display:  block;
+        border: 1px solid;
+        border-radius:  50%;
+        background-color: #499e46;
+        color:  #fff;
+    }
+
+    .slider-area {
+        background: url(../img/anhnen.jpg) center center no-repeat;
+    }
+
+    .slider-area p {
+        font-size: 50px;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .slider-area p:nth-child(2) {
+        margin-top: 70px;
+        font-size: 50px;
+        padding: 40px;
+        text-align: center;
+        color: #000;
+    }
+
+    * {
+        padding: 0px; 
+        margin: 0px;
+    }
+    
+    .payment-img {
+        justify-content:  right;
+        place-items: right;
+    }
+    
+    .copy-right-area {flex: 2;color:  #fff;margin-top: 10px;}
+    
+    .footer-title {
+        font-size:  30px;
+        margin-bottom:  20px;
+        margin-top: 21px;
+    }
+    
+    .simple-footer-bottom {
+        flex:  1;
+        margin-right:  30px;
+        border-right: 1px solid #fff;
+        border-top:  none;
+    }
+    
+    .simple-footer-bottom ul li a {
+        color:  #fff;
+        text-decoration:  none;
+    }
+    
+    .simple-footer-bottom ul {
+        list-style-type: none;
+    }
+    
+    .footer-contact {
+        flex:  1;
+        color:  #fff;
+    }
+    
+    .footer-description {
+        flex:  3;
+        color:  #fff;
+        display:  flex;
+    }
+    
+    .footer-mid {
+        display: flex;
+        border-top:  none !important;
+        margin: 0px 41px;
+    }
+    
+    .footer-top-menu li a {
+        color: #fff;
+        text-decoration:  none;
+    }
+    
+    .footer-top-menu {
+        padding: 40px;
+    }
+    
+    .footer-top nav ul li {
+        display:  inline-block;
+        margin: 0px 50px;
+    }
+    
+    .nav-sub {
+        display: none;
+    }
+
+}

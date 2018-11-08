@@ -1,0 +1,77 @@
+* {
+
+}
+
+.er-red {
+    color: red;
+    font-size: 13px;
+    margin-left: 15%;
+    padding-left: 4px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.card-footer label {
+    width: 20%;
+}
+
+.top a {
+    text-decoration: none;
+    color: #00c292;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    color: #00c292;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: inline-block;
+    width: 15%;
+    font-size: 15px;
+}
+
+.form-group input {
+    width: 80%;
+}
+
+.form-group lable, .form-group input[type="password"], .form-group input[type="datetime-local"], .form-group select, .form-group input[type="date"], .form-group input[type="text"], .form-group input[type="email"], .form-group input[type="tel"], .form-group input[type="url"], .form-group textarea, .form-group button[type=""] 
+{
+    font:400 12px/16px "Open Sans", Helvetica, Arial, sans-serif;
+    width: 50%;
+    border:1px solid #CCC;
+    background:#FFF;
+    margin:0 0 5px;
+    padding: 6px;
+}
+
+.card-footer button {
+    border: none;
+    background: #00c292;
+    color: #fff;
+    padding: 5px 6px;
+    border-radius: 2px;
+    margin-left: 4px;
+}
+
+.card-footer {
+    margin: 20px 0px;
+    margin-left: 15%;
+}
+
+.card-footer {
+    margin-left: 15%;
+}
+
+.container h3 {
+    font-size: 25px;
+}
+
+.container form {
+    padding: 20px 0px;
+}

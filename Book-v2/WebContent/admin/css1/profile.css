@@ -1,0 +1,32 @@
+* {
+
+}
+
+.profile {
+    text-align: center;
+    font-size: 17px;
+    background: #f6f8fa;
+    padding: 22px;
+    color: #00c292;
+}
+
+.profile p, .profile h1 {
+    margin-bottom: 11px;
+    text-transform: uppercase;
+}
+
+.container h3 {
+    font-size: 20px;
+    color: #00c292;
+    margin-left: 30px;
+}
+
+.top a {
+    text-decoration: none;
+    color: #00c292;
+}
+
+.top {
+	display: flex;
+	justify-content: space-between;
+}

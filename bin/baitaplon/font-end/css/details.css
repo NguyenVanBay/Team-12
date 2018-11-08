@@ -1,0 +1,45 @@
+.details label {
+    font-size:  1rem;
+    display:  inline-block;
+    margin-right:  16px;
+}
+
+.details input[type="number"], .details button {
+    height:  30px;
+    padding: 3px 10px;
+    display:  block;
+    margin-top:  20px;
+    width:  100%;
+}
+
+.details button {
+    background: #4CAF50;
+    color:  #fff;
+    border:  none;
+    border-radius:  4px;
+    font-size:  20px;
+}
+
+.details a, .details p {
+    display: block;
+    margin: 18px 0px;
+    font-size: 1rem;
+}
+
+.details h3 {
+    font-size:  2rem;
+    color: #4CAF50;
+}
+
+.detail-product {
+    display:  flex;
+    padding: 50px;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 768px) {
+    
+    .detail-product {
+        display:  flex;
+        padding: 10px;
+    }
+}

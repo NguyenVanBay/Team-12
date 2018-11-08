@@ -1,0 +1,134 @@
+/* css all */
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.detail-img img {
+    width:  100%;
+}
+
+.details {
+    width:  60%;
+}
+
+.detail-img {
+    width:  40%;
+}
+
+
+#mini-cart-sub  {
+    display: none;
+}
+/* end css all */
+
+/* css cart */
+#cart {
+    height: 100px;
+}
+
+#icon-cart {
+    position: relative;
+}
+
+.showCart {
+    display: block !important;
+    position: absolute;
+    top: 55px;
+}
+
+.hiddenCart {
+    display: none !important;
+}
+
+.cart-img img {
+    width: 100px;
+}
+
+.single-cart {
+    display: flex;
+    background-color: #4caf50;
+    padding: 15px;
+}
+
+.cart-img {
+    margin-right: 10px;
+}
+
+.cart-info {
+    margin-right: 10px;
+    color: #fff;
+}
+
+.cart-info h5 a {
+    color: #fff;
+}
+
+.cart-bottom {
+    background-color: #4caf50;
+    text-align: center
+}
+
+.cart-bottom a {
+    display: inline-block;
+    background-color: #fff;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 2px;
+}
+
+#toCart {
+    background: #4CAF50;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* css layout sidebar and container */
+
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 30%;
+}
+
+.content {
+    width: 70%;
+}
+
+span.new {
+    position: absolute;
+    background: red;
+    color: #fff;
+    left: -1px;
+    top: -1px;
+    padding: 5px 16px;
+    font-size: 12px;
+}
+
+span.hot {
+    position: absolute;
+    background: orange;
+    color: #fff;
+    left: -1px;
+    top: -1px;
+    padding: 5px 16px;
+    font-size: 12px;
+}
+
+span.giamgia {
+    position: absolute;
+    background: blue;
+    color: #fff;
+    left: -1px;
+    top: -1px;
+    padding: 5px 16px;
+    font-size: 12px;
+}
