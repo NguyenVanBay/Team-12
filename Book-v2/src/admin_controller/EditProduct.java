@@ -81,7 +81,12 @@ public class EditProduct extends HttpServlet {
 			String type = request.getParameter("type");
 			String url = request.getParameter("url");
 
-			System.out.println(userName);
+			if (userName.equals("") || idCategory.equals("") || author.equals("") || publicAt.equals("")
+					|| count.equals("") || price.equals("") || title.equals("") || description.equals("")
+					|| type.equals("") || url.equals("")) {
+				response.sendRedirect("/Book/admin/editProduct?id=" + id + "&error=edit");
+				return;
+			}
 
 			long milliseconds = 0;
 			SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
@@ -89,7 +94,7 @@ public class EditProduct extends HttpServlet {
 				Date d = f.parse(publicAt);
 				milliseconds = d.getTime();
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("chưa nhập ngày");
 			}
 
 			Product product = new ProductDAO().getProductById(Long.parseLong(id));

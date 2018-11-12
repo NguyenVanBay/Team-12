@@ -57,6 +57,11 @@ public class AddCategory extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			String name = request.getParameter("name");
 			String url = request.getParameter("url");
+			
+			if(name.equals("") || url.equals("")) {
+				response.sendRedirect("/Book/admin/addCategory?error=add");
+				return;
+			}
 
 			System.out.println(name);
 

@@ -31,6 +31,10 @@
 			<h3>Thêm nhân viên</h3>
 			<a href="listUser">Danh sách nhân viên</a>
 		</div>
+
+		<p style="color: red; font-size: 20px"><%="add".equals(request.getParameter("error")) ? "Thêm không thành công" : ""%></p>
+
+
 		<form action="/Book/admin/addUser" method="post">
 
 			<div class="form-group">
@@ -46,11 +50,13 @@
 				<label for="selectSm" class=" form-control-label">Chức vụ</label> <select
 					name="role">
 
-					<% if(session.getAttribute("role").equals("4")) {
-	%>
+					<%
+						if (session.getAttribute("role").equals("4")) {
+					%>
 					<option value="4">Giám đốc</option>
 					<%
-} %>
+						}
+					%>
 
 					<option value="1">Quản lý nhân viên</option>
 					<option value="2">Quản lý sản phẩm</option>
@@ -64,7 +70,9 @@
 					type="text" name="email" id="emailUser" placeholder="Email"
 					onfocusout="checkParam()">
 				<div>
-					<p id="emailUserEr" class="er-red"></p>
+					<p id="emailUserEr" class="er-red">
+						<%="exists".equals(request.getParameter("email")) ? "Email đã được sử dụng" : ""%>
+					</p>
 				</div>
 			</div>
 

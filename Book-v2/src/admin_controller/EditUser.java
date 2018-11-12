@@ -75,6 +75,11 @@ public class EditUser extends HttpServlet {
 			String phone = request.getParameter("phone");
 			String role = request.getParameter("role");
 
+			if(address.equals("") || email.equals("") || name.equals("") || phone.equals("") || role.equals("")) {
+				response.sendRedirect("/Book/admin/editUser?id=" + id + "&error=edit");
+				return;
+			}
+			
 			User userOld = new UserDAO().getUserById(Long.parseLong(id));
 
 			if (!userOld.getEmail().equals(email)) {

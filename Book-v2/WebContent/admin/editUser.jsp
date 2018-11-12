@@ -42,6 +42,9 @@
 			<a href="listUser">Danh sách nhân viên</a>
 		</div>
 
+		<p style="color: red; font-size: 20px"><%="edit".equals(request.getParameter("error")) ? "Sửa không thành công" : ""%></p>
+
+
 		<form action="/Book/admin/editUser" method="post">
 
 			<input type="hidden" name="id" value="<%=user.getId()%>">
@@ -86,6 +89,8 @@
 			<div class=" form-group">
 				<label>email</label> <input type="text" name="email"
 					value="<%=user.getEmail()%>" placeholder="Email">
+				<p style="color: red; font-size: 15px"><%="exists".equals(request.getParameter("email")) ? "Email đã được sử dụng" : ""%></p>
+
 			</div>
 
 			<div class=" form-group">

@@ -12,11 +12,11 @@ public class User {
 	private Long createBy;
 	
 	// danh sách chức vụ user.
-	public static final Long NGUOIDUNG = (long) 0;
-	public static final Long GIAMDOC = (long) 4;
-	public static final Long QUANLYNHANVIEN = (long) 1;
-	public static final Long QUANLYTHELOAI = (long) 2;
-	public static final Long QUANLYKHO = (long) 3;
+	public static final Long NGUOIDUNG = (long) 0; // khách hàng.
+	public static final Long GIAMDOC = (long) 4; // toàn quyền.
+	public static final Long QUANLYNHANVIEN = (long) 1; // chỉ quản lý nhân viên và khách hàng của cửa hàng.
+	public static final Long QUANLYTHELOAI = (long) 2; // chỉ quản lý thể loại và sản phẩm.
+	public static final Long QUANLYKHO = (long) 3; // quản lý đơn hàng và chi tiết đơn hàng.
 
 	public Long getCreateBy() {
 		return createBy;

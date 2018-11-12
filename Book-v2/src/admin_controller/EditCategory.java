@@ -63,10 +63,15 @@ public class EditCategory extends HttpServlet {
 			
 			request.setCharacterEncoding("UTF-8");
 			
-			String id = request.getParameter("id");
-
+			String id = request.getParameter("id");	
+			
 			String name = request.getParameter("name");
 			String url = request.getParameter("url");
+			
+			if(name.equals("") || url.equals("")) {
+				response.sendRedirect("/Book/admin/editCategory?id=" + id +"&error=edit");
+				return;
+			}
 			
 			Category c = new Category();
 			c.setId(Long.parseLong(id));

@@ -38,6 +38,9 @@
 			<a href="listProduct">Danh sách sản phẩm</a>
 		</div>
 
+		<p style="color: red; font-size: 20px"><%= "add".equals(request.getParameter("error")) ? "Thêm không thành công" : "" %></p>
+
+
 		<form id="formCreate" action="/Book/admin/addProduct" method="post" enctype="multipart/form-data">
 
 			<div class="form-group">

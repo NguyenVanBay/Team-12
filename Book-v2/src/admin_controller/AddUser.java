@@ -32,9 +32,9 @@ public class AddUser extends HttpServlet {
 
 			if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYNHANVIEN)) {
 
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/them-nguoi-dung");
-			rd.forward(request, response);
-			
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/them-nguoi-dung");
+				rd.forward(request, response);
+
 			} else {
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
 				rd.forward(request, response);
@@ -62,6 +62,23 @@ public class AddUser extends HttpServlet {
 			String rePassword = request.getParameter("re-password");
 			String phone = request.getParameter("phone");
 			String role = request.getParameter("role");
+
+			if (address.equals("") || email.equals("") || name.equals("") || password.equals("")
+					|| rePassword.equals("") || phone.equals("") || role.equals("")) {
+
+				if (new UserDAO().checkEmail(email)) {
+					response.sendRedirect("/Book/admin/addUser?error=add&email=exists");
+					return;
+				} else {
+					response.sendRedirect("/Book/admin/addUser?error=add");
+					return;
+				}
+			} else {
+				if (new UserDAO().checkEmail(email)) {
+					response.sendRedirect("/Book/admin/addUser?error=add&email=exists");
+					return;
+				}
+			}
 
 			if (checkUser(email, password, rePassword) == 1) {
 

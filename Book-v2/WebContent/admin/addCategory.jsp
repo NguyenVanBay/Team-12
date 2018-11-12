@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+
 <!doctype html>
 <html class="no-js" lang="vi">
 
@@ -29,6 +31,9 @@
 			<h3>Thêm thể loại sách</h3>
 			<a href="listCategory">Danh sách thể loại</a>
 		</div>
+		
+		<p style="color: red; font-size: 20px"><%= "add".equals(request.getParameter("error")) ? "Thêm không thành công" : "" %></p>
+		
 		<form action="/Book/admin/addCategory" method="post">
 
 			<div class="form-group">
@@ -49,7 +54,7 @@
 
 			<div class="card-footer">
 				<label></label>
-				<button type="submit" class="btn btn-primary btn-sm">
+				<button id="btn_submit" type="submit" class="btn btn-primary btn-sm">
 					<i class="fa fa-dot-circle-o"></i> Submit
 				</button>
 				<button type="reset" class="btn btn-danger btn-sm">
@@ -66,9 +71,10 @@
 					var nameCategory = document.getElementById("nameCategory").value.trim();
 					var urlCategory = document.getElementById("urlCategory").value.trim();
 					
+					// nếu đủ điều kiện.
+					
 					if (nameCategory == "") {
 						document.getElementById("categoryEr-sub").innerHTML = "Chưa nhập tên thể loại";
-	
 					} else {
 						document.getElementById("categoryEr-sub").innerHTML = "";
 					}

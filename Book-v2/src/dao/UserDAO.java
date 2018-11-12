@@ -22,7 +22,7 @@ import model.User;
  */
 public class UserDAO {
 
-	// check email exists.
+	// check email exists. co tra ve true.
 	public boolean checkEmail(String email) {
 		Connection connection = DBConnect.getConnection();
 		String sql = "SELECT email FROM users WHERE email = ?";

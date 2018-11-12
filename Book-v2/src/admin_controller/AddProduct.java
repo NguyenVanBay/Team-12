@@ -46,13 +46,12 @@ public class AddProduct extends HttpServlet {
 
 			if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYTHELOAI)) {
 
-			
-			ArrayList<Category> listCategory = new CategoryDAO().getAll();
-			request.setAttribute("categorys", listCategory);
+				ArrayList<Category> listCategory = new CategoryDAO().getAll();
+				request.setAttribute("categorys", listCategory);
 
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/them-san-pham");
-			rd.forward(request, response);
-			
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/them-san-pham");
+				rd.forward(request, response);
+
 			} else {
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
 				rd.forward(request, response);
@@ -91,7 +90,14 @@ public class AddProduct extends HttpServlet {
 				Date d = f.parse(publicAt);
 				milliseconds = d.getTime();
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("chưa nhập ngày");
+			}
+
+			if (userName.equals("") || idCategory.equals("") || author.equals("") || publicAt.equals("")
+					|| count.equals("") || price.equals("") || title.equals("") || description.equals("")
+					|| type.equals("") || url.equals("")) {
+				response.sendRedirect("/Book/admin/addProduct?error=add");
+				return;
 			}
 
 			Product p = new Product();
