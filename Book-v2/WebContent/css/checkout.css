@@ -1,33 +1,31 @@
-* {
-    
+@media only screen and (min-width: 0px) and (max-width: 1100px) {
 }
 
-form button {
-    border: none;
-    padding: 5px 12px;
-    background: red;
-    color: #fff;
-}
-
-.input-group {
-    margin-bottom: 18px;
-}
-
-.input-group label {
-    width: 30%;
-    display: inline-block;
-}
-
-
-.input-group input {
-    width: 60%;
-}
-
-form {
-    width: 60%;
-    margin-left: 20%
-}
-
-.list-product {
-    width: 100%;
+@media only screen and (min-width: 1100px) and (max-width: 1800px) {
+	* {
+		
+	}
+	form button {
+		border: none;
+		padding: 5px 12px;
+		background: red;
+		color: #fff;
+	}
+	.input-group {
+		margin-bottom: 18px;
+	}
+	.input-group label {
+		width: 30%;
+		display: inline-block;
+	}
+	.input-group input {
+		width: 60%;
+	}
+	form {
+		width: 60%;
+		margin-left: 20%
+	}
+	.list-product {
+		width: 100%;
+	}
 }

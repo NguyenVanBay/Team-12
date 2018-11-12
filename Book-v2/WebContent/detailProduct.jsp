@@ -19,8 +19,8 @@
 
 <jsp:include page="include/head.jsp"></jsp:include>
 
-<link rel="stylesheet" href="css/home.css">
-<link rel="stylesheet" href="css/details.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/details.css">
 
 </head>
 
@@ -29,6 +29,12 @@
 	<!-- menu top -->
 	<jsp:include page="include/menu-area.jsp"></jsp:include>
 	<!-- end menu top -->
+
+	<!-- slider area -->
+	<jsp:include page="include/menu.jsp"></jsp:include>
+	<!-- end slide-area -->
+
+
 
 	<div class="container">
 
@@ -46,12 +52,12 @@
 				<div class="w3-content w3-display-container">
 					<div class="list-detail-img">
 						<img class="mySlides" style="width: 100%"
-							src="/Book/admin/upload/<%=product.getThumbnail().getName()%>" />
+							src="${pageContext.request.contextPath}/admin/upload/<%=product.getThumbnail().getName()%>" />
 						<%
 							for (Image i : product.getListImage()) {
 						%>
 						<img class="mySlides" style="width: 100%"
-							src="/Book/admin/upload/<%=i.getName()%>" />
+							src="${pageContext.request.contextPath}/admin/upload/<%=i.getName()%>" />
 						<%
 							}
 						%>
@@ -122,8 +128,6 @@
 	<jsp:include page="include/footer.jsp"></jsp:include>
 	<!-- end menu top -->
 
-
-	<script src="js/my.js"></script>
 </body>
 
 </html>

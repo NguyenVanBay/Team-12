@@ -12,6 +12,11 @@ public class Bill {
 	ArrayList<BillDetail> listBillDetail;
 	private Long createBy;
 
+	public static final Long CHODUYETDON = (long)0;
+	public static final Long DAGIAODON = (long)1;
+	public static final Long DANGGIAODON = (long)2;
+	public static final Long HUYDON = (long)3;
+
 	public Long getCreateBy() {
 		return createBy;
 	}

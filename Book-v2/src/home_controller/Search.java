@@ -15,10 +15,6 @@ import dao.ProductDAO;
 import model.Category;
 import model.Product;
 
-/**
- * Servlet implementation class LoaiSach
- */
-@WebServlet("/Search")
 public class Search extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -37,7 +33,24 @@ public class Search extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String id = (request.getParameter("id") == null) ? "" : request.getParameter("id");
+		String id = "";
+
+		// Sử lý chuỗi để lây id sản phẩm.
+		String pathInfo = request.getRequestURL().toString();
+		System.out.println("duong dan : " + pathInfo);
+
+		// get id thể loại.
+		String[] pathParts = pathInfo.split("/");
+		String[] paths = pathParts[pathParts.length - 1].split("-");
+		
+		id = paths[paths.length - 1];
+
+		try {
+			id = Long.parseLong(id) + "";
+		} catch(Exception e) {
+			id = "";
+		}
+
 		String name = (request.getParameter("name") == null) ? "" : request.getParameter("name");
 		String author = (request.getParameter("author") == null) ? "" : request.getParameter("author");
 		String priceFrom = (request.getParameter("priceFrom") == null) ? "" : request.getParameter("priceFrom");
@@ -55,12 +68,12 @@ public class Search extends HttpServlet {
 			request.setAttribute("products", products);
 
 		} else {
-			
+
 			Category category = new Category();
 			request.setAttribute("category", category);
-			
-			ArrayList<Product> products = new ProductDAO().getWhereInClient(name, author, priceFrom, priceTo, publicFrom,
-					publicTo);
+
+			ArrayList<Product> products = new ProductDAO().getWhereInClient(name, author, priceFrom, priceTo,
+					publicFrom, publicTo);
 			request.setAttribute("products", products);
 		}
 

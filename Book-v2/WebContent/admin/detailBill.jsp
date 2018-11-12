@@ -8,7 +8,6 @@
 <%@page import="java.text.*"%>
 
 <%
-
 	DecimalFormat formatter = new DecimalFormat("###,###,###.00");
 	Bill bill = (Bill) request.getAttribute("bill");
 %>
@@ -29,11 +28,11 @@
 	rel="stylesheet">
 <!-- font awesome CSS
 		============================================ -->
-<link rel="stylesheet" href="css1/font-awesome.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
 
-<link rel="stylesheet" href="css1/style.css">
-<link rel="stylesheet" href="css1/list.css">
-<link rel="stylesheet" href="css1/detailbill.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/list.css">
+<link rel="stylesheet" href="css/detailbill.css">
 </head>
 
 <body>
@@ -42,7 +41,7 @@
 	<div class="container">
 		<div class="bg-while">
 			<div class="top">
-				<h3>Thể loại</h3>
+				<h3>Chi tiết đơn hàng</h3>
 				<a href="/Book/admin/listBill">Danh sách đơn hàng</a>
 			</div>
 
@@ -52,13 +51,13 @@
 
 					<h3>
 						Chi tiết đơn hàng của ông ( bà ) :
-						<%=bill.getAddress()%>
-						
+						<%=bill.getCustomer()%>
+
 					</h3>
 					<h3>
 						Địa chỉ nhận hàng :
 						<%=bill.getAddress()%>
-						
+
 					</h3>
 					<h3>
 						SDT :
@@ -106,8 +105,23 @@
 						<td colspan="4">Tổng tiền</td>
 						<td><%=formatter.format(tongTien)%> VND</td>
 					</tr>
+					<%
+					
+					if(bill.getStatus() == Bill.CHODUYETDON) {
+					%>
+					<tr>
+						<td>Tạo hóa đơn</td>
+						<td colspan="4"><a href="createBill?id=<%= bill.getId() %>"
+							class="item tooltip"> <span class="tooltiptext">Tạo
+									hóa đơn và giao hàng</span> <i class="fa fa-taxi"></i>
+						</a></td>
+					</tr>
+					<%
+					} 
+					%>
 				</tbody>
 			</table>
+
 		</div>
 	</div>
 </body>

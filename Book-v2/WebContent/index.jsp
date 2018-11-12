@@ -16,8 +16,14 @@
 <meta charset="UTF-8">
 <jsp:include page="include/head.jsp"></jsp:include>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/home.css">
+<style>
 
+#nav {
+        margin-right: 40px;
+        }
+</style>
 </head>
 
 <body>
@@ -26,18 +32,17 @@
 	<jsp:include page="include/menu-area.jsp"></jsp:include>
 	<!-- end menu top -->
 
-	<h3 style="text-align: center; color: red; font-size: 25px; margin-top: 10px;">
-	<%
-	
-	String checkout = (request.getParameter("checkout") == null) ? "" : request.getParameter("checkout");
-	
-	if (checkout.equals("success")) {
-		out.print("Đặt hàng thành công ! Chúng tôi sẽ giao hàng cho bạn sớm nhất.");
-	}
-	
-	%>
+	<h3
+		style="text-align: center; color: red; font-size: 25px; margin-top: 10px;">
+		<%
+			String checkout = (request.getParameter("checkout") == null) ? "" : request.getParameter("checkout");
 
-					</h3>
+			if (checkout.equals("success")) {
+				out.print("Đặt hàng thành công ! Chúng tôi sẽ giao hàng cho bạn sớm nhất.");
+			}
+		%>
+
+	</h3>
 
 	<!-- infomation -->
 	<jsp:include page="include/infomation.jsp"></jsp:include>
@@ -46,8 +51,8 @@
 
 
 	<div class="container">
-	
-	
+
+
 
 		<!-- menu left -->
 		<jsp:include page="include/sidebar.jsp"></jsp:include>
@@ -56,11 +61,17 @@
 
 
 		<div class="content">
-		
-		<!-- slider area -->
-	<jsp:include page="include/slide.jsp"></jsp:include>
-	<!-- end slide-area -->
-		
+
+			<!-- slider area -->
+			<jsp:include page="include/slide.jsp"></jsp:include>
+			<!-- end slide-area -->
+
+
+			<!-- slider area -->
+			<jsp:include page="include/menu.jsp"></jsp:include>
+			<!-- end slide-area -->
+
+
 			<div class="banchay">
 
 				<h3>Sản phẩm nổi bật</h3>
@@ -76,8 +87,7 @@
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<a href="/Book/chi-tiet-san-pham?id=<%=p.getId()%>">Chi
-								tiết</a>
+							<a href="/Book/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi tiết</a>
 							<form action="/Book/cart" method="post">
 								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
@@ -114,8 +124,7 @@
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<a href="/Book/chi-tiet-san-pham?id=<%=p.getId()%>">Chi
-								tiết</a>
+							<a href="/Book/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi tiết</a>
 							<form action="/Book/cart" method="post">
 								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
@@ -152,11 +161,9 @@
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<a href="/Book/chi-tiet-san-pham?id=<%=p.getId()%>">Chi
-								tiết</a>
+							<a href="/Book/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi tiết</a>
 							<form action="/Book/cart" method="post">
-								<input type="hidden" name="command" value="plus" />
-								<input
+								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Mua</button>
 							</form>
@@ -178,8 +185,6 @@
 	<!-- menu top -->
 	<jsp:include page="include/footer.jsp"></jsp:include>
 	<!-- end menu top -->
-
-	<script src="js/my.js"></script>
 
 </body>
 

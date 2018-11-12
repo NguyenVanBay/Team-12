@@ -17,6 +17,7 @@ import dao.CategoryDAO;
 import dao.ProductDAO;
 import model.Category;
 import model.Product;
+import model.User;
 
 public class EditProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -35,16 +36,25 @@ public class EditProduct extends HttpServlet {
 			response.sendRedirect("/Book/admin/Login");
 		} else {
 
-			Long id = Long.parseLong(request.getParameter("id"));
+			String roleAdmin = (String) session.getAttribute("role");
 
-			ArrayList<Category> listCategory = new CategoryDAO().getAll();
-			request.setAttribute("categorys", listCategory);
+			if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYTHELOAI)) {
 
-			Product product = new ProductDAO().getProductById(id);
-			request.setAttribute("product", product);
+				Long id = Long.parseLong(request.getParameter("id"));
 
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/sua-san-pham");
-			rd.forward(request, response);
+				ArrayList<Category> listCategory = new CategoryDAO().getAll();
+				request.setAttribute("categorys", listCategory);
+
+				Product product = new ProductDAO().getProductById(id);
+				request.setAttribute("product", product);
+
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/sua-san-pham");
+				rd.forward(request, response);
+
+			} else {
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+				rd.forward(request, response);
+			}
 		}
 	}
 
@@ -58,7 +68,7 @@ public class EditProduct extends HttpServlet {
 		} else {
 
 			request.setCharacterEncoding("UTF-8");
-			
+
 			String id = request.getParameter("id");
 			String userName = request.getParameter("name");
 			String idCategory = request.getParameter("idCategory");
@@ -70,10 +80,9 @@ public class EditProduct extends HttpServlet {
 			String description = request.getParameter("description");
 			String type = request.getParameter("type");
 			String url = request.getParameter("url");
-			
+
 			System.out.println(userName);
-			
-		
+
 			long milliseconds = 0;
 			SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
 			try {

@@ -1,4 +1,4 @@
-@media only screen and (min-width: 769px) and (max-width: 1800px) {
+@media only screen and (min-width: 1100px) and (max-width: 1800px) {
 
     * {
         padding: 0px; margin: 0px;
@@ -28,7 +28,6 @@
     #nav li {
         display:  inline-block;
         padding: 15px;
-        background-color:  #fff;
     }
 
     #nav li a {
@@ -77,7 +76,6 @@
         color: #fff;
         text-decoration: none;
         display: inline-block;
-        margin-right: 20px;
     }
 
     .language-area ul li a {

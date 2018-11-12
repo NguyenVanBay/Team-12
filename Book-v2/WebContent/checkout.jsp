@@ -6,12 +6,13 @@
 <%@page import="model.Category"%>
 <%@page import="model.Image"%>
 <%@page import="model.Cart"%>
+<%@page import="model.User"%>
 <%@page import="model.Item"%>
 <%@ page import="java.util.HashMap"%>
 <%@ page import="java.util.*"%>
 
 <%
-	
+	User user = (User) request.getAttribute("user");
 %>
 
 <!DOCTYPE html>
@@ -44,17 +45,18 @@
 			<form action="/Book/Checkout" method="post">
 				<div class="input-group">
 					<label for="">Nhập tên khách hàng </label> <input type="text"
-						name="customer" value="<%= session.getAttribute("userNameUser") %>" />
+						name="customer"
+						value="<%= user.getName() %>" />
 				</div>
 
 				<div class="input-group">
 					<label for="">Nhập địa chỉ nơi nhận hàng</label> <input type="text"
-						name="address" />
+						name="address" value="<%= user.getAddress() %>" />
 				</div>
 
 				<div class="input-group">
 					<label for="">Nhập sdt nhận hàng</label> <input type="text"
-						name="phone" />
+						name="phone" value="<%= user.getPhone() %>" />
 				</div>
 
 				<button type="submit">CheckOut</button>
@@ -63,7 +65,6 @@
 		</div>
 
 	</div>
-	<script src="js/my.js"></script>
 
 </body>
 

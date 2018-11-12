@@ -21,10 +21,10 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
 	<!-- font awesome CSS
 		============================================ -->
-	<link rel="stylesheet" href="css1/font-awesome.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
 
-	<link rel="stylesheet" href="css1/style.css">
-	<link rel="stylesheet" href="css1/add.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/add.css">
 </head>
 
 <body>
@@ -38,7 +38,7 @@
 			<a href="listProduct">Danh sách sản phẩm</a>
 		</div>
 
-		<form action="/Book/admin/addProduct" method="post" enctype="multipart/form-data">
+		<form id="formCreate" action="/Book/admin/addProduct" method="post" enctype="multipart/form-data">
 
 			<div class="form-group">
 				<label for="text-input" class=" form-control-label">Tên
@@ -147,22 +147,9 @@
 			</div>
 
 			<div class=" form-group">
-				<label for="file-input">Ảnh
-					1</label>
+				<label for="file-input">Ảnh chi tiết</label>
 				<input type="file" id="file-input" name="image1" class="form-control-file">
 
-			</div>
-
-			<div class=" form-group">
-				<label for="file-input">Ảnh
-					2</label>
-				<input type="file" id="file-input" name="image2" class="form-control-file">
-			</div>
-
-			<div class=" form-group">
-				<label for="file-input">Ảnh
-					2</label>
-				<input type="file" id="file-input" name="image3" class="form-control-file">
 			</div>
 
 			<div class="card-footer">
@@ -177,7 +164,16 @@
 
 		</form>
 
+		<script src="js/jquery-3.2.1.min.js"></script>
 		<script>
+		
+		
+			// get tham số ajax.
+			
+		
+		
+			// check tham số.
+		
 			function checkParam() {
 
 				// chuẩn hóa đầu vào

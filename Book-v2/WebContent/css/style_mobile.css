@@ -1,9 +1,39 @@
-/* mÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â n hÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¬nh nhÃƒÆ’Ã‚Â¡Ãƒâ€šÃ‚Â»Ãƒâ€šÃ‚Â hÃƒÆ’Ã¢â‚¬Â Ãƒâ€šÃ‚Â¡n iphone x */
-@media only screen and (min-width: 0px) and (max-width: 768px) {
+@media only screen and (min-width: 0px) and (max-width: 1100px) {
     
     * {
         padding: 0px; margin: 0px;
     }
+
+form#serchpage {
+    display: block;
+}
+
+form#serchpage input {
+    display: block;
+    width: 95%;
+}
+
+form button {
+    height: 30px;
+    padding: 0px 10px;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+}
+
+.w3-content.w3-section {
+    display: flex;
+    justify-content: center;
+    padding: 0px !important;
+}
+
+.menu-area {
+    display: flex;
+    justify-content: center;
+    margin-top: 14px;
+}
 
 .single-slider {
     padding: 96px;
@@ -28,7 +58,6 @@
 #menu {
     text-align:  center;
     color: #fff;
-    background: #FF9800;
 }
 
 ul.nav-sub {

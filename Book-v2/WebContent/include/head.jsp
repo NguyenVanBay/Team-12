@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <base href="" target="">
-<title>Bài tập lớn nhóm 2 quản lý cơ sở dữ liệu phân tán</title>
+<title>Bài tập lớn nhóm 12 lập trình web</title>
 
 <!-- mystyle -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">

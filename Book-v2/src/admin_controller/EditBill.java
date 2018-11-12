@@ -2,6 +2,7 @@ package admin_controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,15 +31,24 @@ public class EditBill extends HttpServlet {
 			response.sendRedirect("/Book/admin/Login");
 		} else {
 
-			Long id = Long.parseLong(request.getParameter("id"));
-			Long status = Long.parseLong(request.getParameter("status"));
+			String roleAdmin = (String) session.getAttribute("role");
 
-			Bill b = new BillDAO().getBillById(id);
-			b.setStatus(status);
+			if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYKHO)) {
 
-			new BillDAO().editBill(b);
+				Long id = Long.parseLong(request.getParameter("id"));
+				Long status = Long.parseLong(request.getParameter("status"));
 
-			response.sendRedirect("/Book/admin/listBill");
+				Bill b = new BillDAO().getBillById(id);
+				b.setStatus(status);
+
+				new BillDAO().editBill(b);
+
+				response.sendRedirect("/Book/admin/listBill");
+
+			} else {
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+				rd.forward(request, response);
+			}
 		}
 	}
 
@@ -52,7 +62,7 @@ public class EditBill extends HttpServlet {
 		} else {
 
 			request.setCharacterEncoding("UTF-8");
-			
+
 			String id = request.getParameter("id");
 			String address = request.getParameter("address");
 			String email = request.getParameter("email");

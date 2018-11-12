@@ -39,9 +39,17 @@
 	<jsp:include page="include/menu-area.jsp"></jsp:include>
 	<!-- end menu top -->
 
+
+	<!-- slider area -->
+	<jsp:include page="include/menu.jsp"></jsp:include>
+	<!-- end slide-area -->
+
+
 	<div class="infomation">
 		<h3>Giỏ hàng</h3>
 	</div>
+	
+	
 	<div class="container">
 
 		<div class="list-product">
@@ -99,8 +107,6 @@
 	<!-- footer -->
 	<jsp:include page="include/footer.jsp"></jsp:include>
 	<!-- end footer -->
-
-	<script src="js/my.js"></script>
 
 </body>
 

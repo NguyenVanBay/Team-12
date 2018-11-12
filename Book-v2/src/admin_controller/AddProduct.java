@@ -21,6 +21,7 @@ import dao.ProductDAO;
 import model.Category;
 import model.Image;
 import model.Product;
+import model.User;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 50)
 public class AddProduct extends HttpServlet {
@@ -36,16 +37,26 @@ public class AddProduct extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		if (null == session.getAttribute("email")) {
+		if (null == session.getAttribute("email") && session.getAttribute("role").equals("2")) {
 			// User is not logged in.
 			response.sendRedirect("/Book/admin/Login");
 		} else {
 
+			String roleAdmin = (String) session.getAttribute("role");
+
+			if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYTHELOAI)) {
+
+			
 			ArrayList<Category> listCategory = new CategoryDAO().getAll();
 			request.setAttribute("categorys", listCategory);
 
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/them-san-pham");
 			rd.forward(request, response);
+			
+			} else {
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+				rd.forward(request, response);
+			}
 		}
 	}
 
@@ -110,17 +121,7 @@ public class AddProduct extends HttpServlet {
 			img1.setName(nameImg + "2.png");
 			img1.setType((long) 2);
 
-			Image img2 = new Image();
-			img2.setName(nameImg + "3.png");
-			img2.setType((long) 2);
-
-			Image img3 = new Image();
-			img3.setName(nameImg + "4.png");
-			img3.setType((long) 2);
-
 			listImg.add(img1);
-			listImg.add(img2);
-			listImg.add(img3);
 
 			p.setListImage(listImg);
 
@@ -130,18 +131,11 @@ public class AddProduct extends HttpServlet {
 
 				Part part1 = request.getPart("thubnail");
 				Part part2 = request.getPart("image1");
-				Part part3 = request.getPart("image2");
-				Part part4 = request.getPart("image3");
-
 				String savePath1 = UPLOAD_DIRECTORY + File.separator + nameImg + "1.png";
 				String savePath2 = UPLOAD_DIRECTORY + File.separator + nameImg + "2.png";
-				String savePath3 = UPLOAD_DIRECTORY + File.separator + nameImg + "3.png";
-				String savePath4 = UPLOAD_DIRECTORY + File.separator + nameImg + "4.png";
 
 				part1.write(savePath1 + File.separator);
 				part2.write(savePath2 + File.separator);
-				part3.write(savePath3 + File.separator);
-				part4.write(savePath4 + File.separator);
 
 			}
 

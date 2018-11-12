@@ -29,10 +29,10 @@ ArrayList<Category> categorys = (ArrayList) request.getAttribute("categorys");
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
 	<!-- font awesome CSS
 		============================================ -->
-	<link rel="stylesheet" href="css1/font-awesome.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
 
-	<link rel="stylesheet" href="css1/style.css">
-	<link rel="stylesheet" href="css1/list.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/list.css">
 </head>
 
 <body>

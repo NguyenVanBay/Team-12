@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import dao.BillDAO;
 import dao.ProductDAO;
 import model.Bill;
+import model.User;
 
 public class ListBill extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,25 +32,38 @@ public class ListBill extends HttpServlet {
 			response.sendRedirect("/Book/admin/Login");
 		} else {
 
-			ArrayList<Bill> bills = new BillDAO().getAll();
-			
-			String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? "" : request.getParameter("name");
-			String address = (request.getParameter("address") == null || request.getParameter("address") == "") ? "" : request.getParameter("address");
-			String phone = (request.getParameter("phone") == null || request.getParameter("phone") == "") ? "" : request.getParameter("phone");
-			String sumFrom = (request.getParameter("sumFrom") == null || request.getParameter("sumFrom") == "") ? "" : request.getParameter("sumFrom");
-			String sumTo = (request.getParameter("sumTo") == null || request.getParameter("sumTo") == "") ? "" : request.getParameter("sumTo");
+			String roleAdmin = (String) session.getAttribute("role");
+
+			if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYKHO)) {
+
+				ArrayList<Bill> bills = new BillDAO().getAll();
+
+				String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? ""
+						: request.getParameter("name");
+				String address = (request.getParameter("address") == null || request.getParameter("address") == "") ? ""
+						: request.getParameter("address");
+				String phone = (request.getParameter("phone") == null || request.getParameter("phone") == "") ? ""
+						: request.getParameter("phone");
+				String sumFrom = (request.getParameter("sumFrom") == null || request.getParameter("sumFrom") == "") ? ""
+						: request.getParameter("sumFrom");
+				String sumTo = (request.getParameter("sumTo") == null || request.getParameter("sumTo") == "") ? ""
+						: request.getParameter("sumTo");
 //			String idCategory = (request.getParameter("idCategory") == null || request.getParameter("idCategory") == "") ? "-1" : request.getParameter("idCategory");
 
-			
-			if (name != "" || address != "" || phone != "" || sumFrom != "" || sumTo != "") {
-				bills = new BillDAO().getWhere(name, address, phone, sumFrom, sumTo);
-			} else {
-				bills = new BillDAO().getAll();
-			}
+				if (name != "" || address != "" || phone != "" || sumFrom != "" || sumTo != "") {
+					bills = new BillDAO().getWhere(name, address, phone, sumFrom, sumTo);
+				} else {
+					bills = new BillDAO().getAll();
+				}
 
-			request.setAttribute("bills", bills);
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/danh-sach-don-hang");
-			rd.forward(request, response);
+				request.setAttribute("bills", bills);
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/danh-sach-don-hang");
+				rd.forward(request, response);
+
+			} else {
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+				rd.forward(request, response);
+			}
 		}
 	}
 

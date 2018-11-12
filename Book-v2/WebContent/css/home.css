@@ -56,7 +56,6 @@ a.btn-seach {
     overflow: auto;
     text-align:  center;
     background: #fff;
-    margin: 20px 40px 31px 0px;
 }
 
 .banchay h3 {
@@ -81,7 +80,7 @@ a.btn-seach {
     width: 20%;
     float: left;
     text-align:  center;
-    height: 410px;
+    min-height: 395px;
 }
 
 .detail-product {
@@ -113,7 +112,7 @@ a.btn-seach {
     text-transform: uppercase;
 }
 
-@media only screen and (min-width: 0px) and (max-width: 768px) {
+@media only screen and (min-width: 0px) and (max-width: 1100px) {
     
     .banchay {
         overflow: auto;
@@ -126,7 +125,7 @@ a.btn-seach {
     }
     
     .product {
-        width: 30%;
+        width: 45%;
         float: left;
     }
 

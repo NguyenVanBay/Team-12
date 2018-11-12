@@ -2,30 +2,43 @@
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.User"%>
+<%@page import="dao.UserDAO"%>
 
 
 <%
-ArrayList<User> users = (ArrayList) request.getAttribute("users");
+	ArrayList<User> users = (ArrayList) request.getAttribute("users");
 %>
 
 <!doctype html>
 <html class="no-js" lang="vi">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>Bài tập lớn nhóm 12</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- Google Fonts
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Bài tập lớn nhóm 12</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google Fonts
 		============================================ -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
-	<!-- font awesome CSS
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900"
+	rel="stylesheet">
+<!-- font awesome CSS
 		============================================ -->
-	<link rel="stylesheet" href="css1/font-awesome.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
 
-	<link rel="stylesheet" href="css1/style.css">
-	<link rel="stylesheet" href="css1/list.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/list.css">
+
+<style>
+.er-red {
+	color: red;
+	font-size: 18px;
+	padding-left: 4px;
+	text-align: center;
+}
+</style>
+
 </head>
 
 <body>
@@ -38,21 +51,48 @@ ArrayList<User> users = (ArrayList) request.getAttribute("users");
 				<a href="addUser">Thêm nhân viên</a>
 			</div>
 
+			<p id="nameUserEr" class="er-red">
+
+				<%
+					String error = (request.getParameter("error") == null) ? "" : request.getParameter("error");
+
+				if (error.equals("edit")) {
+					out.print("Bạn chỉ có quyền sửa nhân viên do bạn tao ra !");
+				}
+				
+				if (error.equals("delete")) {
+					out.print("Không thể xóa nhân viên !");
+				}
+				%>
+
+			</p>
+
 			<form action="/Book/admin/listUser" method="get">
 
 				<div class="row seach-content">
 					<div class="col-md-3 form-group">
-						<input name="name"  value="<%= (request.getParameter("name") == "" || request.getParameter("name") == null) ? "" : request.getParameter("name") %>" class="form-control-sm form-control" placeholder="Nhập tên">
+						<input name="name"
+							value="<%=(request.getParameter("name") == "" || request.getParameter("name") == null) ? ""
+					: request.getParameter("name")%>"
+							class="form-control-sm form-control" placeholder="Nhập tên">
 					</div>
 					<div class="col-md-3 form-group">
-						<input name="email" type="email" value="<%= (request.getParameter("email") == "" || request.getParameter("email") == null) ? "" : request.getParameter("email") %>" class="form-control-sm form-control" placeholder="Nhập email">
+						<input name="email" type="email"
+							value="<%=(request.getParameter("email") == "" || request.getParameter("email") == null) ? ""
+					: request.getParameter("email")%>"
+							class="form-control-sm form-control" placeholder="Nhập email">
 					</div>
 					<div class="col-md-3 form-group">
-						<input name="phone" value="<%= (request.getParameter("phone") == "" || request.getParameter("phone") == null) ? "" : request.getParameter("phone") %>" class="form-control-sm form-control" placeholder="Nhập số điện thoại">
+						<input name="phone"
+							value="<%=(request.getParameter("phone") == "" || request.getParameter("phone") == null) ? ""
+					: request.getParameter("phone")%>"
+							class="form-control-sm form-control"
+							placeholder="Nhập số điện thoại">
 					</div>
-					
+
 					<div class="col-md-3 form-group">
-						<select name="role" id="SelectLm" class="form-control-sm form-control">
+						<select name="role" id="SelectLm"
+							class="form-control-sm form-control">
 							<option value="0">Chức vụ</option>
 							<option value="4">Giám đốc</option>
 							<option value="1">Quản lý nhân viên</option>
@@ -62,8 +102,9 @@ ArrayList<User> users = (ArrayList) request.getAttribute("users");
 						</select>
 					</div>
 					<div class="col-md-4 form-group">
-						<button class="col-sm-offset-8 btn btn-success btn-sm" type="submit">Tìm kiếm</button>
-					
+						<button class="col-sm-offset-8 btn btn-success btn-sm"
+							type="submit">Tìm kiếm</button>
+
 					</div>
 
 
@@ -81,6 +122,7 @@ ArrayList<User> users = (ArrayList) request.getAttribute("users");
 						<th>SDT</th>
 						<th>Địa chỉ</th>
 						<th>Chức vụ</th>
+						<th>Người tạo</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -90,52 +132,64 @@ ArrayList<User> users = (ArrayList) request.getAttribute("users");
 						for (User u : users) {
 					%>
 					<tr class="tr-shadow">
-						<td>
-							<%=u.getId()%>
-						</td>
-						<td><span>
-								<%=u.getName()%></span></td>
-						<td>
-							<%=u.getEmail()%>
-						</td>
-						<td>
-							<%=u.getPhone()%>
-						</td>
-						<td>
-							<%=u.getAddress()%>
-						</td>
-						<td>
+						<td><%=u.getId()%></td>
+						<td><span> <%=u.getName()%></span></td>
+						<td><%=u.getEmail()%></td>
+						<td><%=u.getPhone()%></td>
+						<td><%=u.getAddress()%></td>
+
+						<td style="color: red">
 							<%
-								if (u.getRole() == 4) {
-							%>
-							<p style="color: red">Giám đốc</p>
-							<%
-								} else if (u.getRole() == 1) {
-							%>
-							<p style="color: red">Quản lý nhân viên</p>
-							<%
-								} else if (u.getRole() == 2) {
-							%>
-							<p style="color: red">Quản lý sản phẩm</p>
-							<%
-								} else if (u.getRole() == 3) {
-							%>
-							<p style="color: red">Quản lý đơn hàng</p>
-							<%
-								}
+								if (u.getRole().equals(User.GIAMDOC)) {
+										out.print("Giám đốc");
+									} else if (u.getRole().equals(User.QUANLYKHO)) {
+										out.print("Quản lý kho");
+									} else if (u.getRole().equals(User.QUANLYNHANVIEN)) {
+										out.print("Quản lý nhân viên");
+									} else if (u.getRole().equals(User.QUANLYTHELOAI)) {
+										out.print("Quản lý thể loại");
+									}
 							%>
 						</td>
+						<td style="color: gray">
+							<%
+								User temp = new UserDAO().getUserById(u.getCreateBy());
+
+										if (temp.getRole()==User.GIAMDOC) {
+											%> <a
+							href="${pageContext.request.contextPath}/admin/listUser?email=<%= temp.getEmail() %>"><%= temp.getName() %>
+								(Giám đốc)</a> <%
+										} else if(temp.getRole()==User.QUANLYNHANVIEN){
+											%> <a
+							href="${pageContext.request.contextPath}/admin/listUser?email=<%= temp.getEmail() %>"><%= temp.getName() %>
+								(Nhân Viên)</a> <%
+										} else {
+											
+										}
+							%>
+
+
+						</td>
 						<td>
+						<%
+						
+						if(u.getRole() == User.GIAMDOC) {
+							
+						} else {
+						%>
 							<div class="table-data-feature">
-								<a href="editUser?id=<%=u.getId()%>" class="item tooltip">
-									<i class="fa fa-pencil-square"></i>
-									<span class="tooltiptext">Sửa thông tin nhân viên</span>
-								</a> 
-								<a href="deleteUser?id=<%=u.getId()%>" class="item tooltip">
-									<i class="fa fa-recycle"></i>
-									<span class="tooltiptext">Xóa nhân viên</span>
+								<a href="editUser?id=<%=u.getId()%>" class="item tooltip"> <i
+									class="fa fa-pencil-square"></i> <span class="tooltiptext">Sửa
+										thông tin nhân viên</span>
+								</a> <a href="deleteUser?id=<%=u.getId()%>" class="item tooltip">
+									<i class="fa fa-recycle"></i> <span class="tooltiptext">Xóa
+										nhân viên</span>
 								</a>
 							</div>
+							<%	
+						}
+						
+						%>
 						</td>
 					</tr>
 

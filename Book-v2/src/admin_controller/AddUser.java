@@ -28,9 +28,17 @@ public class AddUser extends HttpServlet {
 			// User is not logged in.
 			response.sendRedirect("/Book/admin/Login");
 		} else {
+			String roleAdmin = (String) session.getAttribute("role");
+
+			if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYNHANVIEN)) {
 
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/them-nguoi-dung");
 			rd.forward(request, response);
+			
+			} else {
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+				rd.forward(request, response);
+			}
 		}
 	}
 

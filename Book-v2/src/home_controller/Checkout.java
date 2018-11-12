@@ -17,9 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.BillDAO;
+import dao.UserDAO;
 import model.Bill;
 import model.BillDetail;
 import model.Cart;
+import model.User;
 
 /**
  *
@@ -42,7 +44,9 @@ public class Checkout extends HttpServlet {
 			// User is not logged in.
 			response.sendRedirect("/Book/dang-nhap-dang-ki");
 		} else {
-
+			
+			User u = new UserDAO().getUserById(Long.parseLong("" + session.getAttribute("idUser")));
+			request.setAttribute("user", u);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/checkout.jsp");
 			rd.forward(request, response);
 		}
@@ -51,6 +55,10 @@ public class Checkout extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
 		String customer = request.getParameter("customer");
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
@@ -91,7 +99,7 @@ public class Checkout extends HttpServlet {
 		} catch (Exception e) {
 		}
 		request.setAttribute("type", "success");
-		response.sendRedirect("/Book/home?checkout=success");
+		response.sendRedirect("/Book/?checkout=success");
 	}
 
 }

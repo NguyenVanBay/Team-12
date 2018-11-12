@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.BillDAO;
 import model.Bill;
+import model.User;
 
 public class DetailBill extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,13 +29,23 @@ public class DetailBill extends HttpServlet {
 			response.sendRedirect("/Book/admin/Login");
 		} else {
 
-			Long id = Long.parseLong(request.getParameter("id"));
+			String roleAdmin = (String) session.getAttribute("role");
 
-			Bill bill = new BillDAO().getBillById(id);
+			if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYKHO)) {
 
-			request.setAttribute("bill", bill);
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/chi-tiet-don-hang");
-			rd.forward(request, response);
+				Long id = Long.parseLong(request.getParameter("id"));
+
+				Bill bill = new BillDAO().getBillById(id);
+
+				request.setAttribute("bill", bill);
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/chi-tiet-don-hang");
+				rd.forward(request, response);
+
+			} else {
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+				rd.forward(request, response);
+			}
+
 		}
 	}
 

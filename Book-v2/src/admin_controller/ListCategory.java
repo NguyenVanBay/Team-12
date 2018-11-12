@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import dao.CategoryDAO;
 import dao.UserDAO;
 import model.Category;
+import model.User;
 
 public class ListCategory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,18 +32,28 @@ public class ListCategory extends HttpServlet {
 			response.sendRedirect("/Book/admin/Login");
 		} else {
 
-			ArrayList<Category> allCategory = new CategoryDAO().getAll();
-			String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? "" : request.getParameter("name");
+			String roleAdmin = (String) session.getAttribute("role");
 
-			if (name != "") {
-				allCategory = new CategoryDAO().getWhere(name);
+			if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYTHELOAI)) {
+
+				ArrayList<Category> allCategory = new CategoryDAO().getAll();
+				String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? ""
+						: request.getParameter("name");
+
+				if (name != "") {
+					allCategory = new CategoryDAO().getWhere(name);
+				} else {
+					allCategory = new CategoryDAO().getAll();
+				}
+
+				request.setAttribute("categorys", allCategory);
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/danh-sach-the-loai");
+				rd.forward(request, response);
+
 			} else {
-				allCategory = new CategoryDAO().getAll();
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+				rd.forward(request, response);
 			}
-			
-			request.setAttribute("categorys", allCategory);
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/danh-sach-the-loai");
-			rd.forward(request, response);
 		}
 	}
 

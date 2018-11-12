@@ -30,23 +30,29 @@ public class ListUser extends HttpServlet {
 			// User is not logged in.
 			response.sendRedirect("/Book/admin/Login");
 		} else {
-
 			
-			ArrayList<User> allUser = new UserDAO().getAllUser();
+			String roleAdmin = (String) session.getAttribute("role");
 			
-			String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? "" : request.getParameter("name");
-			String email = (request.getParameter("email") == null || request.getParameter("email") == "") ? "" : request.getParameter("email");
-			String phone = (request.getParameter("phone") == null || request.getParameter("phone") == "") ? "" : request.getParameter("phone");
-			String role = (request.getParameter("role") == null || request.getParameter("role") == "0") ? "0" : request.getParameter("role");
-			
-			if (name != "" || email != "" || phone != "" || role != "") {
-				allUser = new UserDAO().getWhere(name, email, phone, role);
+			if(roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYNHANVIEN)) {
+				ArrayList<User> allUser = new UserDAO().getAllUser();
+				
+				String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? "" : request.getParameter("name");
+				String email = (request.getParameter("email") == null || request.getParameter("email") == "") ? "" : request.getParameter("email");
+				String phone = (request.getParameter("phone") == null || request.getParameter("phone") == "") ? "" : request.getParameter("phone");
+				String role = (request.getParameter("role") == null || request.getParameter("role") == "0") ? "0" : request.getParameter("role");
+				
+				if (name != "" || email != "" || phone != "" || role != "") {
+					allUser = new UserDAO().getWhere(name, email, phone, role);
+				} else {
+					allUser = new UserDAO().getAllUser();
+				}
+				request.setAttribute("users", allUser);
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/danh-sach-nguoi-dung");
+				rd.forward(request, response);
 			} else {
-				allUser = new UserDAO().getAllUser();
-			}
-			request.setAttribute("users", allUser);
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/danh-sach-nguoi-dung");
-			rd.forward(request, response);
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+				rd.forward(request, response);
+			}	
 		}
 
 	}

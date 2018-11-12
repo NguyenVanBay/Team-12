@@ -2,6 +2,7 @@ package admin_controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.ProductDAO;
+import model.User;
 
 public class DeleteProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,11 +28,20 @@ public class DeleteProduct extends HttpServlet {
 			response.sendRedirect("/Book/admin/Login");
 		} else {
 
-			Long id = Long.parseLong(request.getParameter("id"));
+			String roleAdmin = (String) session.getAttribute("role");
 
-			new ProductDAO().deleteById(id);
+			if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYTHELOAI)) {
 
-			response.sendRedirect("/Book/admin/listProduct");
+				Long id = Long.parseLong(request.getParameter("id"));
+
+				new ProductDAO().deleteById(id);
+
+				response.sendRedirect("/Book/admin/listProduct");
+
+			} else {
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+				rd.forward(request, response);
+			}
 		}
 	}
 

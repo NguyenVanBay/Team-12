@@ -8,7 +8,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>Bài tập lớn nhóm 12 lập trình web</title>
 
     <!-- Fontfaces CSS-->
     <link href="${pageContext.request.contextPath}/../admin/css/font-face.css" rel="stylesheet" media="all">

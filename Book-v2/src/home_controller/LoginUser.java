@@ -89,7 +89,7 @@ public class LoginUser extends HttpServlet {
 				session.setAttribute("userNameUser", u.getName());
 				session.setAttribute("idUser", u.getId());
 
-				response.sendRedirect("/Book/home");
+				response.sendRedirect("/Book/");
 				
 			}
 
@@ -124,6 +124,7 @@ public class LoginUser extends HttpServlet {
 					u.setAddress(address);
 					u.setPassword(password);
 					u.setRole((long) 0);
+					u.setCreateBy((long) -1);
 
 					if (new UserDAO().insertUser(u)) {
 						response.sendRedirect("/Book/dang-nhap-dang-ki?success=register");

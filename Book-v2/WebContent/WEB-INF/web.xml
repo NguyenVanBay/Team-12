@@ -4,15 +4,10 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
 	<display-name>Book</display-name>
-	<welcome-file-list>
-		<welcome-file>home</welcome-file>
-	</welcome-file-list>
-
 	<error-page>
 		<error-code>404</error-code>
 		<location>/error.jsp</location>
 	</error-page>
-
 	<servlet>
 		<servlet-name>Home</servlet-name>
 		<servlet-class>home_controller.Home</servlet-class>
@@ -22,11 +17,30 @@
 		<url-pattern></url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>DetailProduct</servlet-name>
+		<servlet-class>home_controller.DetailProduct</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DetailProduct</servlet-name>
+		<url-pattern>/chi-tiet/*</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>Search</servlet-name>
+		<servlet-class>home_controller.Search</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Search</servlet-name>
+		<url-pattern>/tim-kiem/*</url-pattern>
+	</servlet-mapping>
+
+
 	<context-param>
 		<param-name>contextPath</param-name>
 		<param-value>http://localhost:8080/Book/</param-value>
 	</context-param>
-
 	<servlet>
 		<servlet-name>ListUser</servlet-name>
 		<servlet-class>admin_controller.ListUser</servlet-class>
@@ -246,7 +260,5 @@
 	<session-config>
 		<session-timeout>60</session-timeout>
 	</session-config>
-	<welcome-file-list>
-		<welcome-file>/home</welcome-file>
-	</welcome-file-list>
+
 </web-app>

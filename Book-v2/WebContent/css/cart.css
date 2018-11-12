@@ -5,6 +5,14 @@ table, tr, td {
     width: 100%;
 }
 
+ul#nav {
+    background: #fff;
+}
+
+#nav a {
+    color: red !important;
+}
+
 tr {
 }
 

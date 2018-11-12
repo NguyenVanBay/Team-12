@@ -29,13 +29,32 @@ public class EditUser extends HttpServlet {
 			response.sendRedirect("/Book/admin/Login");
 		} else {
 
-			Long id = Long.parseLong(request.getParameter("id"));
+			String roleAdmin = (String) session.getAttribute("role");
 
-			User user = new UserDAO().getUserById(id);
+			if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYNHANVIEN)) {
 
-			request.setAttribute("user", user);
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/sua-nguoi-dung");
-			rd.forward(request, response);
+				Long id = Long.parseLong(request.getParameter("id"));
+
+				User user = new UserDAO().getUserById(id);
+
+				System.out.println("create by : " + user.getCreateBy());
+				System.out.println("id login : " + session.getAttribute("idAdmin"));
+
+				// check điều kiện user đó là người tạo ra tài khoản này thì mới cho sửa.
+				if (user.getCreateBy() == Long.parseLong(session.getAttribute("idAdmin") + "")) {
+
+					request.setAttribute("user", user);
+					RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/sua-nguoi-dung");
+					rd.forward(request, response);
+
+				} else {
+					response.sendRedirect("/Book/admin/listUser?error=edit");
+				}
+
+			} else {
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+				rd.forward(request, response);
+			}
 		}
 	}
 
@@ -57,9 +76,9 @@ public class EditUser extends HttpServlet {
 			String role = request.getParameter("role");
 
 			User userOld = new UserDAO().getUserById(Long.parseLong(id));
-			
-			if(!userOld.getEmail().equals(email)) {
-			
+
+			if (!userOld.getEmail().equals(email)) {
+
 				if (!new UserDAO().checkEmail(email)) {
 					User u = userOld;
 					u.setId(Long.parseLong(id));
@@ -74,9 +93,9 @@ public class EditUser extends HttpServlet {
 				} else {
 					response.sendRedirect("/Book/admin/editUser?id=" + id + "&error=edit&email=exists");
 				}
-				
+
 			} else {
-				
+
 				User u = new User();
 				u.setId(Long.parseLong(id));
 				u.setAddress(address);

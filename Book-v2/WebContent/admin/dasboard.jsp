@@ -16,10 +16,10 @@
 	rel="stylesheet">
 <!-- font awesome CSS
 		============================================ -->
-<link rel="stylesheet" href="css1/font-awesome.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
 
-<link rel="stylesheet" href="css1/style.css">
-<link rel="stylesheet" href="css1/dasboard.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dasboard.css">
 </head>
 
 <body>

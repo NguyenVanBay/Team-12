@@ -34,20 +34,3 @@
 	</div>
 </div>
 <!-- end header-top-area -->
-
-<div class="menu-area">
-	<nav id="menu">
-		<ul id="nav">
-			<li><a href="/Book/home">Trang chủ</a></li>
-
-			<li><a href="/Book/tintuc.jsp">Tin tức</a></li>
-
-
-			<li><a href="/Book/gioithieu.jsp">Giới thiệu</a></li>
-
-
-			<li><a href="/Book/lienhe.jsp">Liên hệ</a></li>
-		</ul>
-	</nav>
-</div>
-<!-- end menu area -->

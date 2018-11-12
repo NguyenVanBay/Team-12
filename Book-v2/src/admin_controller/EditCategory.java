@@ -1,7 +1,6 @@
 package admin_controller;
 
 import java.io.IOException;
-import java.nio.ByteBuffer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,12 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.nio.charset.Charset;
-import static java.nio.charset.StandardCharsets.*;
 
 import dao.CategoryDAO;
 import model.Category;
-import sun.nio.cs.StandardCharsets;
+import model.User;
 
 public class EditCategory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -33,6 +30,11 @@ public class EditCategory extends HttpServlet {
 			response.sendRedirect("/Book/admin/Login");
 		} else {
 			
+			String roleAdmin = (String) session.getAttribute("role");
+
+			if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYTHELOAI)) {
+
+			
 			request.setCharacterEncoding("UTF-8");
 
 			Long id = Long.parseLong(request.getParameter("id"));
@@ -42,6 +44,11 @@ public class EditCategory extends HttpServlet {
 			request.setAttribute("category", category);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/sua-the-loai");
 			rd.forward(request, response);
+			
+		} else {
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+			rd.forward(request, response);
+		}
 		}
 	}
 

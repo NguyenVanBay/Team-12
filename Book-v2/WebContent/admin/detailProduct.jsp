@@ -7,7 +7,6 @@
 <%@page import="java.text.*"%>
 
 <%
-
 	DecimalFormat formatter = new DecimalFormat("###,###,###.00");
 	Product product = (Product) request.getAttribute("product");
 %>
@@ -21,17 +20,12 @@
 <title>Bài tập lớn nhóm 12</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Google Fonts
-		============================================ -->
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900"
-	rel="stylesheet">
 <!-- font awesome CSS
 		============================================ -->
-<link rel="stylesheet" href="css1/font-awesome.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
 
-<link rel="stylesheet" href="css1/style.css">
-<link rel="stylesheet" href="css1/list.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/list.css">
 </head>
 
 <body>
@@ -52,7 +46,7 @@
 					<th>Tên sách</th>
 					<td><%=product.getName()%></td>
 				</tr>
-				
+
 				<tr>
 					<th>Đường dẫn</th>
 					<td><%=product.getUrl()%></td>
@@ -79,7 +73,7 @@
 				<tr>
 
 					<th>Giá (VND)</th>
-					<td><%=formatter.format(product.getPrice()) + " VND" %></td>
+					<td><%=formatter.format(product.getPrice()) + " VND"%></td>
 				</tr>
 
 				<tr>
@@ -121,25 +115,13 @@
 					</td>
 				</tr>
 
-				<tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-				</tr>
 			</tbody>
 		</table>
+
 	</div>
-	</div>
+
+	
+
 </body>
 
 </html>

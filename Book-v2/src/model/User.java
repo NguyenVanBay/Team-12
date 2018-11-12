@@ -10,6 +10,13 @@ public class User {
 	private String phone;
 	private Long role;
 	private Long createBy;
+	
+	// danh sách chức vụ user.
+	public static final Long NGUOIDUNG = (long) 0;
+	public static final Long GIAMDOC = (long) 4;
+	public static final Long QUANLYNHANVIEN = (long) 1;
+	public static final Long QUANLYTHELOAI = (long) 2;
+	public static final Long QUANLYKHO = (long) 3;
 
 	public Long getCreateBy() {
 		return createBy;

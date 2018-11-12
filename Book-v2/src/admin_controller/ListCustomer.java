@@ -27,30 +27,41 @@ public class ListCustomer extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		
+
 		if (null == session.getAttribute("email")) {
 			// User is not logged in.
 			response.sendRedirect("/Book/admin/Login");
 		} else {
-			ArrayList<User> allUser = new UserDAO().getAllCustomer();
 
-			String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? "" : request.getParameter("name");
-			String email = (request.getParameter("email") == null || request.getParameter("email") == "") ? "" : request.getParameter("email");
-			String phone = (request.getParameter("phone") == null || request.getParameter("phone") == "") ? "" : request.getParameter("phone");
+			String roleAdmin = (String) session.getAttribute("role");
 
+			if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYNHANVIEN)) {
+				
+				ArrayList<User> allUser = new UserDAO().getAllCustomer();
 
-			if (name != "" || email != "" || phone != "") {
-				allUser = new UserDAO().getWhere(name, email, phone, "0");
+				String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? ""
+						: request.getParameter("name");
+				String email = (request.getParameter("email") == null || request.getParameter("email") == "") ? ""
+						: request.getParameter("email");
+				String phone = (request.getParameter("phone") == null || request.getParameter("phone") == "") ? ""
+						: request.getParameter("phone");
+
+				if (name != "" || email != "" || phone != "") {
+					allUser = new UserDAO().getWhere(name, email, phone, "0");
+				} else {
+					allUser = new UserDAO().getAllCustomer();
+				}
+
+				request.setAttribute("users", allUser);
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/listCustomer.jsp");
+				rd.forward(request, response);
+
 			} else {
-				allUser = new UserDAO().getAllCustomer();
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+				rd.forward(request, response);
 			}
-			
-			request.setAttribute("users", allUser);
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/listCustomer.jsp");
-			rd.forward(request, response);
 		}
 
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

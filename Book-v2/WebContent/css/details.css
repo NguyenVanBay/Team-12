@@ -3,6 +3,13 @@
 	padding: 0px;
 }
 
+ul#nav {
+    background: #fff;
+}
+
+#nav a {
+    color: red !important;
+}
 
 .btn-img {
     padding-top: 10px;
@@ -55,7 +62,7 @@
     padding: 50px;
 }
 
-@media only screen and (min-width: 0px) and (max-width: 768px) {
+@media only screen and (min-width: 0px) and (max-width: 1100px) {
     
     .detail-product {
         display:  flex;

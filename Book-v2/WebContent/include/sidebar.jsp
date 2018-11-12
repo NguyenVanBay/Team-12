@@ -19,7 +19,7 @@
 			<%
 				for (Category c : categorys) {
 			%>
-			<li><a href="Search?id=<%=c.getId()%>"> <%=c.getName()%></a></li>
+			<li><a href="${pageContext.request.contextPath}/tim-kiem/<%= c.getUrl() %>-<%=c.getId()%>"> <%=c.getName()%></a></li>
 			<%
 				}
 			%>
@@ -32,7 +32,7 @@
 	<div class="search">
 		<h3>Tìm kiếm nâng cao</h3>
 
-		<form action="/Book/Search">
+		<form id="serchpage" action="/Book/tim-kiem/">
 
 
 			<input type="text" name="name" placeholder="Nhập tên sách" /> <input

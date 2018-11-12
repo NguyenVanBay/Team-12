@@ -18,5 +18,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="F:/PTIT/ki1nam4/laptrinhweb/font-end-12/urlrewritefilter-4.0.3.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

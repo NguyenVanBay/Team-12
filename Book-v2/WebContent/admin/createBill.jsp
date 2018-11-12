@@ -29,10 +29,10 @@
 	rel="stylesheet">
 <!-- font awesome CSS
 		============================================ -->
-<link rel="stylesheet" href="css1/font-awesome.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
 
-<link rel="stylesheet" href="css1/style.css">
-<link rel="stylesheet" href="css1/hoadon.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/hoadon.css">
 </head>
 
 <body onload="window.print();">
@@ -88,7 +88,7 @@
 		</div>
 		<div class="footer-right">
 			Hà Nội, ngày 20 tháng 11 năm 2018<br /> Nhân viên<br>
-
+			<%= session.getAttribute("userName") %>
 		</div>
 	</div>
 

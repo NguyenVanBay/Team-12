@@ -1,0 +1,7 @@
+ul#nav {
+    background: #fff;
+}
+
+#nav a {
+    color: red !important;
+}

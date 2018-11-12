@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.CategoryDAO;
 import model.Category;
+import model.User;
 
 public class AddCategory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,8 +30,17 @@ public class AddCategory extends HttpServlet {
 			response.sendRedirect("/Book/admin/Login");
 		} else {
 
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/them-the-loai");
-			rd.forward(request, response);
+			String roleAdmin = (String) session.getAttribute("role");
+			
+			if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYTHELOAI)) {
+
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/them-the-loai");
+				rd.forward(request, response);
+
+			} else {
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+				rd.forward(request, response);
+			}
 		}
 	}
 
@@ -47,11 +57,11 @@ public class AddCategory extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			String name = request.getParameter("name");
 			String url = request.getParameter("url");
-			
+
 			System.out.println(name);
-			
+
 			Category c = new Category();
-		
+
 			c.setName(name);
 			c.setUrl(url);
 			c.setCreateBy(Long.parseLong(session.getAttribute("idAdmin").toString()));

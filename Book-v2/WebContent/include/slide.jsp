@@ -2,10 +2,10 @@
 	pageEncoding="UTF-8"%>
 <div class="w3-content w3-section"
 	style="width: 100%; padding: 20px 40px 0px 0px;">
-	<img class="mySlides" src="img/anhnen2.jpg" style="width: 100%">
-	<img class="mySlides" src="img/anhnen5.jpg" style="width: 100%"> <img
-		class="mySlides" src="img/anhnen3.jpg" style="width: 100%"> <img
-		class="mySlides" src="img/anhnen4.jpg" style="width: 100%">
+	<img class="mySlides" src="${pageContext.request.contextPath}/img/anhnen2.jpg" style="width: 100%">
+	<img class="mySlides" src="${pageContext.request.contextPath}/img/anhnen5.jpg" style="width: 100%"> <img
+		class="mySlides" src="${pageContext.request.contextPath}/img/anhnen3.jpg" style="width: 100%"> <img
+		class="mySlides" src="${pageContext.request.contextPath}/img/anhnen4.jpg" style="width: 100%">
 </div>
 
 <script>

@@ -246,8 +246,6 @@
 	<jsp:include page="include/footer.jsp"></jsp:include>
 	<!-- end footer -->
 
-	<script src="js/my.js"></script>
-
 </body>
 
 </html>

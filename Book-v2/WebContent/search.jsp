@@ -24,7 +24,8 @@
 
 <jsp:include page="include/head.jsp"></jsp:include>
 
-<link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/search.css">
 
 </head>
 
@@ -39,6 +40,13 @@
 	<!-- infomation -->
 	<jsp:include page="include/infomation.jsp"></jsp:include>
 	<!-- end infomation -->
+
+
+	<!-- slider area -->
+	<jsp:include page="include/menu.jsp"></jsp:include>
+	<!-- end slide-area -->
+
+
 
 	<div class="container">
 
@@ -57,23 +65,19 @@
 
 			<div class="banchay">
 
-				<h3><%= (category.getName() != null) ? category.getName() : "" %></h3>
+				<h3><%=(category.getName() != null) ? category.getName() : ""%></h3>
 
 				<%
 					for (Product p : products) {
 				%>
 				<div class="product view view-first">
 					<div class="img-product">
-						<img src="admin/upload/<%=p.getThumbnail().getName()%>" alt="">
+						<img src="${pageContext.request.contextPath}/admin/upload/<%=p.getThumbnail().getName()%>" alt="">
 					</div>
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<form action="/Book/chi-tiet-san-pham"
-								method="get">
-								<input type="hidden" name="id" value="<%= p.getId() %>" />
-								<button type="submit">Chi tiết</button>
-							</form>
+							<a href="${pageContext.request.contextPath}/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi tiết</a>
 							<form action="/Book/cart" method="post">
 								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
@@ -91,8 +95,8 @@
 			</div>
 
 			<div class="quangcao">
-				<img src="img/vanphong1.png" alt=""> <img
-					src="img/vanphong2.jpg" alt="">
+				<img src="${pageContext.request.contextPath}/img/vanphong1.png" alt=""> <img
+					src="${pageContext.request.contextPath}/img/vanphong2.jpg" alt="">
 			</div>
 		</div>
 	</div>
@@ -190,13 +194,11 @@
 				</p>
 			</div>
 			<div class="payment-img text-right">
-				<a href="#"><img src="img/1.png" alt="payment"></a>
+				<a href="#"><img src="${pageContext.request.contextPath}/img/1.png" alt="payment"></a>
 			</div>
 		</div>
 		<!-- end footer-bottom -->
 	</footer>
-
-	<script src="js/my.js"></script>
 
 </body>
 

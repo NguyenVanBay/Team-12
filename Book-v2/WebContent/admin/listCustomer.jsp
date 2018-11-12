@@ -22,10 +22,10 @@ ArrayList<User> users = (ArrayList) request.getAttribute("users");
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
 	<!-- font awesome CSS
 		============================================ -->
-	<link rel="stylesheet" href="css1/font-awesome.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
 
-	<link rel="stylesheet" href="css1/style.css">
-	<link rel="stylesheet" href="css1/list.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/list.css">
 </head>
 
 <body>
@@ -34,8 +34,20 @@ ArrayList<User> users = (ArrayList) request.getAttribute("users");
 	<div class="container">
 		<div class="bg-while">
 			<div class="top">
-				<h3>Nhân viên</h3>
+				<h3>Khách hàng</h3>
+				
 			</div>
+			<p style="color: red; text-align: center;">
+
+				<%
+					String error = (request.getParameter("error") == null) ? "" : request.getParameter("error");
+
+				if (error.equals("delete")) {
+					out.print("Không thể xóa khách hàng !");
+				}
+				%>
+
+			</p>
 
 			<form action="/Book/admin/listCustomer" method="get">
 

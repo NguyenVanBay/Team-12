@@ -1,0 +1,24 @@
+.simple li {
+	margin-top: 37px;
+}
+
+.simple>h1 {
+	color: green;
+	margin-bottom: 10px;
+}
+
+article.simple {
+	padding: 50px;
+}
+
+#nav {
+
+	background: #fff !important; 
+}
+
+#nav li a {
+    text-decoration: none;
+    color: #E91E63 !important;
+    text-transform: uppercase;
+    display: block;
+}

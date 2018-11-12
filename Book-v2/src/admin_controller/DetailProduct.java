@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.ProductDAO;
 import model.Product;
+import model.User;
 
 @WebServlet("/admin/detailProduct")
 public class DetailProduct extends HttpServlet {
@@ -30,13 +31,22 @@ public class DetailProduct extends HttpServlet {
 			response.sendRedirect("/Book/admin/Login");
 		} else {
 
-			Long id = Long.parseLong(request.getParameter("id"));
+			String roleAdmin = (String) session.getAttribute("role");
 
-			Product product = new ProductDAO().getProductById(id);
+			if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYTHELOAI)) {
 
-			request.setAttribute("product", product);
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/detailProduct.jsp");
-			rd.forward(request, response);
+				Long id = Long.parseLong(request.getParameter("id"));
+
+				Product product = new ProductDAO().getProductById(id);
+
+				request.setAttribute("product", product);
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/detailProduct.jsp");
+				rd.forward(request, response);
+
+			} else {
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+				rd.forward(request, response);
+			}
 		}
 	}
 

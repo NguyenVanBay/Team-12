@@ -93,7 +93,7 @@
 			</p>
 		</div>
 		<div class="payment-img text-right">
-			<a href="#"><img src="img/1.png" alt="payment"></a>
+			<a href="#"><img src="${pageContext.request.contextPath}/img/1.png" alt="payment"></a>
 		</div>
 	</div>
 	<!-- end footer-bottom -->
