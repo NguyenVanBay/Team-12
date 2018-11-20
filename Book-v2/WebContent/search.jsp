@@ -72,7 +72,7 @@
 				%>
 				<div class="product view view-first">
 					<div class="img-product">
-						<img src="${pageContext.request.contextPath}/admin/upload/<%=p.getThumbnail().getName()%>" alt="">
+						<img src="${pageContext.request.contextPath}/admin/upload/<%= p.getThumbnail().getName() %>" alt="">
 					</div>
 					<div class="detail-product">
 						<p><%=p.getName()%></p>

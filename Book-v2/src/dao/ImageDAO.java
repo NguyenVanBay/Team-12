@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import admin_controller.AddProduct;
+import admin_controller.ProductController;
 import connect.DBConnect;
 import model.Image;
 import model.Product;
@@ -23,7 +23,7 @@ import model.Product;
  *
  * @author NVB
  */
-public class ImageDAO {
+public class ImageDAO implements ImageInterface {
 
 	// add image.
 	public boolean insertImage(Image i) {
@@ -139,7 +139,7 @@ public class ImageDAO {
 		} catch (SQLException ex) {
 			Logger.getLogger(ImageDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return null;
+		return listImage;
 	}
 
 	public ArrayList<Image> getAll() {
@@ -224,11 +224,11 @@ public class ImageDAO {
 				preparedStmt.execute();
 				connection.close();
 
-				File file = new File(AddProduct.UPLOAD_DIRECTORY + product.getThumbnail().getName());     
+				File file = new File(ProductController.UPLOAD_DIRECTORY + product.getThumbnail().getName());     
 		        file.delete();
 				
 		        for (Image image : product.getListImage()) {
-		        	file = new File(AddProduct.UPLOAD_DIRECTORY + image.getName());     
+		        	file = new File(ProductController.UPLOAD_DIRECTORY + image.getName());     
 			        file.delete();
 				}
 				

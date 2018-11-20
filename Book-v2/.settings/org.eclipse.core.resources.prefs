@@ -8,7 +8,6 @@ encoding//WebContent/include/infomation.jsp=UTF-8
 encoding//WebContent/include/menu-area.jsp=UTF-8
 encoding//WebContent/include/quangcao.jsp=UTF-8
 encoding//WebContent/login.jsp=UTF-8
-encoding//src/admin_controller/AddCategory.java=UTF-8
 encoding//src/dao/BillDetailDAO.java=UTF-8
 encoding//src/dao/ImageDAO.java=UTF-8
 encoding//src/home_controller/CreateBill.java=UTF-8

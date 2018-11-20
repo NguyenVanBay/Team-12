@@ -46,14 +46,15 @@
 				sửa sản phẩm :
 				<%=product.getName()%>
 			</h3>
-			<a href="listProduct">Danh sách sản phẩm</a>
+			<a href="${pageContext.request.contextPath}/admin/product?action=list">Danh sách sản phẩm</a>
 		</div>
 
 		<p style="color: red; font-size: 20px"><%="edit".equals(request.getParameter("error")) ? "Sửa không thành công" : ""%></p>
 
 
-		<form action="/Book/admin/editProduct" method="post">
+		<form action="${pageContext.request.contextPath}/admin/product" method="post">
 
+<input type="hidden" name="action" value="edit"/>
 			<input name="id" type="hidden" value="<%=product.getId()%>" />
 
 			<div class="form-group">

@@ -22,7 +22,7 @@ import model.Product;
  *
  * @author NVB
  */
-public class BillDetailDAO {
+public class BillDetailDAO implements BillDetailInterface {
 
 	// add billdetail
 	public boolean insertBillDetail(BillDetail b) {
@@ -112,7 +112,12 @@ public class BillDetailDAO {
 		} catch (SQLException ex) {
 			Logger.getLogger(BillDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return null;
+		return listBillDetail;
+	}
+	
+	public static void main(String[] args) {
+		ArrayList<BillDetail> list = new BillDetailDAO().getBillDetailByIdBill(2);
+
 	}
 
 }

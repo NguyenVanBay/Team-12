@@ -48,7 +48,7 @@
 		<div class="bg-while">
 			<div class="top">
 				<h3>Nhân viên</h3>
-				<a href="addUser">Thêm nhân viên</a>
+				<a href="${pageContext.request.contextPath}/admin/user?action=add">Thêm nhân viên</a>
 			</div>
 
 			<p id="nameUserEr" class="er-red">
@@ -67,7 +67,9 @@
 
 			</p>
 
-			<form action="/Book/admin/listUser" method="get">
+			<form action="${pageContext.request.contextPath}/admin/user" method="get">
+			
+			<input type="hidden" name="action" value="list"/>
 
 				<div class="row seach-content">
 					<div class="col-md-3 form-group">
@@ -157,11 +159,11 @@
 
 										if (temp.getRole()==User.GIAMDOC) {
 											%> <a
-							href="${pageContext.request.contextPath}/admin/listUser?email=<%= temp.getEmail() %>"><%= temp.getName() %>
+							href="${pageContext.request.contextPath}/admin/user?action=list&email=<%= temp.getEmail() %>"><%= temp.getName() %>
 								(Giám đốc)</a> <%
 										} else if(temp.getRole()==User.QUANLYNHANVIEN){
 											%> <a
-							href="${pageContext.request.contextPath}/admin/listUser?email=<%= temp.getEmail() %>"><%= temp.getName() %>
+							href="${pageContext.request.contextPath}/admin/user?action=list&email=<%= temp.getEmail() %>"><%= temp.getName() %>
 								(Nhân Viên)</a> <%
 										} else {
 											
@@ -178,10 +180,10 @@
 						} else {
 						%>
 							<div class="table-data-feature">
-								<a href="editUser?id=<%=u.getId()%>" class="item tooltip"> <i
+								<a href="${pageContext.request.contextPath}/admin/user?action=edit&id=<%=u.getId()%>" class="item tooltip"> <i
 									class="fa fa-pencil-square"></i> <span class="tooltiptext">Sửa
 										thông tin nhân viên</span>
-								</a> <a href="deleteUser?id=<%=u.getId()%>" class="item tooltip">
+								</a> <a href="${pageContext.request.contextPath}/admin/user?action=delete&id=<%=u.getId()%>" class="item tooltip">
 									<i class="fa fa-recycle"></i> <span class="tooltiptext">Xóa
 										nhân viên</span>
 								</a>

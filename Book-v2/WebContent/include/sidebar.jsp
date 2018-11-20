@@ -32,7 +32,7 @@
 	<div class="search">
 		<h3>Tìm kiếm nâng cao</h3>
 
-		<form id="serchpage" action="/Book/tim-kiem/">
+		<form id="serchpage" action="${pageContext.request.contextPath}/tim-kiem/">
 
 
 			<input type="text" name="name" placeholder="Nhập tên sách" /> <input

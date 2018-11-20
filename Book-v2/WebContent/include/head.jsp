@@ -3,7 +3,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<base href="" target="">
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <title>Bài tập lớn nhóm 12 lập trình web</title>
 
 <!-- mystyle -->

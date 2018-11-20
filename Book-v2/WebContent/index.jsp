@@ -16,13 +16,20 @@
 <meta charset="UTF-8">
 <jsp:include page="include/head.jsp"></jsp:include>
 
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/home.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
 <style>
 
 #nav {
         margin-right: 40px;
         }
+        
+        <style>
+
+.mySlides1 {
+
+	display: block;
+
+}
 </style>
 </head>
 
@@ -82,13 +89,13 @@
 				%>
 				<div class="product view view-first">
 					<div class="img-product">
-						<img src="admin/upload/<%=p.getThumbnail().getName()%>" alt="">
+						<img src="${pageContext.request.contextPath}/admin/upload/<%= p.getThumbnail().getName() %>" alt="">
 					</div>
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<a href="/Book/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi tiết</a>
-							<form action="/Book/cart" method="post">
+							<a href="${pageContext.request.contextPath}/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi tiết</a>
+							<form action="${pageContext.request.contextPath}/cart" method="post">
 								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Mua</button>
@@ -119,13 +126,13 @@
 				%>
 				<div class="product view view-first">
 					<div class="img-product">
-						<img src="admin/upload/<%=p.getThumbnail().getName()%>" alt="">
+						<img src="${pageContext.request.contextPath}/admin/upload/<%= p.getThumbnail().getName() %>" alt="">
 					</div>
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<a href="/Book/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi tiết</a>
-							<form action="/Book/cart" method="post">
+							<a href="${pageContext.request.contextPath}/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi tiết</a>
+							<form action="${pageContext.request.contextPath}/cart" method="post">
 								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Mua</button>
@@ -156,13 +163,13 @@
 				%>
 				<div class="product view view-first">
 					<div class="img-product">
-						<img src="admin/upload/<%=p.getThumbnail().getName()%>" alt="">
+						<img src="${pageContext.request.contextPath}/admin/upload/<%= p.getThumbnail().getName() %>" alt="">
 					</div>
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<a href="/Book/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi tiết</a>
-							<form action="/Book/cart" method="post">
+							<a href="${pageContext.request.contextPath}/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi tiết</a>
+							<form action="${pageContext.request.contextPath}/cart" method="post">
 								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Mua</button>

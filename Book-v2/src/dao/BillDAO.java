@@ -13,15 +13,18 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
+
 import connect.DBConnect;
 import model.Bill;
 import model.BillDetail;
+import model.Product;
 
 /**
  *
  * @author NVB
  */
-public class BillDAO {
+public class BillDAO implements BillInterface {
 
 	// add bill.
 	public boolean insertBill(Bill b) {
@@ -128,13 +131,17 @@ public class BillDAO {
 				b.setSumMoney(rs.getDouble("sumMoney"));
 				b.setStatus(rs.getLong("status"));
 				listBill.add(b);
-
 			}
+			
+			System.out.println("dia chi : " + listBill.get(1).getAddress());
 
 			connection.close();
 			int i = 0;
+	
 			for (Bill bill : listBill) {
-				ArrayList<BillDetail> listBillDetail = new BillDetailDAO().getBillDetailByIdBill(bill.getId());
+				System.out.println(bill.getId());
+				long idtemp = 0;
+				ArrayList<BillDetail> listBillDetail = new BillDetailDAO().getBillDetailByIdBill(idtemp);
 				bill.setListBillDetail(listBillDetail);
 				listBill.set(i, bill);
 				i++;
@@ -187,13 +194,16 @@ public class BillDAO {
 				listBill.add(b);
 
 			}
+			
+			System.out.println(listBill.size());
 
 			connection.close();
 			int i = 0;
+			ArrayList<BillDetail> listBillDetail =  new ArrayList<>();
 			for (Bill bill : listBill) {
-				ArrayList<BillDetail> listBillDetail = new BillDetailDAO().getBillDetailByIdBill(bill.getId());
-				bill.setListBillDetail(listBillDetail);
-				listBill.set(i, bill);
+				new BillDetailDAO().getBillDetailByIdBill(1);
+//				bill.setListBillDetail(listBillDetail);
+//				listBill.set(i, bill);
 				i++;
 			}
 
@@ -203,4 +213,10 @@ public class BillDAO {
 		}
 		return listBill;
 	}
+	
+	public static void main(String[] args) {
+		ArrayList<Bill> listProduct = new BillDAO().getAll();
+	
+	}
+
 }

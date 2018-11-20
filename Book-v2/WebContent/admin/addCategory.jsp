@@ -29,12 +29,14 @@
 
 		<div class="top">
 			<h3>Thêm thể loại sách</h3>
-			<a href="listCategory">Danh sách thể loại</a>
+			<a href="${pageContext.request.contextPath}/admin/category?action=list">Danh sách thể loại</a>
 		</div>
 		
 		<p style="color: red; font-size: 20px"><%= "add".equals(request.getParameter("error")) ? "Thêm không thành công" : "" %></p>
 		
-		<form action="/Book/admin/addCategory" method="post">
+		<form action="/Book/admin/category" method="post">
+		
+		<input type="hidden" name="action" value="add"/>
 
 			<div class="form-group">
 				<label for="text-input" class=" form-control-label"> Tên thể loại</label>

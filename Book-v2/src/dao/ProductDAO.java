@@ -22,7 +22,7 @@ import model.Product;
  *
  * @author NVB
  */
-public class ProductDAO {
+public class ProductDAO implements ProductInterface {
 
 	// add Product.
 	public boolean insertProduct(Product p) {
@@ -143,52 +143,61 @@ public class ProductDAO {
 
 	public ArrayList<Product> getAll() {
 
+
 		ArrayList<Product> allProduct = new ArrayList<>();
+		
 		ArrayList<Long> allCategory = new ArrayList<>();
 
-		try {
 			Connection connection = DBConnect.getConnection();
 			String sql = "SELECT * FROM products";
-			PreparedStatement ps = connection.prepareCall(sql);
-
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				Product p = new Product();
-				p.setId(rs.getLong("id"));
-				p.setName(rs.getString("name"));
-				p.setAuthor(rs.getString("author"));
-				p.setPublicAt(rs.getTimestamp("public"));
-				p.setCount(rs.getLong("count"));
-				p.setPrice(rs.getDouble("price"));
-				p.setTitle(rs.getString("title"));
-				p.setDescription(rs.getString("description"));
-				p.setType(rs.getString("type"));
-				p.setUrl(rs.getString("url"));
-				allProduct.add(p);
-				allCategory.add(rs.getLong("id_category"));
+			PreparedStatement ps;
+			try {
+				ps = connection.prepareCall(sql);
 				
+				ResultSet rs = ps.executeQuery();
+
+				while (rs.next()) {
+					Product p = new Product();
+					p.setId(rs.getLong("id"));
+					p.setName(rs.getString("name"));
+					p.setAuthor(rs.getString("author"));
+					p.setPublicAt(rs.getTimestamp("public"));
+					p.setCount(rs.getLong("count"));
+					p.setPrice(rs.getDouble("price"));
+					p.setTitle(rs.getString("title"));
+					p.setDescription(rs.getString("description"));
+					p.setType(rs.getString("type"));
+					p.setUrl(rs.getString("url"));
+					allProduct.add(p);
+					allCategory.add(rs.getLong("id_category"));
+					
+				}
+				connection.close();
+				
+				for (int i = 0; i < allCategory.size(); i++) {
+
+					Product p = allProduct.get(i);
+					
+					Category category = new CategoryDAO().getCategoryById(allCategory.get(i));
+					ArrayList<Image> listImage = new ImageDAO().getImageByProductIdAndType(p.getId(), 2);
+					
+					Image imagesThumbnail = new Image();
+					
+					for (Image image : new ImageDAO().getImageByProductIdAndType(p.getId(), 1)) {
+						p.setThumbnail(image);
+						System.out.println(image.getName());
+						imagesThumbnail = image;
+					}
+				
+					p.setCategory(category);
+					p.setListImage(listImage);
+					p.setThumbnail(imagesThumbnail);
+									
+					allProduct.set(i, p);
+				}
+				
+			} catch (SQLException e) {
 			}
-			connection.close();
-
-			for (int i = 0; i < allProduct.size(); i++) {
-
-				Product p = allProduct.get(i);
-
-				Category category = new CategoryDAO().getCategoryById(allCategory.get(i));
-				ArrayList<Image> listImage = new ImageDAO().getImageByProductIdAndType(p.getId(), 2);
-				Image thumbnail = new ImageDAO().getImageByProductIdAndType(p.getId(), 1).get(0);
-
-				p.setCategory(category);
-				p.setListImage(listImage);
-				p.setThumbnail(thumbnail);
-				allProduct.set(i, p);
-			}
-
-			return allProduct;
-		} catch (SQLException ex) {
-			Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-		}
 		return allProduct;
 	}
 	
@@ -226,7 +235,7 @@ public class ProductDAO {
 			for (int i = 0; i < allProduct.size(); i++) {
 
 				Product p = allProduct.get(i);
-
+				
 				Category category = new CategoryDAO().getCategoryById(allCategory.get(i));
 				ArrayList<Image> listImage = new ImageDAO().getImageByProductIdAndType(p.getId(), 2);
 				Image thumbnail = new ImageDAO().getImageByProductIdAndType(p.getId(), 1).get(0);
@@ -341,7 +350,8 @@ public class ProductDAO {
 	}
 	
 	public static void main(String[] args) {
-		new ProductDAO().deleteById((long)18);
+		ArrayList<Product> listProduct = new ProductDAO().getAll();
+	
 	}
 
 	public ArrayList<Product> getWhereInClient(String name, String author, String priceFrom, String priceTo,
@@ -368,8 +378,6 @@ public class ProductDAO {
 			if(publicFrom != "" && publicFrom != "") {
 				sql += " AND public BETWEEN '"+ publicFrom +"' AND '" + publicTo +"' ";
 			}
-			
-			
 			
 			System.out.println(sql);
 			

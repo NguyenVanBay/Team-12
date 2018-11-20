@@ -39,14 +39,15 @@
 				Sửa nhân viên :
 				<%=user.getName()%>
 			</h3>
-			<a href="listUser">Danh sách nhân viên</a>
+			<a href="${pageContext.request.contextPath}/admin/user?action=list">Danh sách nhân viên</a>
 		</div>
 
 		<p style="color: red; font-size: 20px"><%="edit".equals(request.getParameter("error")) ? "Sửa không thành công" : ""%></p>
 
 
-		<form action="/Book/admin/editUser" method="post">
+		<form action="${pageContext.request.contextPath}/admin/user" method="post">
 
+<input type="hidden" name="action" value="edit"/>
 			<input type="hidden" name="id" value="<%=user.getId()%>">
 
 			<div class="form-group">
@@ -113,7 +114,6 @@
 					<i class="fa fa-ban"></i> Reset
 				</button>
 			</div>
-
 		</form>
 	</div>
 </body>

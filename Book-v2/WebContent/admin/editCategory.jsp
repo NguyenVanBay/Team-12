@@ -38,13 +38,15 @@
 				sửa thể loại sách :
 				<%=category.getName()%>
 			</h3>
-			<a href="listCategory">Danh sách thể loại</a>
+			<a href="${pageContext.request.contextPath}/admin/category?action=list">Danh sách thể loại</a>
 		</div>
 
 		<p style="color: red; font-size: 20px"><%="edit".equals(request.getParameter("error")) ? "Sửa không thành công" : ""%></p>
 
 
-		<form action="/Book/admin/editCategory" method="post">
+		<form action="/Book/admin/category" method="post">
+		
+			<input type="hidden" name="action" value="edit">
 			<input type="hidden" name="id" value="<%=category.getId()%>">
 			<div class="form-group">
 				<label for="text-input" class=" form-control-label"> Tên thể

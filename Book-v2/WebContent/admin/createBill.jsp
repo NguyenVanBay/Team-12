@@ -92,7 +92,7 @@
 		</div>
 	</div>
 
-	<a href="editBill?id=<%=bill.getId()%>&status=2" class="item tooltip">Xuất
+	<a href="${pageContext.request.contextPath}/admin/bill?action=edit&id=<%=bill.getId()%>&status=2" class="item tooltip">Xuất
 		sản phẩm</a>
 </body>
 

@@ -42,37 +42,23 @@
 		<param-value>http://localhost:8080/Book/</param-value>
 	</context-param>
 	<servlet>
-		<servlet-name>ListUser</servlet-name>
-		<servlet-class>admin_controller.ListUser</servlet-class>
+		<servlet-name>UserController</servlet-name>
+		<servlet-class>admin_controller.UserController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ListUser</servlet-name>
-		<url-pattern>/admin/listUser</url-pattern>
+		<servlet-name>UserController</servlet-name>
+		<url-pattern>/admin/user</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>AddUser</servlet-name>
-		<servlet-class>admin_controller.AddUser</servlet-class>
+	
+		<servlet>
+		<servlet-name>CustomerController</servlet-name>
+		<servlet-class>admin_controller.CustomerController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>AddUser</servlet-name>
-		<url-pattern>/admin/addUser</url-pattern>
+		<servlet-name>CustomerController</servlet-name>
+		<url-pattern>/admin/customer</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>EditUser</servlet-name>
-		<servlet-class>admin_controller.EditUser</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>EditUser</servlet-name>
-		<url-pattern>/admin/editUser</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>DeleteUser</servlet-name>
-		<servlet-class>admin_controller.DeleteUser</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>DeleteUser</servlet-name>
-		<url-pattern>/admin/deleteUser</url-pattern>
-	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>list user jsp</servlet-name>
 		<jsp-file>/admin/listUser.jsp</jsp-file>
@@ -98,36 +84,12 @@
 		<url-pattern>/admin/sua-nguoi-dung</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>ListCategory</servlet-name>
-		<servlet-class>admin_controller.ListCategory</servlet-class>
+		<servlet-name>CategoryController</servlet-name>
+		<servlet-class>admin_controller.CategoryController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ListCategory</servlet-name>
-		<url-pattern>/admin/listCategory</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>AddCategory</servlet-name>
-		<servlet-class>admin_controller.AddCategory</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AddCategory</servlet-name>
-		<url-pattern>/admin/addCategory</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>EditCategory</servlet-name>
-		<servlet-class>admin_controller.EditCategory</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>EditCategory</servlet-name>
-		<url-pattern>/admin/editCategory</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>DeleteCategory</servlet-name>
-		<servlet-class>admin_controller.DeleteCategory</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>DeleteCategory</servlet-name>
-		<url-pattern>/admin/deleteCategory</url-pattern>
+		<servlet-name>CategoryController</servlet-name>
+		<url-pattern>/admin/category</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>danh sach the loai jsp</servlet-name>
@@ -154,36 +116,12 @@
 		<url-pattern>/admin/sua-the-loai</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>ListProduct</servlet-name>
-		<servlet-class>admin_controller.ListProduct</servlet-class>
+		<servlet-name>ProductController</servlet-name>
+		<servlet-class>admin_controller.ProductController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ListProduct</servlet-name>
-		<url-pattern>/admin/listProduct</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>AddProduct</servlet-name>
-		<servlet-class>admin_controller.AddProduct</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AddProduct</servlet-name>
-		<url-pattern>/admin/addProduct</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>EditProduct</servlet-name>
-		<servlet-class>admin_controller.EditProduct</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>EditProduct</servlet-name>
-		<url-pattern>/admin/editProduct</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>DeleteProduct</servlet-name>
-		<servlet-class>admin_controller.DeleteProduct</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>DeleteProduct</servlet-name>
-		<url-pattern>/admin/deleteProduct</url-pattern>
+		<servlet-name>ProductController</servlet-name>
+		<url-pattern>/admin/product</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>danh sach san pham jsp</servlet-name>
@@ -210,28 +148,12 @@
 		<url-pattern>/admin/sua-san-pham</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>ListBill</servlet-name>
-		<servlet-class>admin_controller.ListBill</servlet-class>
+		<servlet-name>BillController</servlet-name>
+		<servlet-class>admin_controller.BillController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ListBill</servlet-name>
-		<url-pattern>/admin/listBill</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>DetailBill</servlet-name>
-		<servlet-class>admin_controller.DetailBill</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>DetailBill</servlet-name>
-		<url-pattern>/admin/detailBill</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>EditBill</servlet-name>
-		<servlet-class>admin_controller.EditBill</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>EditBill</servlet-name>
-		<url-pattern>/admin/editBill</url-pattern>
+		<servlet-name>BillController</servlet-name>
+		<url-pattern>/admin/bill</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>danh sach don hang jsp</servlet-name>

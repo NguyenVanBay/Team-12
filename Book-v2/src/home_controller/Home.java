@@ -1,6 +1,7 @@
 package home_controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -31,7 +32,8 @@ public class Home extends HttpServlet {
 			throws ServletException, IOException {
 
 		// get all category.
-		ArrayList<Product> allProduct = new ProductDAO().getAll();
+		ArrayList<Product> allProduct = null;
+		allProduct = new ProductDAO().getAll();
 		request.setAttribute("products", allProduct);
 		
 		// get all product.

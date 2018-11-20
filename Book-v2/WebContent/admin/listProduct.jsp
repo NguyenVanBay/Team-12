@@ -42,11 +42,11 @@ ArrayList<Category> categorys = (ArrayList) request.getAttribute("categorys");
 		<div class="bg-while">
 			<div class="top">
 				<h3>Sản phẩm</h3>
-				<a href="addProduct">Thêm sản phẩm</a>
+				<a href="product?action=add">Thêm sản phẩm</a>
 			</div>
 
-			<form action="/Book/admin/listProduct" method="get">
-
+			<form action="/Book/admin/product" method="get">
+<input type="hidden" name="action" value="list"/>
 				<div class="row seach-content">
 					<div class="form-group">
 						<input name="name" type="text" value="<%= (request.getParameter("name") == "" || request.getParameter("name") == null) ? "" : request.getParameter("name") %>" placeholder="Tên sản phẩm">
@@ -150,15 +150,15 @@ ArrayList<Category> categorys = (ArrayList) request.getAttribute("categorys");
 						<td><img class="img img-responsive" style="height: 150px;" src="/Book/admin/upload/<%= p.getThumbnail().getName() %>" /></td>
 						<td>
 							<div class="table-data-feature">
-							<a href="detailProduct?id=<%=p.getId()%>" class="item tooltip">
+							<a href="product?action=detail&id=<%=p.getId()%>" class="item tooltip">
 									<span class="tooltiptext">Chi tiết sản phẩm</span>
 									<i class="fa fa-taxi"></i>
 								</a>
-								<a href="editProduct?id=<%= p.getId() %>" class="item tooltip">
+								<a href="product?action=edit&id=<%= p.getId() %>" class="item tooltip">
 									<i class="fa fa-pencil-square"></i>
 									<span class="tooltiptext">Sửa sản phẩm</span>
 								</a>
-								<a href="deleteProduct?id=<%= p.getId() %>" class="item tooltip">
+								<a href="product?action=delete&id=<%= p.getId() %>" class="item tooltip">
 									<i class="fa fa-recycle"></i>
 									<span class="tooltiptext">Xóa sản phẩm</span>
 								</a>

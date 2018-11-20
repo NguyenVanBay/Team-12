@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div class="w3-content w3-section"
-	style="width: 100%; padding: 20px 40px 0px 0px;">
+	style="width: 100%; padding: 20px 0px 0px 0px;">
 	<img class="mySlides" src="${pageContext.request.contextPath}/img/anhnen2.jpg" style="width: 100%">
 	<img class="mySlides" src="${pageContext.request.contextPath}/img/anhnen5.jpg" style="width: 100%"> <img
 		class="mySlides" src="${pageContext.request.contextPath}/img/anhnen3.jpg" style="width: 100%"> <img

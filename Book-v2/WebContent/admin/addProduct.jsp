@@ -35,13 +35,15 @@
 		<div class="top">
 			<h3>Thêm sản phẩm
 			</h3>
-			<a href="listProduct">Danh sách sản phẩm</a>
+			<a href="${pageContext.request.contextPath}/admin/product?action=list">Danh sách sản phẩm</a>
 		</div>
 
 		<p style="color: red; font-size: 20px"><%= "add".equals(request.getParameter("error")) ? "Thêm không thành công" : "" %></p>
 
 
-		<form id="formCreate" action="/Book/admin/addProduct" method="post" enctype="multipart/form-data">
+		<form id="formCreate" action="/Book/admin/product" method="post" enctype="multipart/form-data">
+
+<input type="hidden" name="action" value="add"/>
 
 			<div class="form-group">
 				<label for="text-input" class=" form-control-label">Tên

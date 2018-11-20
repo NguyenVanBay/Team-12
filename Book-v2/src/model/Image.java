@@ -6,6 +6,14 @@ public class Image {
 	private String name;
 	private Product product;
 	private Long type;
+	
+	public Image() {
+	}
+
+	public Image(String name) {
+		super();
+		this.name = name;
+	}
 
 	public Long getId() {
 		return id;
@@ -37,5 +45,11 @@ public class Image {
 
 	public void setType(Long type) {
 		this.type = type;
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.getName();
 	}
 }

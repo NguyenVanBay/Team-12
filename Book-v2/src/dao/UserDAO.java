@@ -20,7 +20,7 @@ import model.User;
  *
  * @author NVB
  */
-public class UserDAO {
+public class UserDAO implements UserInterface {
 
 	// check email exists. co tra ve true.
 	public boolean checkEmail(String email) {

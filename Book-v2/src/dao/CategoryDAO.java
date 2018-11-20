@@ -20,7 +20,7 @@ import model.Category;
  *
  * @author NVB
  */
-public class CategoryDAO {
+public class CategoryDAO implements CategoryInterface {
 
 	// add Category.
 	public boolean insertCategory(Category c) {
@@ -112,8 +112,7 @@ public class CategoryDAO {
 		return allCategory;
 	}
 
-	public void deleteById(Long id) {
-		try {
+	public void deleteById(Long id) throws SQLException {
 			Connection connection = DBConnect.getConnection();
 
 			String query = "delete from categorys where id = ?";
@@ -123,13 +122,6 @@ public class CategoryDAO {
 
 			connection.close();
 
-		} catch (SQLException ex) {
-			Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
-
-	public static void main(String[] args) {
-		new CategoryDAO().deleteById(Long.parseLong("8"));
 	}
 
 	public ArrayList<Category> getWhere(String name) {

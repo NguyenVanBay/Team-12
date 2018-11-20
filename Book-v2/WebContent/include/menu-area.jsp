@@ -8,14 +8,14 @@
 			<%
 				if (session.getAttribute("userNameUser") == null) {
 			%>
-			<li><a href="/Book/dang-nhap-dang-ki">Đăng nhập</a></li>
+			<li><a href="${pageContext.request.contextPath}/dang-nhap-dang-ki">Đăng nhập</a></li>
 			<%
 				} else {
 			%>
 
 			
 			<li>
-				<form id="form" action="/Book/dang-nhap-dang-ki" method="post">
+				<form id="form" action="${pageContext.request.contextPath}/dang-nhap-dang-ki" method="post">
 					<input type="hidden" name="type" value="logout" />
 					<button  class="btn btn-success" type="submit">Logout</button>
 				</form>
@@ -28,8 +28,8 @@
 				}
 			%>
 
-			<li><a href="/Book/dang-nhap-dang-ki">Đăng kí</a></li>
-			<li><a href="/Book/danh-sach-gio-hang">Xem giỏ hàng</a></li>
+			<li><a href="${pageContext.request.contextPath}/dang-nhap-dang-ki">Đăng kí</a></li>
+			<li><a href="${pageContext.request.contextPath}/danh-sach-gio-hang">Xem giỏ hàng</a></li>
 		</ul>
 	</div>
 </div>

@@ -29,14 +29,14 @@
 
 		<div class="top">
 			<h3>Thêm nhân viên</h3>
-			<a href="listUser">Danh sách nhân viên</a>
+			<a href="${pageContext.request.contextPath}/admin/user?action=list">Danh sách nhân viên</a>
 		</div>
 
 		<p style="color: red; font-size: 20px"><%="add".equals(request.getParameter("error")) ? "Thêm không thành công" : ""%></p>
 
 
-		<form action="/Book/admin/addUser" method="post">
-
+		<form action="${pageContext.request.contextPath}/admin/user" method="post">
+<input type="hidden" name="action" value="add" />
 			<div class="form-group">
 				<label for="text-input" class=" form-control-label">Họ tên </label>
 				<input type="text" name="name" id="nameUser" placeholder="Họ Tên"

@@ -6,6 +6,7 @@
     <meta name="description" content="au theme template">
     <meta name="author" content="nvb">
     <meta name="keywords" content="au theme template">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
     <!-- Title Page-->
     <title>Bài tập lớn nhóm 12 lập trình web</title>

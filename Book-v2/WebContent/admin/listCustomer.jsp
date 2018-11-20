@@ -49,8 +49,8 @@ ArrayList<User> users = (ArrayList) request.getAttribute("users");
 
 			</p>
 
-			<form action="/Book/admin/listCustomer" method="get">
-
+			<form action="/Book/admin/customer" method="get">
+<input name="action" type="hidden" value="list"/>
 				<div class="row seach-content">
 					<div class="col-md-3 form-group">
 						<input name="name"  value="<%= (request.getParameter("name") == "" || request.getParameter("name") == null) ? "" : request.getParameter("name") %>" class="form-control-sm form-control" placeholder="Nhập tên">
@@ -110,7 +110,7 @@ ArrayList<User> users = (ArrayList) request.getAttribute("users");
 						</td>
 						<td>
 							<div class="table-data-feature">
-								</a> <a href="deleteUser?id=<%=u.getId()%>&type=customer" class="item tooltip">
+								</a> <a href="${pageContext.request.contextPath}/admin/customer?action=delete&id=<%=u.getId()%>&type=customer" class="item tooltip">
 									<i class="fa fa-recycle"></i>
 									<span class="tooltiptext">Xóa khách hàng</span>
 								</a>

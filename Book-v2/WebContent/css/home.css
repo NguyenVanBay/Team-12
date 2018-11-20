@@ -3,12 +3,13 @@
 }
 
 .img-product {
-    min-height: 63%;
+    min-height: 280px;
 }
 
 ul#nav {
     display: flex;
     font-size: 1.1rem;
+    width: 100%;
 }
 
 .account-area li {
@@ -22,6 +23,8 @@ ul#nav {
 .quangcao {
     display: flex;
     margin-bottom: 15px;
+    justify-content: center;
+    padding: 25px 0px;
 }
 
 .quangcao img {
