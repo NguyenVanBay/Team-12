@@ -16,19 +16,16 @@
 <meta charset="UTF-8">
 <jsp:include page="include/head.jsp"></jsp:include>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/home.css">
 <style>
-
 #nav {
-        margin-right: 40px;
-        }
-        
-        <style>
+	margin-right: 40px;
+}
 
-.mySlides1 {
-
+<
+style>.mySlides1 {
 	display: block;
-
 }
 </style>
 </head>
@@ -40,7 +37,7 @@
 	<!-- end menu top -->
 
 	<h3
-		style="text-align: center; color: red; font-size: 25px; margin-top: 10px;">
+		style="text-align: center; color: red; font-size: 25px;">
 		<%
 			String checkout = (request.getParameter("checkout") == null) ? "" : request.getParameter("checkout");
 
@@ -55,7 +52,9 @@
 	<jsp:include page="include/infomation.jsp"></jsp:include>
 	<!-- end infomation -->
 
-
+	<!-- slider area -->
+	<jsp:include page="include/menu.jsp"></jsp:include>
+	<!-- end slide-area -->
 
 	<div class="container">
 
@@ -73,12 +72,6 @@
 			<jsp:include page="include/slide.jsp"></jsp:include>
 			<!-- end slide-area -->
 
-
-			<!-- slider area -->
-			<jsp:include page="include/menu.jsp"></jsp:include>
-			<!-- end slide-area -->
-
-
 			<div class="banchay">
 
 				<h3>Sản phẩm nổi bật</h3>
@@ -87,15 +80,38 @@
 					for (Product p : products) {
 						if (p.getType().equals("hot")) {
 				%>
-				<div class="product view view-first">
-					<div class="img-product">
-						<img src="${pageContext.request.contextPath}/admin/upload/<%= p.getThumbnail().getName() %>" alt="">
+				<div class="product ">
+					<div class="img-product view">
+						<img class="image"
+							src="${pageContext.request.contextPath}/admin/upload/<%= p.getThumbnail().getName() %>"
+							alt="">
+						<div class="overlay">
+							<a
+								href="${pageContext.request.contextPath}/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">
+								<div class="text">
+									<p>
+										<%
+											String title = p.getTitle();
+													int maxLength = (title.length() < 250) ? title.length() : 250;
+													String newtitle = title.substring(0, maxLength);
+
+													out.print(newtitle + " ...");
+										%>
+									</p>
+									<p
+										style="color: white; font-size: 15px; text-transform: uppercase; margin-top: 31px;"><%="Tác giả : " + p.getAuthor()%></p>
+								</div>
+							</a>
+						</div>
 					</div>
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<a href="${pageContext.request.contextPath}/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi tiết</a>
-							<form action="${pageContext.request.contextPath}/cart" method="post">
+							<a
+								href="${pageContext.request.contextPath}/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi
+								tiết</a>
+							<form action="${pageContext.request.contextPath}/cart"
+								method="post">
 								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Mua</button>
@@ -124,15 +140,38 @@
 					for (Product p : products) {
 						if (p.getType().equals("new")) {
 				%>
-				<div class="product view view-first">
-					<div class="img-product">
-						<img src="${pageContext.request.contextPath}/admin/upload/<%= p.getThumbnail().getName() %>" alt="">
+				<div class="product ">
+					<div class="img-product view">
+						<img class="image"
+							src="${pageContext.request.contextPath}/admin/upload/<%= p.getThumbnail().getName() %>"
+							alt="">
+						<div class="overlay">
+							<a
+								href="${pageContext.request.contextPath}/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">
+								<div class="text">
+									<p>
+										<%
+											String title = p.getTitle();
+													int maxLength = (title.length() < 250) ? title.length() : 250;
+													String newtitle = title.substring(0, maxLength);
+
+													out.print(newtitle + " ...");
+										%>
+									</p>
+									<p
+										style="color: white; font-size: 15px; text-transform: uppercase; margin-top: 31px;"><%="Tác giả : " + p.getAuthor()%></p>
+								</div>
+							</a>
+						</div>
 					</div>
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<a href="${pageContext.request.contextPath}/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi tiết</a>
-							<form action="${pageContext.request.contextPath}/cart" method="post">
+							<a
+								href="${pageContext.request.contextPath}/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi
+								tiết</a>
+							<form action="${pageContext.request.contextPath}/cart"
+								method="post">
 								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Mua</button>
@@ -161,15 +200,38 @@
 					for (Product p : products) {
 						if (p.getType().equals("sellMultiple")) {
 				%>
-				<div class="product view view-first">
-					<div class="img-product">
-						<img src="${pageContext.request.contextPath}/admin/upload/<%= p.getThumbnail().getName() %>" alt="">
+				<div class="product ">
+					<div class="img-product view">
+						<img class="image"
+							src="${pageContext.request.contextPath}/admin/upload/<%= p.getThumbnail().getName() %>"
+							alt="">
+						<div class="overlay">
+							<a
+								href="${pageContext.request.contextPath}/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">
+								<div class="text">
+									<p>
+										<%
+											String title = p.getTitle();
+													int maxLength = (title.length() < 250) ? title.length() : 250;
+													String newtitle = title.substring(0, maxLength);
+
+													out.print(newtitle + " ...");
+										%>
+									</p>
+									<p
+										style="color: white; font-size: 15px; text-transform: uppercase; margin-top: 31px;"><%="Tác giả : " + p.getAuthor()%></p>
+								</div>
+							</a>
+						</div>
 					</div>
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<a href="${pageContext.request.contextPath}/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi tiết</a>
-							<form action="${pageContext.request.contextPath}/cart" method="post">
+							<a
+								href="${pageContext.request.contextPath}/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi
+								tiết</a>
+							<form action="${pageContext.request.contextPath}/cart"
+								method="post">
 								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Mua</button>

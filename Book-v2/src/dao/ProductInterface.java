@@ -15,4 +15,5 @@ public interface ProductInterface {
 	public ArrayList<Product> getWhereInClient(String name, String author, String priceFrom, String priceTo,
 			String publicFrom, String publicTo);
 	public boolean insertProduct(Product p);
+	public boolean updateCount(Long idProduct, Long count);
 }

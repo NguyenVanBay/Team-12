@@ -95,12 +95,12 @@
 			</div>
 
 			<%
-				SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY");
+				SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd");
 			%>
 
 			<div class="form-group">
 				<label for="text-input" class=" form-control-label">Thời
-					gian xuất bản</label> <input type="date" id="text-input" name="publicAt"
+					gian xuất bản</label> <input type="date" name="publicAt"
 					value="<%=format.format(product.getPublicAt())%>"
 					placeholder="Giá tiền" class="form-control">
 

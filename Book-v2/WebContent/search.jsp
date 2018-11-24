@@ -24,8 +24,10 @@
 
 <jsp:include page="include/head.jsp"></jsp:include>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/search.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/home.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/search.css">
 
 </head>
 
@@ -70,15 +72,36 @@
 				<%
 					for (Product p : products) {
 				%>
-				<div class="product view view-first">
-					<div class="img-product">
-						<img src="${pageContext.request.contextPath}/admin/upload/<%= p.getThumbnail().getName() %>" alt="">
+				<div class="product ">
+					<div class="img-product view">
+						<img class="image"
+							src="${pageContext.request.contextPath}/admin/upload/<%= p.getThumbnail().getName() %>"
+							alt="">
+						<div class="overlay">
+						<a
+								href="${pageContext.request.contextPath}/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">
+							<div class="text"><p><%
+								String title = p.getTitle();
+								int maxLength = (title.length() < 250)?title.length():250;
+								String newtitle = title.substring(0, maxLength);
+								
+						out.print(newtitle + " ...");
+								
+								%></p>
+								<p
+									style="color: white; font-size: 15px; text-transform: uppercase; margin-top: 31px;"><%="Tác giả : " + p.getAuthor()%></p>
+							</div>
+							</a>
+						</div>
 					</div>
 					<div class="detail-product">
 						<p><%=p.getName()%></p>
 						<div class="btn-select">
-							<a href="${pageContext.request.contextPath}/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi tiết</a>
-							<form action="/Book/cart" method="post">
+							<a
+								href="${pageContext.request.contextPath}/chi-tiet/<%= p.getUrl() %>-<%=p.getId()%>">Chi
+								tiết</a>
+							<form action="${pageContext.request.contextPath}/cart"
+								method="post">
 								<input type="hidden" name="command" value="plus" /> <input
 									type="hidden" name="productId" value="<%=p.getId()%>" />
 								<button type="submit">Mua</button>
@@ -95,7 +118,8 @@
 			</div>
 
 			<div class="quangcao">
-				<img src="${pageContext.request.contextPath}/img/vanphong1.png" alt=""> <img
+				<img src="${pageContext.request.contextPath}/img/vanphong1.png"
+					alt=""> <img
 					src="${pageContext.request.contextPath}/img/vanphong2.jpg" alt="">
 			</div>
 		</div>
@@ -194,7 +218,8 @@
 				</p>
 			</div>
 			<div class="payment-img text-right">
-				<a href="#"><img src="${pageContext.request.contextPath}/img/1.png" alt="payment"></a>
+				<a href="#"><img
+					src="${pageContext.request.contextPath}/img/1.png" alt="payment"></a>
 			</div>
 		</div>
 		<!-- end footer-bottom -->
