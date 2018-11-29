@@ -3,11 +3,6 @@
 		padding: 0px;
 		margin: 0px;
 	}
-	
-	nav#menu-sidebar {
-    display: none;
-}
-
 	#nav>li {
 		list-style-type: none;
 	}
@@ -184,12 +179,4 @@
 	ul#nav-sidebar li {
 		background: #fff;
 	}
-	
-	.img-product {
-    min-height: 570px !important;
-}
-
-.product.view.view-first {
-    margin-bottom: 38px !important;
-}
 }

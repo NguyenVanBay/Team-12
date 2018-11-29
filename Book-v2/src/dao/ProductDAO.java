@@ -252,64 +252,6 @@ public class ProductDAO implements ProductInterface {
 		}
 		return allProduct;
 	}
-	
-	public ArrayList<Product> getProductBySQL(String sql) {
-
-
-		ArrayList<Product> allProduct = new ArrayList<>();
-		ArrayList<Long> allCategory = new ArrayList<>();
-
-			Connection connection = DBConnect.getConnection();
-			PreparedStatement ps;
-			try {
-				ps = connection.prepareCall(sql);
-				
-				ResultSet rs = ps.executeQuery();
-
-				while (rs.next()) {
-					Product p = new Product();
-					p.setId(rs.getLong("id"));
-					p.setName(rs.getString("name"));
-					p.setAuthor(rs.getString("author"));
-					p.setPublicAt(rs.getTimestamp("public"));
-					p.setCount(rs.getLong("count"));
-					p.setPrice(rs.getDouble("price"));
-					p.setTitle(rs.getString("title"));
-					p.setDescription(rs.getString("description"));
-					p.setType(rs.getString("type"));
-					p.setUrl(rs.getString("url"));
-					allProduct.add(p);
-					allCategory.add(rs.getLong("id_category"));
-					
-				}
-				connection.close();
-				
-				for (int i = 0; i < allCategory.size(); i++) {
-
-					Product p = allProduct.get(i);
-					
-					Category category = new CategoryDAO().getCategoryById(allCategory.get(i));
-					ArrayList<Image> listImage = new ImageDAO().getImageByProductIdAndType(p.getId(), 2);
-					
-					Image imagesThumbnail = new Image();
-					
-					for (Image image : new ImageDAO().getImageByProductIdAndType(p.getId(), 1)) {
-						p.setThumbnail(image);
-						imagesThumbnail = image;
-					}
-				
-					p.setCategory(category);
-					p.setListImage(listImage);
-					p.setThumbnail(imagesThumbnail);
-									
-					allProduct.set(i, p);
-				}
-				
-			} catch (SQLException e) {
-			}
-		return allProduct;
-	}
-	
 
 	public void deleteById(Long id) {
 		
@@ -480,23 +422,5 @@ public class ProductDAO implements ProductInterface {
 			Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return allProduct;
-	}
-
-	@Override
-	public boolean updateCount(Long idProduct, Long count) {
-		
-		Connection connection = DBConnect.getConnection();
-		String sql = "UPDATE products set count = ?  WHERE id = ?";
-		try {
-			PreparedStatement ps = connection.prepareCall(sql);
-			ps.setLong(1, count);
-			ps.setLong(2, idProduct);
-			ps.executeUpdate();
-			connection.close();
-			return true;
-		} catch (SQLException ex) {
-			System.out.println("update so luong sp khong thanh cong.");
-		}
-		return false;
 	}
 }

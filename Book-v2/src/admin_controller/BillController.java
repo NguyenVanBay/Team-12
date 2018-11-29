@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.BillDAO;
-import dao.ProductDAO;
 import model.Bill;
-import model.BillDetail;
 import model.User;
 
 public class BillController extends HttpServlet {
@@ -25,7 +23,7 @@ public class BillController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		HttpSession session = request.getSession();
 
 		request.setCharacterEncoding("UTF-8");
@@ -129,11 +127,6 @@ public class BillController extends HttpServlet {
 
 					Bill b = new BillDAO().getBillById(id);
 					b.setStatus(status);
-					
-					for (BillDetail billDetail : b.getListBillDetail()) {
-						System.out.println("so luong " + (billDetail.getProduct().getCount() - billDetail.getCount()));
-						new ProductDAO().updateCount(billDetail.getProduct().getId(), billDetail.getProduct().getCount() - billDetail.getCount());
-					}
 
 					new BillDAO().editBill(b);
 

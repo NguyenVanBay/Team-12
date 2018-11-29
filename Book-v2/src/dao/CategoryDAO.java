@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 
 import connect.DBConnect;
 import model.Category;
-import model.Product;
 
 /**
  *
@@ -106,16 +105,6 @@ public class CategoryDAO implements CategoryInterface {
 				allCategory.add(c);
 			}
 			connection.close();
-			
-			int i = 0;
-			for (Category c : allCategory) {	
-				Category tempc = c;
-				ArrayList<Product> listProduct = new ProductDAO().getProductBySQL("SELECT * FROM products WHERE id_category = " + c.getId() + " ORDER BY price DESC Limit 10");		
-				c.setListProduct(listProduct);
-				allCategory.set(i, tempc);
-				i++;
-			}	
-			
 			return allCategory;
 		} catch (SQLException ex) {
 			Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -165,10 +154,5 @@ public class CategoryDAO implements CategoryInterface {
 			Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return allCategory;
-	}
-	
-	public static void main(String[] args) {
-		ArrayList<Category> listProduct = new CategoryDAO().getAll();
-	
 	}
 }

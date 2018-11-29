@@ -41,7 +41,6 @@
 		<param-name>contextPath</param-name>
 		<param-value>http://localhost:8080/Book/</param-value>
 	</context-param>
-	
 	<servlet>
 		<servlet-name>UserController</servlet-name>
 		<servlet-class>admin_controller.UserController</servlet-class>

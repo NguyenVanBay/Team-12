@@ -97,7 +97,7 @@
 
 				<div class="details">
 					<h3><%=product.getName()%></h3>
-					<a href=""><%=product.getCategory().getName()%> : Tác giả <%= product.getAuthor() %></a>
+					<a href=""><%=product.getCategory().getName()%></a>
 					<p><%=product.getPrice()%>
 						VND
 					</p>
