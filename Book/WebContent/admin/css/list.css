@@ -1,0 +1,65 @@
+* {
+
+}
+
+.form-group {
+    width: 20%;
+    margin-right: 5px;
+    margin-top: 28px;
+    position: relative;
+}
+
+.seach-content button {
+    background: #fff;
+    border: none;
+    padding: 3px 6px;
+    color: #00c292;
+}
+
+.top a {
+    text-decoration: none;
+    color: #00c292;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    color: #00c292;
+    text-transform: uppercase;
+}
+
+.form-group label {
+    width: 10%;
+    display: inline-block;
+}
+
+.form-group input {
+    width: 50%;
+}
+
+.form-group label, .form-group input, .form-group select , .form-group button {
+    height: 25px;
+    line-height: 25px;
+    padding: 0px 19px;
+}
+
+.card-footer button {
+    border: none;
+    background: #00c292;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 2px;
+}
+
+.card-footer {
+    margin: 20px 0px;
+}
+
+.container h3 {
+    font-size: 20px;
+    color: #00c292;
+}
+
+.container form {
+    padding: 20px 0px;
+}

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <display-name>Book</display-name>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error.jsp</location>
+  </error-page>
+  <servlet>
+    <servlet-name>HomeController</servlet-name>
+    <servlet-class>home.HomeController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomeController</servlet-name>
+    <url-pattern></url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>DasboardController</servlet-name>
+    <servlet-class>admin.DasboardController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DasboardController</servlet-name>
+    <url-pattern>/admin/dasboard</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DetailProduct</servlet-name>
+    <servlet-class>home.DetailProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailProduct</servlet-name>
+    <url-pattern>/chi-tiet/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Search</servlet-name>
+    <servlet-class>home.SearchController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Search</servlet-name>
+    <url-pattern>/tim-kiem/*</url-pattern>
+  </servlet-mapping>
+  <context-param>
+    <param-name>contextPath</param-name>
+    <param-value>http://localhost:8088/Book/</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>UserController</servlet-name>
+    <servlet-class>admin.UserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserController</servlet-name>
+    <url-pattern>/admin/user</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CustomerController</servlet-name>
+    <servlet-class>admin.CustomerController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomerController</servlet-name>
+    <url-pattern>/admin/customer</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>list user jsp</servlet-name>
+    <jsp-file>/admin/listUser.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>list user jsp</servlet-name>
+    <url-pattern>/admin/danh-sach-nguoi-dung</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>add user jsp</servlet-name>
+    <jsp-file>/admin/addUser.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>add user jsp</servlet-name>
+    <url-pattern>/admin/them-nguoi-dung</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>sua user jsp</servlet-name>
+    <jsp-file>/admin/editUser.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sua user jsp</servlet-name>
+    <url-pattern>/admin/sua-nguoi-dung</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CategoryController</servlet-name>
+    <servlet-class>admin.CategoryController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CategoryController</servlet-name>
+    <url-pattern>/admin/category</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>danh sach the loai jsp</servlet-name>
+    <jsp-file>/admin/listCategory.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>danh sach the loai jsp</servlet-name>
+    <url-pattern>/admin/danh-sach-the-loai</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>them the loai jsp</servlet-name>
+    <jsp-file>/admin/addCategory.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>them the loai jsp</servlet-name>
+    <url-pattern>/admin/them-the-loai</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>sua the loai jsp</servlet-name>
+    <jsp-file>/admin/editCategory.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sua the loai jsp</servlet-name>
+    <url-pattern>/admin/sua-the-loai</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ProductController</servlet-name>
+    <servlet-class>admin.ProductController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductController</servlet-name>
+    <url-pattern>/admin/product</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>danh sach san pham jsp</servlet-name>
+    <jsp-file>/admin/listProduct.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>danh sach san pham jsp</servlet-name>
+    <url-pattern>/admin/danh-sach-san-pham</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>them san pham jsp</servlet-name>
+    <jsp-file>/admin/addProduct.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>them san pham jsp</servlet-name>
+    <url-pattern>/admin/them-san-pham</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>sua san pham jsp</servlet-name>
+    <jsp-file>/admin/editProduct.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sua san pham jsp</servlet-name>
+    <url-pattern>/admin/sua-san-pham</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>BillController</servlet-name>
+    <servlet-class>admin.BillController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BillController</servlet-name>
+    <url-pattern>/admin/bill</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>danh sach don hang jsp</servlet-name>
+    <jsp-file>/admin/listBill.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>danh sach don hang jsp</servlet-name>
+    <url-pattern>/admin/danh-sach-don-hang</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>sua don hang jsp</servlet-name>
+    <jsp-file>/admin/editBill.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sua don hang jsp</servlet-name>
+    <url-pattern>/admin/sua-don-hang</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>chi tiet don hang jsp</servlet-name>
+    <jsp-file>/admin/detailBill.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>chi tiet don hang jsp</servlet-name>
+    <url-pattern>/admin/chi-tiet-don-hang</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>tin tuc</servlet-name>
+    <jsp-file>/tintuc.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>tin tuc</servlet-name>
+    <url-pattern>/tin-tuc-trong-ngay</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>gioi thieu</servlet-name>
+    <jsp-file>/gioithieu.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>gioi thieu</servlet-name>
+    <url-pattern>/gioi-thieu-trang-web</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>su kien</servlet-name>
+    <jsp-file>/sukien.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>su kien</servlet-name>
+    <url-pattern>/su-kien-cua-hang</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>60</session-timeout>
+  </session-config>
+</web-app>
