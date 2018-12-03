@@ -25,145 +25,131 @@ public class BillController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		HttpSession session = request.getSession();
+
+		RequestDispatcher rd;
+		if (check(request, response, session) == 0)
+			return;
 
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
 
 		String action = request.getParameter("action");
+		Long id;
+		Bill bill;
 
-		// danh sach đơn hàng.
-		if (action.equals("list")) {
-			if (null == session.getAttribute("email")) {
-				// User is not logged in.
-				response.sendRedirect("/Book/admin/Login");
+		switch (action) {
+
+		// xem danh đơn hàng.
+		case "list":
+
+			ArrayList<Bill> bills = new ArrayList<>();
+			String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? ""
+					: request.getParameter("name");
+			String address = (request.getParameter("address") == null || request.getParameter("address") == "") ? ""
+					: request.getParameter("address");
+			String phone = (request.getParameter("phone") == null || request.getParameter("phone") == "") ? ""
+					: request.getParameter("phone");
+			String sumFrom = (request.getParameter("sumFrom") == null || request.getParameter("sumFrom") == "") ? ""
+					: request.getParameter("sumFrom");
+			String sumTo = (request.getParameter("sumTo") == null || request.getParameter("sumTo") == "") ? ""
+					: request.getParameter("sumTo");
+			String createFrom = (request.getParameter("createFrom") == null || request.getParameter("createFrom") == "")
+					? ""
+					: request.getParameter("createFrom");
+			String createTo = (request.getParameter("createTo") == null || request.getParameter("createTo") == "") ? ""
+					: request.getParameter("createTo");
+
+			// hiển thị sản phẩm.
+			if (name != "" || address != "" || phone != "" || sumFrom != "" || sumTo != "" || createFrom != ""
+					|| createTo != "") {
+				bills = new BillDAO().getWhere(name, address, phone, sumFrom, sumTo, createFrom, createTo);
 			} else {
+				bills = new BillDAO().getAll();
+			}
 
-				String roleAdmin = (String) session.getAttribute("role");
+			request.setAttribute("bills", bills);
+			rd = getServletContext().getRequestDispatcher("/admin/danh-sach-don-hang");
+			rd.forward(request, response);
+			return;
 
-				if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYKHO)) {
+		// tạo hóa đơn xuất sản phẩm.
+		case "add":
+			id = Long.parseLong(request.getParameter("id"));
+			bill = new BillDAO().getBillById(id);
+			request.setAttribute("bill", bill);
+			rd = getServletContext().getRequestDispatcher("/admin/createBill.jsp");
+			rd.forward(request, response);
+			return;
 
-					ArrayList<Bill> bills = new  ArrayList<>();
+		// xem chi tiết đơn hàng.
+		case "detail":
 
-					String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? ""
-							: request.getParameter("name");
-					String address = (request.getParameter("address") == null || request.getParameter("address") == "") ? ""
-							: request.getParameter("address");
-					String phone = (request.getParameter("phone") == null || request.getParameter("phone") == "") ? ""
-							: request.getParameter("phone");
-					String sumFrom = (request.getParameter("sumFrom") == null || request.getParameter("sumFrom") == "") ? ""
-							: request.getParameter("sumFrom");
-					String sumTo = (request.getParameter("sumTo") == null || request.getParameter("sumTo") == "") ? ""
-							: request.getParameter("sumTo");	
-					String createFrom = (request.getParameter("createFrom") == null || request.getParameter("createFrom") == "") ? ""
-							: request.getParameter("createFrom");
-					String createTo = (request.getParameter("createTo") == null || request.getParameter("createTo") == "") ? ""
-							: request.getParameter("createTo");
+			id = Long.parseLong(request.getParameter("id"));
+			bill = new BillDAO().getBillById(id);
+			request.setAttribute("bill", bill);
+			rd = getServletContext().getRequestDispatcher("/admin/chi-tiet-don-hang");
+			rd.forward(request, response);
+			return;
 
-					if (name != "" || address != "" || phone != "" || sumFrom != "" || sumTo != "" || createFrom != "" || createTo != "") {
-						bills = new BillDAO().getWhere(name, address, phone, sumFrom, sumTo, createFrom, createTo);
-					} else {
-						bills = new BillDAO().getAll();
-					}
+		// sửa đơn hàng.
+		case "edit":
 
-					request.setAttribute("bills", bills);
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/danh-sach-don-hang");
-					rd.forward(request, response);
+			id = Long.parseLong(request.getParameter("id"));
+			Long status = Long.parseLong(request.getParameter("status"));
 
-				} else {
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
-					rd.forward(request, response);
+			Bill b = new BillDAO().getBillById(id);
+			b.setStatus(status);
+
+			// nếu là bắt đầu giao hàng thì sản phẩm trong kho phải trử đi.
+			if (status == Bill.DANGGIAODON) {
+				for (BillDetail billDetail : b.getListBillDetail()) {
+					System.out.println("so luong tru " + (billDetail.getProduct().getCount() - billDetail.getCount()));
+					new ProductDAO().updateCount(billDetail.getProduct().getId(),
+							billDetail.getProduct().getCount() - billDetail.getCount());
 				}
 			}
-			
-			// hiển thị form tạo đơn hàng admin
-		} else if (action.equals("add")) {
-			if (null == session.getAttribute("email")) {
-				// User is not logged in.
-				response.sendRedirect("/Book/admin/Login");
-			} else {
-				
-				Long id = Long.parseLong(request.getParameter("id"));
-				
-				Bill bill = new BillDAO().getBillById(id);
-				
-				request.setAttribute("bill", bill);
 
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/createBill.jsp");
-				rd.forward(request, response);
-			}
-			
-			// hiển thị chi tiết đơn hàng admin
-		} else if (action.equals("detail")) {
-		
-			if (null == session.getAttribute("email")) {
-				// User is not logged in.
-				response.sendRedirect("/Book/admin/Login");
-			} else {
-
-				String roleAdmin = (String) session.getAttribute("role");
-
-				if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYKHO)) {
-
-					Long id = Long.parseLong(request.getParameter("id"));
-
-					Bill bill = new BillDAO().getBillById(id);
-
-					request.setAttribute("bill", bill);
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/chi-tiet-don-hang");
-					rd.forward(request, response);
-
-				} else {
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
-					rd.forward(request, response);
-				}
-
-			}
-			// sửa đơn hàng admin
-		} else if(action.equals("edit")) {
-			if (null == session.getAttribute("email")) {
-				// User is not logged in.
-				response.sendRedirect("/Book/admin/Login");
-			} else {
-				String roleAdmin = (String) session.getAttribute("role");
-
-				if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYKHO)) {
-
-					Long id = Long.parseLong(request.getParameter("id"));
-					Long status = Long.parseLong(request.getParameter("status"));
-
-					Bill b = new BillDAO().getBillById(id);
-					b.setStatus(status);
-					
-					// nếu là bắt đầu giao hàng thì sản phẩm trong kho phải trử đi.
-					if(status == Bill.DANGGIAODON) {
-						for (BillDetail billDetail : b.getListBillDetail()) {
-							System.out.println("so luong tru " + (billDetail.getProduct().getCount() - billDetail.getCount()));
-							new ProductDAO().updateCount(billDetail.getProduct().getId(), billDetail.getProduct().getCount() - billDetail.getCount());
-						}
-					}
-					
-					// nếu khách hàng trả lại hàng thì số lượng sản phẩm phải tăng lên.
-					if(status == Bill.HUYDON) {
-						for (BillDetail billDetail : b.getListBillDetail()) {
-							System.out.println("so luong them " + (billDetail.getProduct().getCount() + billDetail.getCount()));
-							new ProductDAO().updateCount(billDetail.getProduct().getId(), billDetail.getProduct().getCount() + billDetail.getCount());
-						}
-					}
-					
-
-					new BillDAO().editBill(b);
-
-					response.sendRedirect("/Book/admin/bill?action=list");
-
-				} else {
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
-					rd.forward(request, response);
+			// nếu khách hàng trả lại hàng thì số lượng sản phẩm phải tăng lên.
+			if (status == Bill.HUYDON) {
+				for (BillDetail billDetail : b.getListBillDetail()) {
+					System.out.println("so luong them " + (billDetail.getProduct().getCount() + billDetail.getCount()));
+					new ProductDAO().updateCount(billDetail.getProduct().getId(),
+							billDetail.getProduct().getCount() + billDetail.getCount());
 				}
 			}
-		}	
+
+			new BillDAO().editBill(b);
+			response.sendRedirect(this.getServletContext().getInitParameter("contextPath") + "admin/bill?action=list");
+			return;
+		default:
+			break;
+		}
+		rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+		rd.forward(request, response);
+		return;
+	}
+
+	private int check(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws IOException, ServletException {
+		// check login.
+		if (null == session.getAttribute("email")) {
+			// User is not logged in.
+			response.sendRedirect(this.getServletContext().getInitParameter("contextPath") + "admin/Login");
+			return 0;
+		}
+
+		RequestDispatcher rd;
+		String roleAdmin = (String) session.getAttribute("role");
+		// quản trị có quyền amdin và quản lý khó ms có quyền xem.
+		if (!roleAdmin.equals("" + User.GIAMDOC) && !roleAdmin.equals("" + User.QUANLYKHO)) {
+			rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+			rd.forward(request, response);
+			return 0;
+		}
+		return 1;
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

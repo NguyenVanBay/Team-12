@@ -65,7 +65,7 @@
 
 
 					<div class="form-group">
-						<button type="submit">Đăng nhập</button>
+						<button style="color: #fff; background-color: red; padding: 5px;" type="submit">Đăng nhập</button>
 					</div>
 
 				</div>
@@ -152,7 +152,7 @@
 						<p id="address-rg" class="er-red"></p>
 					</div>
 					<div class="form-group">
-						<button type="submit">Đăng kí</button>
+						<button style="color: #fff; background-color: red; padding: 5px;" type="submit">Đăng kí</button>
 					</div>
 				</div>
 			</form>

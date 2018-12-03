@@ -100,7 +100,7 @@ ArrayList<User> users = (ArrayList) request.getAttribute("users");
 						</td>
 						<td>
 							<div class="table-data-feature">
-								</a> <a href="${pageContext.request.contextPath}/admin/customer?action=delete&id=<%=u.getId()%>&type=customer" class="item tooltip">
+								</a> <a href="${pageContext.request.contextPath}/admin/customer?action=delete&id=<%=u.getId()%>&type=customer" onclick="return confirm('Bạn có muốn thực sự muốn xoá không')" class="item tooltip">
 									<i class="fa fa-recycle"></i>
 									<span class="tooltiptext">Xóa khách hàng</span>
 								</a>

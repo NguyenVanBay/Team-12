@@ -50,6 +50,7 @@ public class SearchController extends HttpServlet {
 			id = "";
 		}
 
+		// get Param
 		String name = (request.getParameter("name") == null) ? "" : request.getParameter("name");
 		String author = (request.getParameter("author") == null) ? "" : request.getParameter("author");
 		String priceFrom = (request.getParameter("priceFrom") == null) ? "" : request.getParameter("priceFrom");
@@ -57,6 +58,7 @@ public class SearchController extends HttpServlet {
 		String publicFrom = (request.getParameter("publicFrom") == null) ? "" : request.getParameter("publicFrom");
 		String publicTo = (request.getParameter("publicTo") == null) ? "" : request.getParameter("publicTo");
 
+		// tìm theo thể loại.
 		if (id != "") {
 
 			// category.
@@ -66,6 +68,7 @@ public class SearchController extends HttpServlet {
 			ArrayList<Product> products = new ProductDAO().getProductByCategoryId(Long.parseLong(id));
 			request.setAttribute("products", products);
 
+		// tìm theo tham số khác.
 		} else {
 
 			Category category = new Category();
@@ -89,8 +92,6 @@ public class SearchController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

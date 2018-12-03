@@ -81,7 +81,7 @@
 								<a href="${pageContext.request.contextPath}/admin/category?action=edit&id=<%=c.getId()%>" class="item tooltip">
 									<i class="fa fa-pencil-square"></i> <span class="tooltiptext">Sửa
 										thể loại</span>
-								</a> <a href="${pageContext.request.contextPath}/admin/category?action=delete&id=<%=c.getId()%>" class="item tooltip">
+								</a> <a href="${pageContext.request.contextPath}/admin/category?action=delete&id=<%=c.getId()%>" onclick="return confirm('Bạn có muốn thực sự muốn xoá không')"  class="item tooltip">
 									<i class="fa fa-recycle"></i> <span class="tooltiptext">Xóa
 										thể loại</span>
 								</a>

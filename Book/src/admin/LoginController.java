@@ -3,7 +3,6 @@ package admin;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,6 +43,7 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+		// get param.
 		String type = request.getParameter("type");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -51,40 +51,33 @@ public class LoginController extends HttpServlet {
 			password = MD5.encryption(password);
 		}
 
-		ServletContext context = getServletContext();
-		String url = context.getInitParameter("contextPath");
+		String url = this.getServletContext().getInitParameter("contextPath");
 
 		HttpSession session = request.getSession();
 
-		if (type.equals("login")) {
+		switch (type) {
+		case "login":
 			if (new UserDAO().loginAdmin(email, password) == null) {
-
 				response.sendRedirect(url + "admin/Login?error=login");
-
 			} else {
 
 				User u = new UserDAO().loginAdmin(email, password);
-
 				session.setAttribute("idAdmin", u.getId());
 				session.setAttribute("email", email);
 				session.setAttribute("password", password);
 				session.setAttribute("userName", u.getName());
 				session.setAttribute("role", u.getRole().toString());
-
 				response.sendRedirect(url + "admin/dasboard");
 			}
-
-		} else {
-
+			return;
+		default:
 			session.removeAttribute("idAdmin");
 			session.removeAttribute("email");
 			session.removeAttribute("password");
 			session.removeAttribute("userName");
 			session.removeAttribute("role");
-
 			response.sendRedirect(url + "admin/Login");
 		}
-
+		return;
 	}
-
 }

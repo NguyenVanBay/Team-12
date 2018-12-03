@@ -12,6 +12,7 @@
 <%@ page import="java.util.*"%>
 
 <%
+	ArrayList<Product> listProductSugerencias = (ArrayList) request.getAttribute("listProductSugerencias");
 	User user = (User) request.getAttribute("user");
 %>
 
@@ -61,6 +62,35 @@
 
 				<button type="submit">CheckOut</button>
 			</form>
+
+		</div>
+		
+		<div class="spTuongTu">
+
+			<h3 style="margin-bottom: 20px; text-transform: uppercase;">Sản
+				phẩm tương tự</h3>
+
+			<%
+				for (Product product : listProductSugerencias) {
+			%>
+			<div class="product">
+
+				<div class="detail-product"
+					style="overflow: hidden; margin-bottom: 20px;">
+					<img style="width: 100px; float: left; margin-right: 20px;"
+						src="${pageContext.request.contextPath}/admin/upload/<%= product.getThumbnail().getName() %>"
+						alt=""><a
+						href="${pageContext.request.contextPath}/chi-tiet/<%= product.getUrl() + "-" + product.getId() %>">Chi
+						tiết</a>
+					<p><%=product.getPrice()%>
+						VND
+					</p>
+					<p><%=product.getName()%></p>
+				</div>
+			</div>
+			<%
+				}
+			%>
 
 		</div>
 

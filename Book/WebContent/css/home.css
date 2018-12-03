@@ -14,13 +14,13 @@
 		display: block;
 		position: absolute;
 		top: 0px;
-		left: 372px;
+		left: 282px;
 		width: 900px;
 		background: #ffff;
 		margin: 0px 0px 20px -20px;
 		height: 452px;
 		z-index: 1000;
-		border: 2px solid #ff9800 !important;
+		border-left: 5px solid #f5f5f5 !important;
 	}
 	ul#submenuCategory {
 		display: none;
@@ -28,7 +28,7 @@
 }
 
 .img-product {
-	min-height: 302px;
+	min-height: 211px;
 }
 
 ul#nav {
@@ -107,7 +107,7 @@ a.btn-seach {
 	width: 20%;
 	float: left;
 	text-align: center;
-	min-height: 450px;
+	min-height: 360px;
 }
 
 .detail-product {

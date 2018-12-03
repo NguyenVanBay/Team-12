@@ -28,7 +28,7 @@ public class DetailProduct extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Long id = (long)0;
+		long id = 0;
 		
 		// Sử lý chuỗi để lây id sản phẩm.
 		String pathInfo = request.getRequestURL().toString();
@@ -40,7 +40,7 @@ public class DetailProduct extends HttpServlet {
 		try {
 			id = Long.parseLong(paths[paths.length - 1]);
 		} catch (Exception e) {
-			
+			System.out.println("Lỗi xem chi tiết.");
 		}
 
 		// get Product.
@@ -52,7 +52,6 @@ public class DetailProduct extends HttpServlet {
 		request.setAttribute("categorys", allCategory);
 
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/detailProduct.jsp");
-
 		rd.forward(request, response);
 	}
 
@@ -62,8 +61,7 @@ public class DetailProduct extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }

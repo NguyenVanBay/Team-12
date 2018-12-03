@@ -42,9 +42,10 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// get utf-8
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		
+
 		// get all category.
 		ArrayList<Product> allProduct = null;
 		allProduct = new ProductDAO().getAll();
@@ -54,6 +55,7 @@ public class LoginController extends HttpServlet {
 		ArrayList<Category> allCategory = new CategoryDAO().getAll();
 		request.setAttribute("categorys", allCategory);
 
+		// redirec page.
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
 		rd.forward(request, response);
 	}
@@ -65,87 +67,103 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+		// get ufl-8
 		request.setCharacterEncoding("UTF-8");
-		String type = request.getParameter("type");
-		
 		HttpSession session = request.getSession();
+		ServletContext context = getServletContext();
 
-		 ServletContext context = getServletContext();
-		 String url = context.getInitParameter("contextPath");
-		
-		if (type.equals("login")) {
+		// get param.
+		String type = request.getParameter("type");
+		String url = context.getInitParameter("contextPath");
+		String email, password;
 
-			String email = request.getParameter("email");
-			String password = request.getParameter("password");
-			
+		switch (type) {
+
+		case "login":
+
+			// get paramerter.
+			email = request.getParameter("email");
+			password = request.getParameter("password");
 			password = MD5.encryption(password);
-			System.out.println(password);
 
+			// login false.
 			if (new UserDAO().loginUser(email, password) == null) {
 				response.sendRedirect(url + "dang-nhap-dang-ki?error=login");
-
+				return;
 			} else {
 
-				
 				User u = new UserDAO().loginUser(email, password);
-
 				session.setAttribute("emailUser", email);
 				session.setAttribute("passwordUser", password);
 				session.setAttribute("userNameUser", u.getName());
 				session.setAttribute("idUser", u.getId());
 
+				// nếu từ trang có tạo oldUrl. chuyển sang trang đó.
+				String oldUrl = (String) session.getAttribute("url");
+				if (oldUrl != null) {
+					session.removeAttribute("oldUrl");
+					response.sendRedirect(oldUrl);
+
+					return;
+				}
+
 				response.sendRedirect(url);
-				
 			}
+			break;
 
-		} else if (type.equals("register")) {
+		case "register":
 
+			// get param.
+			email = request.getParameter("email");
+			password = request.getParameter("password");
 			String name = request.getParameter("name");
-			String email = request.getParameter("email");
-			String password = request.getParameter("password");
 			String repass = request.getParameter("repassword");
 			String phone = request.getParameter("phone");
 			String address = request.getParameter("address");
-			System.out.println(name);
-			System.out.println(phone);
-			System.out.println(address);
-			
+
+			// check pass and repass chuyển sang trang đăng kí thông báo lỗi.
 			if (!password.equals(repass)) {
 				response.sendRedirect(url + "dang-nhap-dang-ki?error=register");
-			} else {
-
-				if (new UserDAO().checkEmail(email)) {
-					response.sendRedirect(url + "dang-nhap-dang-ki?error=register&email=exists");
-				} else {
-					
-					password = MD5.encryption(password);
-					System.out.println(password);
-					
-					User u = new User();
-					u.setName(name);
-					u.setPhone(phone);
-					u.setEmail(email);
-					u.setAddress(address);
-					u.setPassword(password);
-					u.setRole((long) 0);
-					u.setCreateBy((long) -1);
-
-					if (new UserDAO().insertUser(u)) {
-						response.sendRedirect(url + "dang-nhap-dang-ki?success=register");
-					} else {
-						response.sendRedirect(url + "dang-nhap-dang-ki?error=register");
-					}
-				}
+				return;
 			}
 
-		} else {
+			// check email nếu đã có thì chuyển trang đăng kí thông báo lỗi.
+			if (new UserDAO().checkEmail(email)) {
+				response.sendRedirect(url + "dang-nhap-dang-ki?error=register&email=exists");
+				return;
+			}
+
+			User u = new User();
+
+			// md5 pass trước ki đăng kí
+			password = MD5.encryption(password);
+			u.setName(name);
+			u.setPhone(phone);
+			u.setEmail(email);
+			u.setAddress(address);
+			u.setPassword(password);
+			u.setRole((long) 0);
+			u.setCreateBy((long) -1);
+
+			if (new UserDAO().insertUser(u)) {
+				response.sendRedirect(url + "dang-nhap-dang-ki?success=register");
+			} else {
+				response.sendRedirect(url + "dang-nhap-dang-ki?error=register");
+			}
+
+			break;
+		case "logout":
+			// xóa tất sesion của người dùng.
 			session.removeAttribute("emailUser");
 			session.removeAttribute("passwordUser");
 			session.removeAttribute("userNameUser");
 			session.removeAttribute("idUser");
 			response.sendRedirect(url + "dang-nhap-dang-ki");
+			return;
+		default:
+			response.sendRedirect(url);
+			break;
 		}
-
 	}
 
 }

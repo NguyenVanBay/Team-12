@@ -2,9 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
 <%@page import="java.text.*"%>
-<%@page import="model.Product"%>
-<%@page import="model.Category"%>
-<%@page import="model.Image"%>
+<%@page import="model.*"%>
+<%@page import="constant.*"%>
 
 <%
 	ArrayList<Product> products = (ArrayList) request.getAttribute("products");
@@ -87,7 +86,7 @@
 									<p>
 										<%
 											String title = p.getTitle();
-												int maxLength = (title.length() < 230) ? title.length() : 230;
+												int maxLength = (title.length() < Constant.soLongChuMoTa) ? title.length() : Constant.soLongChuMoTa;
 												String newtitle = title.substring(0, maxLength);
 
 												out.print(newtitle + " ...");

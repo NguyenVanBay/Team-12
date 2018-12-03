@@ -13,12 +13,7 @@
 
 
 <%
-	ArrayList<Product> products = (ArrayList) request.getAttribute("products");
-%>
-
-<%
-	ArrayList<Category> categorys = (ArrayList) request.getAttribute("categorys");
-
+	ArrayList<Product> listProductSugerencias = (ArrayList) request.getAttribute("listProductSugerencias");
 	ArrayList<Item> listItem = (ArrayList) request.getAttribute("listItem");
 %>
 <!DOCTYPE html>
@@ -48,8 +43,8 @@
 	<div class="infomation">
 		<h3>Giỏ hàng</h3>
 	</div>
-	
-	
+
+
 	<div class="container">
 
 		<div class="list-product">
@@ -62,11 +57,10 @@
 						<td>Giá</td>
 						<td></td>
 					</tr>
-					
-					<% 
-					
-					DecimalFormat formatter = new DecimalFormat("###,###,###.00");
-					
+
+					<%
+						DecimalFormat formatter = new DecimalFormat("###,###,###.00");
+
 						for (Item i : listItem) {
 					%>
 
@@ -76,8 +70,10 @@
 							alt=""></td>
 						<td><input name="soLuong<%=i.getProduct().getId()%>"
 							value="<%=i.getQuantity()%>" /></td>
-						<td style="color: red"><%=formatter.format(i.getProduct().getPrice())%> VND</td>
-						<td><a href="${pageContext.request.contextPath}/cart?command=remove&productId=<%= i.getProduct().getId() %>">Xóa</a></td>
+						<td style="color: red"><%=formatter.format(i.getProduct().getPrice())%>
+							VND</td>
+						<td><a
+							href="${pageContext.request.contextPath}/cart?command=remove&productId=<%= i.getProduct().getId() %>">Xóa</a></td>
 					</tr>
 
 					<%
@@ -85,8 +81,6 @@
 					%>
 				</table>
 			</form>
-
-
 
 			<button id="updateCart">Cập nhật giỏ hàng</button>
 			<form id="checkout" action="/Book/Checkout" method="get">
@@ -101,6 +95,35 @@
 							form.submit();
 						});
 			</script>
+
+		</div>
+
+		<div class="spTuongTu">
+
+			<h3 style="margin-bottom: 20px; text-transform: uppercase;">Sản
+				phẩm tương tự</h3>
+
+			<%
+				for (Product product : listProductSugerencias) {
+			%>
+			<div class="product">
+
+				<div class="detail-product"
+					style="overflow: hidden; margin-bottom: 20px;">
+					<img style="width: 100px; float: left; margin-right: 20px;"
+						src="${pageContext.request.contextPath}/admin/upload/<%= product.getThumbnail().getName() %>"
+						alt=""><a
+						href="${pageContext.request.contextPath}/chi-tiet/<%= product.getUrl() + "-" + product.getId() %>">Chi
+						tiết</a>
+					<p><%=product.getPrice()%>
+						VND
+					</p>
+					<p><%=product.getName()%></p>
+				</div>
+			</div>
+			<%
+				}
+			%>
 
 		</div>
 

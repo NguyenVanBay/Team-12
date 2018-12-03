@@ -25,42 +25,58 @@ public class CartController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
 		String command = request.getParameter("command");
 		Cart cart = (Cart) session.getAttribute("cart");
+
 		switch (command) {
-		
-		case "list" :
+		case "list": // xem danh sách giỏ hàng.
 			ArrayList<Item> listItem = new ArrayList<>();
 
+			// sản phẩm đề xuất.
+			ArrayList<Product> listProductSugerencias = new ArrayList<>();
+
+			// nếu cart null -> create cart.
 			if (cart == null) {
 				cart = new Cart();
 				session.setAttribute("cart", cart);
+
+				// lấy toàn bộ đơn.
 			} else {
 				session.setAttribute("cart", cart);
 				cart.getCartItems().forEach((key, value) -> {
 					listItem.add(value);
-					System.out.println(key);
-					System.out.println(value.getProduct().getName());
-					System.out.println(value.getQuantity());
+					double priceFrom = value.getProduct().getPrice() - 20000;
+					double priceTo = value.getProduct().getPrice() + 20000;
+
+					// lấy sản phẩm cùng lại và có giá hơn kém 20k.
+					String sql = "Select * from products where id_category = " + value.getProduct().getCategory().getId()
+							+ " AND price between " + priceFrom + " AND " + priceTo + " limit 2";
+					System.out.println(sql);
+					ArrayList<Product> temp = new ProductDAO().getProductBySQL(sql);
+
+					listProductSugerencias.addAll(temp);
 				});
 			}
 
+			// send data to cart view.
 			request.setAttribute("listItem", listItem);
+			request.setAttribute("listProductSugerencias", listProductSugerencias);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/listCart.jsp");
 			rd.forward(request, response);
-			break;
-		
-			case "remove":
-				String productID1 = request.getParameter("productId");
-				Long idProduct1 = Long.parseLong(productID1);
-				cart.removeToCart(idProduct1);
-				break;
+			return;
+
+		case "remove": // xóa giỏ hàng.
+			String productID1 = request.getParameter("productId");
+			Long idProduct1 = Long.parseLong(productID1);
+			cart.removeToCart(idProduct1);
+			// chuyển trang.
+			session.setAttribute("cart", cart);
+			response.sendRedirect(this.getServletContext().getInitParameter("contextPath") + "cart?command=list");
+			return;
 		}
-		
-		session.setAttribute("cart", cart);
-		response.sendRedirect("/Book/cart?command=list");
-		
+
 	}
 
 	@Override
@@ -68,45 +84,36 @@ public class CartController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String command = request.getParameter("command");
+
 		int countL = (request.getParameter("count") == null) ? 1 : Integer.parseInt(request.getParameter("count"));
-
 		Cart cart = (Cart) session.getAttribute("cart");
-
 		if (cart == null) {
 			cart = new Cart();
 		}
-
 		try {
 
 			switch (command) {
 			case "plus":
-
-				String productID = request.getParameter("productId");
-				Long idProduct = Long.parseLong(productID);
+				Long idProduct = Long.parseLong(request.getParameter("productId"));
 				Product product = productDAO.getProductById(idProduct);
 
 				if (cart.getCartItems().containsKey(idProduct)) {
 					cart.plusToCart(idProduct,
 							new Item(product, cart.getCartItems().get(idProduct).getQuantity() + countL));
-
 				} else {
 					cart.plusToCart(idProduct, new Item(product, countL));
-
 				}
-
 				break;
 
 			case "edit":
 				ArrayList<Long> listKey = new ArrayList<>();
-				
 				cart.getCartItems().forEach((k, v) -> {
 					listKey.add(k);
 				});
-
 				for (int i = 0; i < listKey.size(); i++) {
-					cart.plusToCart(listKey.get(i), new Item(cart.getCartItems().get(listKey.get(i)).getProduct(), Integer.parseInt(request.getParameter("soLuong" + listKey.get(i)))));
+					cart.plusToCart(listKey.get(i), new Item(cart.getCartItems().get(listKey.get(i)).getProduct(),
+							Integer.parseInt(request.getParameter("soLuong" + listKey.get(i)))));
 				}
-
 				break;
 			}
 		} catch (Exception e) {

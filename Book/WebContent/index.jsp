@@ -1,3 +1,4 @@
+<%@page import="constant.Constant"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
@@ -42,10 +43,13 @@ style>.mySlides1 {
 
 	<h3 style="text-align: center; color: red; font-size: 25px;">
 		<%
+		
+			// thong bao.
 			String checkout = (request.getParameter("checkout") == null) ? "" : request.getParameter("checkout");
-
 			if (checkout.equals("success")) {
-				out.print("Đặt hàng thành công ! Chúng tôi sẽ giao hàng cho bạn sớm nhất.");
+				out.print("Đặt hàng thành công ! Chúng tôi sẽ giao hàng cho bạn sớm nhất !");
+			} else if(checkout.equals("error")) {
+				out.print("Bạn chưa mua sản phẩm nào của cửa hàng !");
 			}
 		%>
 
@@ -98,7 +102,7 @@ style>.mySlides1 {
 									<p>
 										<%
 											String title = p.getTitle();
-													int maxLength = (title.length() < 250) ? title.length() : 250;
+													int maxLength = (title.length() < Constant.soLongChuMoTa) ? title.length() : Constant.soLongChuMoTa;
 													String newtitle = title.substring(0, maxLength);
 
 													out.print(newtitle + " ...");
@@ -107,7 +111,7 @@ style>.mySlides1 {
 									<p
 										style="color: white; font-size: 15px; text-transform: uppercase; margin-top: 31px;"><%="Tác giả : " + p.getAuthor()%></p>
 									<p
-										style="color: #fff; font-size: 15px; text-transform: uppercase; margin-top: 31px;"><%= "Xuất bản " + format.format(p.getPublicAt()) %></p>
+										style="color: #fff; font-size: 15px; text-transform: uppercase; margin-top: 31px;"><%="Xuất bản " + format.format(p.getPublicAt())%></p>
 								</div>
 							</a>
 						</div>
@@ -161,7 +165,7 @@ style>.mySlides1 {
 									<p>
 										<%
 											String title = p.getTitle();
-													int maxLength = (title.length() < 250) ? title.length() : 250;
+													int maxLength = (title.length() < Constant.soLongChuMoTa) ? title.length() : Constant.soLongChuMoTa;
 													String newtitle = title.substring(0, maxLength);
 
 													out.print(newtitle + " ...");
@@ -170,7 +174,7 @@ style>.mySlides1 {
 									<p
 										style="color: white; font-size: 15px; text-transform: uppercase; margin-top: 31px;"><%="Tác giả : " + p.getAuthor()%></p>
 									<p
-										style="color: #fff; font-size: 15px; text-transform: uppercase; margin-top: 31px;"><%= "Xuất bản " + format.format(p.getPublicAt()) %></p>
+										style="color: #fff; font-size: 15px; text-transform: uppercase; margin-top: 31px;"><%="Xuất bản " + format.format(p.getPublicAt())%></p>
 								</div>
 							</a>
 						</div>
@@ -223,7 +227,7 @@ style>.mySlides1 {
 									<p>
 										<%
 											String title = p.getTitle();
-													int maxLength = (title.length() < 250) ? title.length() : 250;
+													int maxLength = (title.length() < Constant.soLongChuMoTa) ? title.length() : Constant.soLongChuMoTa;
 													String newtitle = title.substring(0, maxLength);
 
 													out.print(newtitle + " ...");
@@ -232,7 +236,7 @@ style>.mySlides1 {
 									<p
 										style="color: white; font-size: 15px; text-transform: uppercase; margin-top: 31px;"><%="Tác giả : " + p.getAuthor()%></p>
 									<p
-										style="color: #fff; font-size: 15px; text-transform: uppercase; margin-top: 31px;"><%= "Xuất bản " + format.format(p.getPublicAt()) %></p>
+										style="color: #fff; font-size: 15px; text-transform: uppercase; margin-top: 31px;"><%="Xuất bản " + format.format(p.getPublicAt())%></p>
 								</div>
 							</a>
 						</div>

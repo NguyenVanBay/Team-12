@@ -354,4 +354,5 @@ ul#nav-sidebar li:hover a {
             -ms-transform: translate(-50%, -50%);
             width: 159px;
             margin: 0px;
+            margin-top: 25px;
           }

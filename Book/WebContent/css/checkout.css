@@ -5,6 +5,16 @@
 	* {
 		
 	}
+
+.spTuongTu {
+    background: #fff;
+    padding: 50px 40px;
+}
+
+.container {
+    display: flex;
+    margin-bottom: 20px;
+}
 	form button {
 		border: none;
 		padding: 5px 12px;
@@ -26,6 +36,9 @@
 		margin-left: 20%
 	}
 	.list-product {
-		width: 100%;
+		width: 60%;
+		background: #fff;
+		margin: 0px 50px;
+		padding: 50px 0px;
 	}
 }

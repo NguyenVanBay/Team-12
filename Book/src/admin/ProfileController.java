@@ -40,28 +40,20 @@ public class ProfileController extends HttpServlet {
 		if (null == session.getAttribute("email")) {
 			// User is not logged in.
 			response.sendRedirect("/Book/admin/Login");
-		} else {
-
-			Long idAdmin = Long.parseLong(session.getAttribute("idAdmin").toString());
-
-			User userLogin = new UserDAO().getUserById(idAdmin);
-
-			String type = request.getParameter("type");
-
-			request.setAttribute("user", userLogin);
-
-			if (type.equals("infomation")) {
-
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/profile.jsp");
-				rd.forward(request, response);
-
-			} else if (type.equals("edit")) {
-
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/editProfile.jsp");
-				rd.forward(request, response);
-			}
+			return;
 		}
 
+		Long idAdmin = Long.parseLong(session.getAttribute("idAdmin").toString());
+		User userLogin = new UserDAO().getUserById(idAdmin);
+		String type = request.getParameter("type");
+		request.setAttribute("user", userLogin);
+		if (type.equals("infomation")) {
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/profile.jsp");
+			rd.forward(request, response);
+		} else if (type.equals("edit")) {
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/editProfile.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	/**
@@ -76,83 +68,73 @@ public class ProfileController extends HttpServlet {
 		if (null == session.getAttribute("email")) {
 			// User is not logged in.
 			response.sendRedirect("/Book/admin/Login");
-		} else {
-			
-			request.setCharacterEncoding("UTF-8");
+			return;
+		}
 
-			String address = request.getParameter("address");
-			String email = request.getParameter("email");
-			String name = request.getParameter("name");
-			String phone = request.getParameter("phone");
-			String password = request.getParameter("password");
-			password = MD5.encryption(password);
-			
-			String status = request.getParameter("status");
-			String newpassword = request.getParameter("newpass");
-			String newrepassword = request.getParameter("newpass_re");
-			System.out.println(status);
-			System.out.println(newpassword);
-			System.out.println(newrepassword);
-			
+		request.setCharacterEncoding("UTF-8");
 
-			Long idLogin = Long.parseLong(session.getAttribute("idAdmin").toString());
-			User userOld = new UserDAO().getUserById(idLogin);
+		String address = request.getParameter("address");
+		String email = request.getParameter("email");
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		String password = request.getParameter("password");
+		password = MD5.encryption(password);
 
-			if (password.equals(userOld.getPassword())) {
-				if (!userOld.getEmail().equals(email)) {
+		String status = request.getParameter("status");
+		String newpassword = request.getParameter("newpass");
+		String newrepassword = request.getParameter("newpass_re");
 
-					// email chưa tồn tại.
-					if (!new UserDAO().checkEmail(email)) {
-						User u = userOld;
-						u.setAddress(address);
-						u.setEmail(email);
-						u.setName(name);
-						u.setPhone(phone);
-						u.setPassword(password);
-						
-						if(status.equals("1")) {
-							if(newpassword.equals(newrepassword)) {
-								u.setPassword(MD5.encryption(newpassword));
-							} else {
-								response.sendRedirect("/Book/admin/profile?type=edit&repass=false");
-							}
-							System.out.println("gg");
-						} else {
-							System.out.println("ff");
-						}
+		Long idLogin = Long.parseLong(session.getAttribute("idAdmin").toString());
+		User userOld = new UserDAO().getUserById(idLogin);
 
-						new UserDAO().editUser(u);
-						response.sendRedirect("/Book/admin/profile?type=infomation");
-					} else {
-						response.sendRedirect("/Book/admin/profile?type=edit&error=edit&email=exists");
-					}
+		if (password.equals(userOld.getPassword())) {
+			if (!userOld.getEmail().equals(email)) {
 
-				} else {
-
+				// email chưa tồn tại.
+				if (!new UserDAO().checkEmail(email)) {
 					User u = userOld;
 					u.setAddress(address);
 					u.setEmail(email);
 					u.setName(name);
 					u.setPhone(phone);
-					
-					if(status.equals("1")) {
-						if(newpassword.equals(newrepassword)) {
+					u.setPassword(password);
+
+					if (status.equals("1")) {
+						if (newpassword.equals(newrepassword)) {
 							u.setPassword(MD5.encryption(newpassword));
-							System.out.println(u.getPassword());
 						} else {
-							response.sendRedirect("/Book/admin/profile?type=edit&repass=false");
+							response.sendRedirect(this.getServletContext().getInitParameter("contextPath") + "admin/profile?type=edit&repass=false");
 						}
 					}
-					
+
 					new UserDAO().editUser(u);
-					session.setAttribute("password", password);
-					response.sendRedirect("/Book/admin/profile?type=infomation");
+					response.sendRedirect(this.getServletContext().getInitParameter("contextPath") + "admin/profile?type=infomation");
+				} else {
+					response.sendRedirect(this.getServletContext().getInitParameter("contextPath") + "admin/profile?type=edit&error=edit&email=exists");
 				}
+
 			} else {
-				response.sendRedirect("/Book/admin/profile?type=edit&error=passfalse");
+
+				User u = userOld;
+				u.setAddress(address);
+				u.setEmail(email);
+				u.setName(name);
+				u.setPhone(phone);
+
+				if (status.equals("1")) {
+					if (newpassword.equals(newrepassword)) {
+						u.setPassword(MD5.encryption(newpassword));
+					} else {
+						response.sendRedirect(this.getServletContext().getInitParameter("contextPath") + "admin/profile?type=edit&repass=false");
+					}
+				}
+
+				new UserDAO().editUser(u);
+				session.setAttribute("password", password);
+				response.sendRedirect(this.getServletContext().getInitParameter("contextPath") + "admin/profile?type=infomation");
 			}
+		} else {
+			response.sendRedirect(this.getServletContext().getInitParameter("contextPath") + "admin/profile?type=edit&error=passfalse");
 		}
-
 	}
-
 }

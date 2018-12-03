@@ -45,30 +45,31 @@ public class DasboardController extends HttpServlet {
 
 		if (null == session.getAttribute("email")) {
 			// User is not logged in.
-			response.sendRedirect("/Book/admin/Login");
-		} else {
-			
-			// lấy danh sách sản phẩm sắp hết hàng.
-			ArrayList<Product> listProduct = new ProductDAO().getProductBySQL("SELECT * FROM products WHERE count < " + Constant.soLuongConLaiNhoHon);
-			request.setAttribute("listwarningProduct", listProduct);
-			
-			// lấy đơn hàng đã giao trong tháng này.
-			Date date = new Date();
-			LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			int month = localDate.getMonthValue();
-			String sqlGetBillInMonth = "SELECT * FROM bills WHERE MONTH(create_at) = " + month + " AND status = 1";
-			ArrayList<Bill> listBill = new BillDAO().geBySQL(sqlGetBillInMonth);
-			request.setAttribute("listBill", listBill);
-			
-			request.setAttribute("donchuaduyet", new BillDAO().countByStatus(0));
-			request.setAttribute("dondagiao", new BillDAO().countByStatus(1));
-			request.setAttribute("donhuy", new BillDAO().countByStatus(3));
-			request.setAttribute("dondanggiao", new BillDAO().countByStatus(2));
-			
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard.jsp");
-			rd.forward(request, response);
-			
+			response.sendRedirect(this.getServletContext().getInitParameter("contextPath") + "admin/Login");
+			return;
 		}
+		
+		// lấy danh sách sản phẩm sắp hết hàng.
+		ArrayList<Product> listProduct = new ProductDAO()
+				.getProductBySQL("SELECT * FROM products WHERE count < " + Constant.soLuongConLaiNhoHon);
+		request.setAttribute("listwarningProduct", listProduct);
+
+		// lấy đơn hàng đã giao trong tháng này.
+		Date date = new Date();
+		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		int month = localDate.getMonthValue();
+		String sqlGetBillInMonth = "SELECT * FROM bills WHERE MONTH(create_at) = " + month + " AND status = 1";
+		ArrayList<Bill> listBill = new BillDAO().geBySQL(sqlGetBillInMonth);
+		request.setAttribute("listBill", listBill);
+
+		request.setAttribute("donchuaduyet", new BillDAO().countByStatus(0));
+		request.setAttribute("dondagiao", new BillDAO().countByStatus(1));
+		request.setAttribute("donhuy", new BillDAO().countByStatus(3));
+		request.setAttribute("dondanggiao", new BillDAO().countByStatus(2));
+
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard.jsp");
+		rd.forward(request, response);
+		return;
 	}
 
 	/**

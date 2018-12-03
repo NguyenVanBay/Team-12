@@ -26,228 +26,166 @@ public class CategoryController extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
+		RequestDispatcher rd;
+		if(check(request, response, session) == 0) return;
+
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
 
+		Long id;
 		String action = request.getParameter("action");
 
-		// danh sach
-		if (action.equals("list")) {
+		switch (action) {
+		// xem danh sách thể loại.
+		case "list":
 
-			if (null == session.getAttribute("email")) {
-				// User is not logged in.
-				response.sendRedirect("/Book/admin/Login");
+			ArrayList<Category> allCategory = new CategoryDAO().getAll();
+			String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? ""
+					: request.getParameter("name");
+
+			// check điều kiện hiển thị.
+			if (name != "") {
+				allCategory = new CategoryDAO().getWhere(name);
 			} else {
-
-				String roleAdmin = (String) session.getAttribute("role");
-
-				if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYTHELOAI)) {
-
-					ArrayList<Category> allCategory = new CategoryDAO().getAll();
-					String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? ""
-							: request.getParameter("name");
-
-					if (name != "") {
-						allCategory = new CategoryDAO().getWhere(name);
-					} else {
-						allCategory = new CategoryDAO().getAll();
-					}
-
-					if ("delete".equals(request.getParameter("error"))) {
-						request.setAttribute("error", "Xóa không thành công");
-					}
-					
-					if ("delete".equals(request.getParameter("success"))) {
-						request.setAttribute("success", "Xóa thành công");
-					}
-
-					System.out.println(request.getParameter("success"));
-					// add
-					if ("add".equals(request.getParameter("success"))) {
-						request.setAttribute("success", "Thêm thành công");
-					}
-
-					// edit
-					if ("edit".equals(request.getParameter("success"))) {
-						request.setAttribute("success", "Sửa thành công");
-					}
-					
-					if(request.getParameter("error") == null) {
-						request.setAttribute("error", "");
-					}
-					
-					if(request.getParameter("success") == null) {
-						request.setAttribute("success", "");
-					}
-
-					request.setAttribute("categorys", allCategory);
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/danh-sach-the-loai");
-					rd.forward(request, response);
-
-				} else {
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
-					rd.forward(request, response);
-				}
+				allCategory = new CategoryDAO().getAll();
 			}
 
-//			form them
-		} else if (action.equals("add")) {
-
-			if (null == session.getAttribute("email")) {
-				// User is not logged in.
-				response.sendRedirect("/Book/admin/Login");
-			} else {
-
-				String roleAdmin = (String) session.getAttribute("role");
-
-				if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYTHELOAI)) {
-
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/them-the-loai");
-					rd.forward(request, response);
-
-				} else {
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
-					rd.forward(request, response);
-				}
+			if ("delete".equals(request.getParameter("error"))) {
+				request.setAttribute("error", "Xóa không thành công");
 			}
 
-			// form sua
-		} else if (action.equals("edit")) {
-
-			if (null == session.getAttribute("email")) {
-				// User is not logged in.
-				response.sendRedirect("/Book/admin/Login");
-			} else {
-
-				String roleAdmin = (String) session.getAttribute("role");
-
-				if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYTHELOAI)) {
-
-					request.setCharacterEncoding("UTF-8");
-
-					Long id = Long.parseLong(request.getParameter("id"));
-
-					Category category = new CategoryDAO().getCategoryById(id);
-
-					request.setAttribute("category", category);
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/sua-the-loai");
-					rd.forward(request, response);
-
-				} else {
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
-					rd.forward(request, response);
-				}
+			if ("delete".equals(request.getParameter("success"))) {
+				request.setAttribute("success", "Xóa thành công");
 			}
 
-			// xóa thể loại.
-		} else if (action.equals("delete")) {
-
-			if (null == session.getAttribute("email")) {
-				// User is not logged in.
-				response.sendRedirect("/Book/admin/Login");
-			} else {
-
-				String roleAdmin = (String) session.getAttribute("role");
-
-				if (roleAdmin.equals("" + User.GIAMDOC) || roleAdmin.equals("" + User.QUANLYTHELOAI)) {
-
-					Long id = Long.parseLong(request.getParameter("id"));
-					try {
-						new CategoryDAO().deleteById(id);
-						response.sendRedirect("/Book/admin/category?action=list&success=delete");
-						return;
-					} catch (Exception e) {
-						response.sendRedirect("/Book/admin/category?action=list&error=delete");
-						return;
-					}
-
-				} else {
-
-					RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/dasboard");
-					rd.forward(request, response);
-				}
-
+			// add
+			if ("add".equals(request.getParameter("success"))) {
+				request.setAttribute("success", "Thêm thành công");
 			}
 
+			// edit
+			if ("edit".equals(request.getParameter("success"))) {
+				request.setAttribute("success", "Sửa thành công");
+			}
+
+			if (request.getParameter("error") == null) {
+				request.setAttribute("error", "");
+			}
+
+			if (request.getParameter("success") == null) {
+				request.setAttribute("success", "");
+			}
+
+			request.setAttribute("categorys", allCategory);
+			rd = getServletContext().getRequestDispatcher("/admin/danh-sach-the-loai");
+			rd.forward(request, response);
+			return;
+
+		case "add":
+			rd = getServletContext().getRequestDispatcher("/admin/them-the-loai");
+			rd.forward(request, response);
+			return;
+
+		case "edit":
+
+			id = Long.parseLong(request.getParameter("id"));
+			Category category = new CategoryDAO().getCategoryById(id);
+			request.setAttribute("category", category);
+			rd = getServletContext().getRequestDispatcher("/admin/sua-the-loai");
+			rd.forward(request, response);
+			return;
+
+		case "delete":
+			id = Long.parseLong(request.getParameter("id"));
+			try {
+				new CategoryDAO().deleteById(id);
+				response.sendRedirect(this.getServletContext().getInitParameter("contextPath")
+						+ "admin/category?action=list&success=delete");
+			} catch (Exception e) {
+				response.sendRedirect(this.getServletContext().getInitParameter("contextPath")
+						+ "admin/category?action=list&error=delete");
+			}
+			return;
+		default:
+			break;
 		}
+	}
+
+	private int check(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws IOException, ServletException {
+		// check login.
+		if (null == session.getAttribute("email")) {
+			// User is not logged in.
+			response.sendRedirect(this.getServletContext().getInitParameter("contextPath") + "admin/Login");
+			return 0;
+		}
+
+		RequestDispatcher rd;
+		String roleAdmin = (String) session.getAttribute("role");
+		// quản trị có quyền amdin và quản lý khó ms có quyền xem.
+		if (!roleAdmin.equals("" + User.GIAMDOC) && !roleAdmin.equals("" + User.QUANLYTHELOAI)) {
+			rd = getServletContext().getRequestDispatcher("/admin/dasboard");
+			rd.forward(request, response);
+			return 0;
+		}
+		return 1;
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-
+		check(request, response, session);
+		
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
 
+		Category c;
+		String name, url;
 		String action = request.getParameter("action");
 
-		if (action.equals("list")) {
+		switch (action) {
+		case "add":
+			request.setCharacterEncoding("UTF-8");
 
-			// them the loai.
-		} else if (action.equals("add")) {
+			name = request.getParameter("name");
+			url = request.getParameter("url");
 
-			if (null == session.getAttribute("email")) {
-				// User is not logged in.
-				response.sendRedirect("/Book/admin/Login");
-			} else {
-
-				request.setCharacterEncoding("UTF-8");
-				String name = request.getParameter("name");
-				String url = request.getParameter("url");
-
-				if (name.equals("") || url.equals("")) {
-					response.sendRedirect("/Book/admin/category?action=list&error=add?error=add");
-					return;
-				}
-
-				Category c = new Category();
-
-				c.setName(name);
-				c.setUrl(url);
-				c.setCreateBy(Long.parseLong(session.getAttribute("idAdmin").toString()));
-
-				new CategoryDAO().insertCategory(c);
-
-				response.sendRedirect("/Book/admin/category?action=list&success=add");
+			if (name.equals("") || url.equals("")) {
+				response.sendRedirect("/Book/admin/category?action=list&error=add?error=add");
+				return;
 			}
 
-			// sua the loai
-		} else if (action.equals("edit")) {
+			c = new Category();
 
-			if (null == session.getAttribute("email")) {
-				// User is not logged in.
-				response.sendRedirect("/Book/admin/Login");
-			} else {
+			c.setName(name);
+			c.setUrl(url);
+			c.setCreateBy(Long.parseLong(session.getAttribute("idAdmin").toString()));
 
-				request.setCharacterEncoding("UTF-8");
+			new CategoryDAO().insertCategory(c);
 
-				String id = request.getParameter("id");
+			response.sendRedirect("/Book/admin/category?action=list&success=add");
+			break;
 
-				String name = request.getParameter("name");
-				String url = request.getParameter("url");
-
-				if (name.equals("") || url.equals("")) {
-					response.sendRedirect("/Book/admin/category?action=edit&id=" + id + "&error=edit");
-					return;
-				}
-
-				Category c = new Category();
-				c.setId(Long.parseLong(id));
-				c.setName(name);
-				c.setUrl(url);
-
-				new CategoryDAO().editCategory(c);
-
-				response.sendRedirect("/Book/admin/category?action=list&success=edit");
-
+		case "edit":
+			String id = request.getParameter("id");
+			name = request.getParameter("name");
+			url = request.getParameter("url");
+			if (name.equals("") || url.equals("")) {
+				response.sendRedirect("/Book/admin/category?action=edit&id=" + id + "&error=edit");
+				return;
 			}
+			c = new CategoryDAO().getCategoryById(Long.parseLong(id));
+			c.setName(name);
+			c.setUrl(url);
+			new CategoryDAO().editCategory(c);
+			response.sendRedirect("/Book/admin/category?action=list&success=edit");
+			return;
 
-			// xóa thể loại.
-		} else if (action.equals("delete")) {
-
+		default:
+			break;
 		}
 
 	}

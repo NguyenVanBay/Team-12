@@ -10,6 +10,3 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style_pc.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style_mobile.css">
- 
-<!--  link js -->
- <script src="myscripts.js"></script>

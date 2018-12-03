@@ -175,7 +175,7 @@
 								</a> <a href="product?action=edit&id=<%=p.getId()%>"
 									class="item tooltip"> <i class="fa fa-pencil-square"></i> <span
 									class="tooltiptext">Sửa sản phẩm</span>
-								</a> <a href="product?action=delete&id=<%=p.getId()%>"
+								</a> <a href="product?action=delete&id=<%=p.getId()%>" onclick="return confirm('Bạn có muốn thực sự muốn xoá không')"
 									class="item tooltip"> <i class="fa fa-recycle"></i> <span
 									class="tooltiptext">Xóa sản phẩm</span>
 								</a>
