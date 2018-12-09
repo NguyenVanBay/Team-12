@@ -92,6 +92,9 @@
 			</form>
 		</div>
 
+		<h3 style="margin-bottom: 10px;">
+			Trang
+			<%=request.getAttribute("page")%></h3>
 		<div class="table-responsive">
 			<table class="table">
 				<thead>
@@ -103,7 +106,7 @@
 						<th>Ngày tạo đơn</th>
 						<th>Tổng tiền</th>
 						<th>Trạng thái đơn hàng</th>
-						<th></th>
+						<th style="width: 140px;"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -194,6 +197,12 @@
 					%>
 				</tbody>
 			</table>
+			
+			<ul class="pagination">
+				<li><a href="${pageContext.request.contextPath}/admin/bill?action=list&page=<%= ((int)request.getAttribute("page") - 1) %>&<%= request.getAttribute("url") %>" class="prev"> Previous </a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/bill?action=list&page=<%= ((int)request.getAttribute("page") + 1) %>&<%= request.getAttribute("url") %>" class="next"> Next </a></li>
+			</ul>
+			
 		</div>
 	</div>
 </body>

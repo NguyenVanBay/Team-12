@@ -27,7 +27,8 @@ public class CategoryController extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		RequestDispatcher rd;
-		if(check(request, response, session) == 0) return;
+		if (check(request, response, session) == 0)
+			return;
 
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -40,15 +41,22 @@ public class CategoryController extends HttpServlet {
 		// xem danh sách thể loại.
 		case "list":
 
+			int page = 0;
+			if (request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				if (page < 0)
+					page = 0;
+			}
+
 			ArrayList<Category> allCategory = new CategoryDAO().getAll();
 			String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? ""
 					: request.getParameter("name");
 
 			// check điều kiện hiển thị.
 			if (name != "") {
-				allCategory = new CategoryDAO().getWhere(name);
+				allCategory = new CategoryDAO().getWhere(name, page);
 			} else {
-				allCategory = new CategoryDAO().getAll();
+				allCategory = new CategoryDAO().getAllPage(page);
 			}
 
 			if ("delete".equals(request.getParameter("error"))) {
@@ -76,6 +84,11 @@ public class CategoryController extends HttpServlet {
 			if (request.getParameter("success") == null) {
 				request.setAttribute("success", "");
 			}
+
+			String url = "name=" + name;
+
+			request.setAttribute("url", url);
+			request.setAttribute("page", page);
 
 			request.setAttribute("categorys", allCategory);
 			rd = getServletContext().getRequestDispatcher("/admin/danh-sach-the-loai");
@@ -137,7 +150,7 @@ public class CategoryController extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		check(request, response, session);
-		
+
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");

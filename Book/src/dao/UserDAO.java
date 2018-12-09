@@ -203,13 +203,13 @@ public class UserDAO implements UserInterface {
 		return u;
 	}
 
-	public ArrayList<User> getAllCustomer() {
+	public ArrayList<User> getAllCustomer(int page) {
 
 		ArrayList<User> allUser = new ArrayList<>();
 
 		try {
 			Connection connection = DBConnect.getConnection();
-			String sql = "SELECT * FROM users where role = 0";
+			String sql = "SELECT * FROM users where role = 0 limit " + page * 10 + " , 10";
 			PreparedStatement ps = connection.prepareCall(sql);
 
 			ResultSet rs = ps.executeQuery();
@@ -234,13 +234,13 @@ public class UserDAO implements UserInterface {
 		return allUser;
 	}
 
-	public ArrayList<User> getAllUser() {
+	public ArrayList<User> getAllUser(int page) {
 
 		ArrayList<User> allUser = new ArrayList<>();
 
 		try {
 			Connection connection = DBConnect.getConnection();
-			String sql = "SELECT * FROM users where role != '0'";
+			String sql = "SELECT * FROM users where role != '0' limit " + page * 10 + " , 10";
 			PreparedStatement ps = connection.prepareCall(sql);
 
 			ResultSet rs = ps.executeQuery();
@@ -276,7 +276,7 @@ public class UserDAO implements UserInterface {
 
 	}
 
-	public ArrayList<User> getWhereUser(String name, String email, String phone, String role) {
+	public ArrayList<User> getWhereUser(String name, String email, String phone, String role, int page) {
 
 		String sql = "SELECT * FROM users where 1 = 1 ";
 
@@ -299,6 +299,8 @@ public class UserDAO implements UserInterface {
 		} else {
 			sql += " AND role != 0";
 		}
+		
+		sql +=" limit " + page * 10 + " , 10";
 
 		System.out.println(sql);
 
@@ -331,7 +333,7 @@ public class UserDAO implements UserInterface {
 		return allUser;
 	}
 	
-	public ArrayList<User> getWhereCustomer(String name, String email, String phone) {
+	public ArrayList<User> getWhereCustomer(String name, String email, String phone, int page) {
 
 		String sql = "SELECT * FROM users where 1 = 1 ";
 
@@ -348,6 +350,8 @@ public class UserDAO implements UserInterface {
 		}
 
 		sql += " AND role = 0";
+		
+		sql +=" limit " + page * 10 + " , 10";
 
 		System.out.println(sql);
 

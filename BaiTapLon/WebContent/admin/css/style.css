@@ -1,0 +1,95 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+tbody {
+    width: 100px !important;
+}
+
+tr {
+    width: 100px;
+}
+
+.btn-menu {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 0px;
+}
+
+.content {
+    margin-left: 15%;
+    width: 80%;
+    padding: 20px 0px;
+}
+
+.menu p {
+    text-transform: uppercase;
+}
+
+.menu-aside li {
+    list-style-type: none;
+}
+
+.menu-aside li a {
+    color: #fff;
+    text-decoration: none;
+    line-height: 30px;
+    height: 30px;
+    border-bottom: 2px solid #009688;
+    display: block;
+    text-transform: uppercase;
+}
+
+.menu-aside li a:hover {
+    border-bottom: 2px solid #fff;
+}
+
+.menu-aside {
+    width: 15%;
+    background: #009688;
+    position: fixed;
+    height: 100%;
+    padding: 10px;
+    top: 40px;
+    left: 0;
+}
+
+.box {
+    display: flex;
+}
+
+.container {
+    padding: 0px 50px;
+}
+
+.menu {
+    background: #009688;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px;
+    color: #fff;
+    border-bottom: 2px solid #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    overflow: auto;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #9E9E9E;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}

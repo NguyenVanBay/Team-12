@@ -44,6 +44,12 @@ public class BillController extends HttpServlet {
 
 		// xem danh đơn hàng.
 		case "list":
+			
+			int page = 0;
+			if (request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				if(page < 0) page = 0;
+			};
 
 			ArrayList<Bill> bills = new ArrayList<>();
 			String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? ""
@@ -65,11 +71,15 @@ public class BillController extends HttpServlet {
 			// hiển thị sản phẩm.
 			if (name != "" || address != "" || phone != "" || sumFrom != "" || sumTo != "" || createFrom != ""
 					|| createTo != "") {
-				bills = new BillDAO().getWhere(name, address, phone, sumFrom, sumTo, createFrom, createTo);
+				bills = new BillDAO().getWhere(name, address, phone, sumFrom, sumTo, createFrom, createTo, page);
 			} else {
-				bills = new BillDAO().getAll();
+				bills = new BillDAO().getAll(page);
 			}
 
+			String url = "name="+name+"&address="+ address +"&phone="+phone+"&sumFrom="+sumFrom+"&sumTo="+sumTo+"&createFrom"+createFrom+"&createTo=" + createTo;
+			
+			request.setAttribute("url", url);
+			request.setAttribute("page", page);
 			request.setAttribute("bills", bills);
 			rd = getServletContext().getRequestDispatcher("/admin/danh-sach-don-hang");
 			rd.forward(request, response);

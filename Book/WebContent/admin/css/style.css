@@ -115,8 +115,7 @@ li.nav-item {
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 90%;
-    margin: 50px;
+    width: 100%;
     background: #fff;
 }
 
@@ -175,4 +174,25 @@ tr:nth-child(even) {
     top: -23px;
     color: #fff;
     text-align: left;
+}
+
+/* css phan trang */
+.pagination a {
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    width: 100px;
+    background: #499e46;
+    margin-right: 36px;
+    padding: 8px 0px;
+}
+
+ul.pagination {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 11px;
+    background: #fff;
+    margin: 10px 0px;
+    list-style-type: none;
 }

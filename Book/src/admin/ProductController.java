@@ -50,6 +50,13 @@ public class ProductController extends HttpServlet {
 		
 		// danh sách sản phẩm.
 		case "list":
+			
+			int page = 0;
+			if (request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				if(page < 0) page = 0;
+			};
+			
 			ArrayList<Product> allProduct = new ArrayList<>();
 			String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? ""
 					: request.getParameter("name");
@@ -71,11 +78,17 @@ public class ProductController extends HttpServlet {
 			// nếu bất kì trường tìm kiếm nào khác khoảng trống thì sẽ tìm where.
 			if (name != "" || author != "" || title != "" || priceFrom != "" || priceTo != "" || publicFrom != "" || publicTo != ""
 					|| idCategory != "-1") {
-				allProduct = new ProductDAO().getWhere(name, author, title, priceFrom, priceTo, idCategory, publicFrom, publicTo);
+				allProduct = new ProductDAO().getWhere(name, author, title, priceFrom, priceTo, idCategory, publicFrom, publicTo, page);
 			// lấy tất cả sản phẩm.
 			} else {
-				allProduct = new ProductDAO().getAll();
+				allProduct = new ProductDAO().getAllPage(page);
 			}
+
+			if(idCategory == "-1") idCategory = "";			
+			String url = "name="+name+"&author="+author+"&title="+title+"&priceFrom="+priceFrom+"&priceTo="+priceTo+"&publicFrom="+publicFrom+"&publicTo="+publicTo+"&idCategory="+ idCategory;
+
+			request.setAttribute("url", url);
+			request.setAttribute("page", page);
 
 			listCategory = new CategoryDAO().getAll();
 			request.setAttribute("categorys", listCategory);

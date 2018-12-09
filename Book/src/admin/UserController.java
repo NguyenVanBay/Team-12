@@ -41,7 +41,14 @@ public class UserController extends HttpServlet {
 
 		// danh sách nhân viên.
 		case "list":
-			ArrayList<User> allUser = new UserDAO().getAllUser();
+			
+			int page = 0;
+			if (request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				if(page < 0) page = 0;
+			};
+			
+			ArrayList<User> allUser = null;
 
 			String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? ""
 					: request.getParameter("name");
@@ -54,10 +61,16 @@ public class UserController extends HttpServlet {
 
 			// get dữ liệu vs điều kiện.
 			if (name != "" || email != "" || phone != "" || role != "") {
-				allUser = new UserDAO().getWhereUser(name, email, phone, role);
+				allUser = new UserDAO().getWhereUser(name, email, phone, role, page);
 			} else {
-				allUser = new UserDAO().getAllUser();
+				allUser = new UserDAO().getAllUser(page);
 			}
+			
+			String url = "name="+name+"&email="+email+"&phone="+phone+"&role="+role;
+
+			request.setAttribute("url", url);
+			request.setAttribute("page", page);
+			
 			request.setAttribute("users", allUser);
 			rd = getServletContext().getRequestDispatcher("/admin/danh-sach-nguoi-dung");
 			rd.forward(request, response);

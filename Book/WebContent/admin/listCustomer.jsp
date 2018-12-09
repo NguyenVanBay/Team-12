@@ -5,17 +5,17 @@
 
 
 <%
-ArrayList<User> users = (ArrayList) request.getAttribute("users");
+	ArrayList<User> users = (ArrayList) request.getAttribute("users");
 %>
 
 <!doctype html>
 <html class="no-js" lang="vi">
 
 <head>
-	<jsp:include page="include/head.jsp"></jsp:include>
+<jsp:include page="include/head.jsp"></jsp:include>
 
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/list.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/list.css">
 </head>
 
 <body>
@@ -25,36 +25,46 @@ ArrayList<User> users = (ArrayList) request.getAttribute("users");
 		<div class="bg-while">
 			<div class="top">
 				<h3>Khách hàng</h3>
-				
+
 			</div>
 			<p style="color: red; text-align: center;">
 
 				<%
 					String error = (request.getParameter("error") == null) ? "" : request.getParameter("error");
 
-				if (error.equals("delete")) {
-					out.print("Không thể xóa khách hàng !");
-				}
+					if (error.equals("delete")) {
+						out.print("Không thể xóa khách hàng !");
+					}
 				%>
-
 			</p>
 
 			<form action="/Book/admin/customer" method="get">
-<input name="action" type="hidden" value="list"/>
+				<input name="action" type="hidden" value="list" />
 				<div class="row seach-content">
 					<div class="col-md-3 form-group">
-						<input name="name"  value="<%= (request.getParameter("name") == "" || request.getParameter("name") == null) ? "" : request.getParameter("name") %>" class="form-control-sm form-control" placeholder="Nhập tên">
+						<input name="name"
+							value="<%=(request.getParameter("name") == "" || request.getParameter("name") == null) ? ""
+					: request.getParameter("name")%>"
+							class="form-control-sm form-control" placeholder="Nhập tên">
 					</div>
 					<div class="col-md-3 form-group">
-						<input name="email" type="email" value="<%= (request.getParameter("email") == "" || request.getParameter("email") == null) ? "" : request.getParameter("email") %>" class="form-control-sm form-control" placeholder="Nhập email">
+						<input name="email" type="email"
+							value="<%=(request.getParameter("email") == "" || request.getParameter("email") == null) ? ""
+					: request.getParameter("email")%>"
+							class="form-control-sm form-control" placeholder="Nhập email">
 					</div>
 					<div class="col-md-3 form-group">
-						<input name="phone" value="<%= (request.getParameter("phone") == "" || request.getParameter("phone") == null) ? "" : request.getParameter("phone") %>" class="form-control-sm form-control" placeholder="Nhập số điện thoại">
+						<input name="phone"
+							value="<%=(request.getParameter("phone") == "" || request.getParameter("phone") == null) ? ""
+					: request.getParameter("phone")%>"
+							class="form-control-sm form-control"
+							placeholder="Nhập số điện thoại">
 					</div>
-					
+
 					<div class="col-md-4 form-group">
-						<button class="col-sm-offset-8 btn btn-success btn-sm" type="submit">Tìm kiếm</button>
-					
+						<button class="col-sm-offset-8 btn btn-success btn-sm"
+							type="submit">Tìm kiếm</button>
+
 					</div>
 
 
@@ -62,6 +72,9 @@ ArrayList<User> users = (ArrayList) request.getAttribute("users");
 			</form>
 		</div>
 
+		<h3 style="margin-bottom: 10px;">
+			Trang
+			<%=request.getAttribute("page")%></h3>
 		<div class="table-responsive">
 			<table class="table">
 				<thead>
@@ -72,7 +85,7 @@ ArrayList<User> users = (ArrayList) request.getAttribute("users");
 						<th>SDT</th>
 						<th>Địa chỉ</th>
 						<th>Chức vụ</th>
-						<th></th>
+						<th style="width: 100px;"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -81,28 +94,21 @@ ArrayList<User> users = (ArrayList) request.getAttribute("users");
 						for (User u : users) {
 					%>
 					<tr class="tr-shadow">
-						<td>
-							<%=u.getId()%>
-						</td>
-						<td><span>
-								<%=u.getName()%></span></td>
-						<td>
-							<%=u.getEmail()%>
-						</td>
-						<td>
-							<%=u.getPhone()%>
-						</td>
-						<td>
-							<%=u.getAddress()%>
-						</td>
+						<td><%=u.getId()%></td>
+						<td><span> <%=u.getName()%></span></td>
+						<td><%=u.getEmail()%></td>
+						<td><%=u.getPhone()%></td>
+						<td><%=u.getAddress()%></td>
 						<td>
 							<p style="color: red">Khách hàng</p>
 						</td>
 						<td>
 							<div class="table-data-feature">
-								</a> <a href="${pageContext.request.contextPath}/admin/customer?action=delete&id=<%=u.getId()%>&type=customer" onclick="return confirm('Bạn có muốn thực sự muốn xoá không')" class="item tooltip">
-									<i class="fa fa-recycle"></i>
-									<span class="tooltiptext">Xóa khách hàng</span>
+								</a> <a
+									href="${pageContext.request.contextPath}/admin/customer?action=delete&id=<%=u.getId()%>&type=customer"
+									onclick="return confirm('Bạn có muốn thực sự muốn xoá không')"
+									class="item tooltip"> <i class="fa fa-recycle"></i> <span
+									class="tooltiptext">Xóa khách hàng</span>
 								</a>
 							</div>
 						</td>
@@ -114,6 +120,15 @@ ArrayList<User> users = (ArrayList) request.getAttribute("users");
 					<tr class="spacer"></tr>
 				</tbody>
 			</table>
+
+			<ul class="pagination">
+				<li><a
+					href="${pageContext.request.contextPath}/admin/customer?action=list&page=<%= ((int)request.getAttribute("page") - 1) %>&<%= request.getAttribute("url") %>"
+					class="prev"> Previous </a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/admin/customer?action=list&page=<%= ((int)request.getAttribute("page") + 1) %>&<%= request.getAttribute("url") %>"
+					class="next"> Next </a></li>
+			</ul>
 		</div>
 	</div>
 </body>

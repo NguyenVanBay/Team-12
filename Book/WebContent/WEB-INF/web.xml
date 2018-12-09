@@ -40,8 +40,14 @@
   </servlet-mapping>
   <context-param>
     <param-name>contextPath</param-name>
-    <param-value>http://localhost:8088/Book/</param-value>
+    <param-value>http://localhost:8080/Book/</param-value>
   </context-param>
+  
+    <context-param>
+    <param-name>numberInPage</param-name>
+    <param-value>1</param-value>
+  </context-param>
+  
   <servlet>
     <servlet-name>UserController</servlet-name>
     <servlet-class>admin.UserController</servlet-class>

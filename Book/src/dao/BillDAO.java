@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.catalina.connector.Request;
+
 import connect.DBConnect;
 import model.Bill;
 import model.BillDetail;
@@ -111,13 +113,13 @@ public class BillDAO implements BillInterface {
 		return null;
 	}
 
-	public ArrayList<Bill> getAll() {
+	public ArrayList<Bill> getAll(int page) {
 
 		ArrayList<Bill> listBill = new ArrayList<>();
 
 		try {
 			Connection connection = DBConnect.getConnection();
-			String sql = "SELECT * FROM bills ORDER BY status ASC";
+			String sql = "SELECT * FROM bills ORDER BY status ASC limit " + page * 10 + " , 10";
 			PreparedStatement ps = connection.prepareCall(sql);
 			ResultSet rs = ps.executeQuery();
 
@@ -151,7 +153,7 @@ public class BillDAO implements BillInterface {
 		return listBill;
 	}
 
-	public ArrayList<Bill> getWhere(String name, String address, String phone, String sumFrom, String sumTo, String createFrom, String createTo) {
+	public ArrayList<Bill> getWhere(String name, String address, String phone, String sumFrom, String sumTo, String createFrom, String createTo, int page) {
 		ArrayList<Bill> listBill = new ArrayList<>();
 
 		try {
@@ -179,7 +181,7 @@ public class BillDAO implements BillInterface {
 			}
 
 
-			sql += " ORDER BY status ASC";
+			sql += " ORDER BY status ASC limit " + page * 10 + " , 10";
 			
 			PreparedStatement ps = connection.prepareCall(sql);
 			ResultSet rs = ps.executeQuery();

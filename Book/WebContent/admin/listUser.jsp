@@ -36,7 +36,8 @@
 		<div class="bg-while">
 			<div class="top">
 				<h3>Nhân viên</h3>
-				<a href="${pageContext.request.contextPath}/admin/user?action=add">Thêm nhân viên</a>
+				<a href="${pageContext.request.contextPath}/admin/user?action=add">Thêm
+					nhân viên</a>
 			</div>
 
 			<p id="nameUserEr" class="er-red">
@@ -44,20 +45,21 @@
 				<%
 					String error = (request.getParameter("error") == null) ? "" : request.getParameter("error");
 
-				if (error.equals("edit")) {
-					out.print("Bạn chỉ có quyền sửa nhân viên do bạn tao ra !");
-				}
-				
-				if (error.equals("delete")) {
-					out.print("Không thể xóa nhân viên !");
-				}
+					if (error.equals("edit")) {
+						out.print("Bạn chỉ có quyền sửa nhân viên do bạn tao ra !");
+					}
+
+					if (error.equals("delete")) {
+						out.print("Không thể xóa nhân viên !");
+					}
 				%>
 
 			</p>
 
-			<form action="${pageContext.request.contextPath}/admin/user" method="get">
-			
-			<input type="hidden" name="action" value="list"/>
+			<form action="${pageContext.request.contextPath}/admin/user"
+				method="get">
+
+				<input type="hidden" name="action" value="list" />
 
 				<div class="row seach-content">
 					<div class="col-md-3 form-group">
@@ -102,6 +104,9 @@
 			</form>
 		</div>
 
+		<h3 style="margin-bottom: 10px;">
+			Trang
+			<%=request.getAttribute("page")%></h3>
 		<div class="table-responsive">
 			<table class="table">
 				<thead>
@@ -113,7 +118,7 @@
 						<th>Địa chỉ</th>
 						<th>Chức vụ</th>
 						<th>Người tạo</th>
-						<th></th>
+						<th style="width: 100px;"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -145,41 +150,40 @@
 							<%
 								User temp = new UserDAO().getUserById(u.getCreateBy());
 
-										if (temp.getRole()==User.GIAMDOC) {
-											%> <a
-							href="${pageContext.request.contextPath}/admin/user?action=list&email=<%= temp.getEmail() %>"><%= temp.getName() %>
+									if (temp.getRole() == User.GIAMDOC) {
+							%> <a
+							href="${pageContext.request.contextPath}/admin/user?action=list&email=<%= temp.getEmail() %>"><%=temp.getName()%>
 								(Giám đốc)</a> <%
-										} else if(temp.getRole()==User.QUANLYNHANVIEN){
-											%> <a
-							href="${pageContext.request.contextPath}/admin/user?action=list&email=<%= temp.getEmail() %>"><%= temp.getName() %>
+ 	} else if (temp.getRole() == User.QUANLYNHANVIEN) {
+ %> <a
+							href="${pageContext.request.contextPath}/admin/user?action=list&email=<%= temp.getEmail() %>"><%=temp.getName()%>
 								(Nhân Viên)</a> <%
-										} else {
-											
-										}
-							%>
+ 	} else {
+
+ 		}
+ %>
 
 
 						</td>
 						<td>
-						<%
-						
-						if(u.getRole() == User.GIAMDOC) {
-							
-						} else {
-						%>
+							<%
+								if (u.getRole() == User.GIAMDOC) {
+
+									} else {
+							%>
 							<div class="table-data-feature">
-								<a href="${pageContext.request.contextPath}/admin/user?action=edit&id=<%=u.getId()%>" class="item tooltip"> <i
-									class="fa fa-pencil-square"></i> <span class="tooltiptext">Sửa
-										thông tin nhân viên</span>
-								</a> <a href="${pageContext.request.contextPath}/admin/user?action=delete&id=<%=u.getId()%>" class="item tooltip">
-									<i class="fa fa-recycle"></i> <span class="tooltiptext">Xóa
-										nhân viên</span>
+								<a
+									href="${pageContext.request.contextPath}/admin/user?action=edit&id=<%=u.getId()%>"
+									class="item tooltip"> <i class="fa fa-pencil-square"></i> <span
+									class="tooltiptext">Sửa thông tin nhân viên</span>
+								</a> <a
+									href="${pageContext.request.contextPath}/admin/user?action=delete&id=<%=u.getId()%>"
+									class="item tooltip"> <i class="fa fa-recycle"></i> <span
+									class="tooltiptext">Xóa nhân viên</span>
 								</a>
-							</div>
-							<%	
-						}
-						
-						%>
+							</div> <%
+ 	}
+ %>
 						</td>
 					</tr>
 
@@ -189,6 +193,16 @@
 					<tr class="spacer"></tr>
 				</tbody>
 			</table>
+
+			<ul class="pagination">
+				<li><a
+					href="${pageContext.request.contextPath}/admin/user?action=list&page=<%= ((int)request.getAttribute("page") - 1) %>&<%= request.getAttribute("url") %>"
+					class="prev"> Previous </a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/admin/user?action=list&page=<%= ((int)request.getAttribute("page") + 1) %>&<%= request.getAttribute("url") %>"
+					class="next"> Next </a></li>
+			</ul>
+
 		</div>
 	</div>
 </body>

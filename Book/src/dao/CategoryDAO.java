@@ -122,6 +122,43 @@ public class CategoryDAO implements CategoryInterface {
 		}
 		return allCategory;
 	}
+	
+	public ArrayList<Category> getAllPage(int page) {
+
+		ArrayList<Category> allCategory = new ArrayList<>();
+
+		try {
+			Connection connection = DBConnect.getConnection();
+			String sql = "SELECT * FROM categorys limit " + page * 10 + " , 10";
+			PreparedStatement ps = connection.prepareCall(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Category c = new Category();
+				c.setId(rs.getLong("id"));
+				c.setName(rs.getString("name"));
+				c.setUrl(rs.getString("url"));
+				c.setCreateBy(rs.getLong("create_by"));
+				allCategory.add(c);
+			}
+			connection.close();
+			
+			int i = 0;
+			for (Category c : allCategory) {	
+				Category tempc = c;
+				ArrayList<Product> listProduct = new ProductDAO().getProductBySQL("SELECT * FROM products WHERE id_category = " + c.getId() + " ORDER BY price DESC Limit 10");		
+				c.setListProduct(listProduct);
+				allCategory.set(i, tempc);
+				i++;
+			}	
+			
+			return allCategory;
+		} catch (SQLException ex) {
+			Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return allCategory;
+	}
 
 	public void deleteById(Long id) throws SQLException {
 			Connection connection = DBConnect.getConnection();
@@ -135,7 +172,7 @@ public class CategoryDAO implements CategoryInterface {
 
 	}
 
-	public ArrayList<Category> getWhere(String name) {
+	public ArrayList<Category> getWhere(String name, int page) {
 
 		ArrayList<Category> allCategory = new ArrayList<>();
 		String sql = "SELECT * FROM categorys where 1 = 1 ";
@@ -143,6 +180,8 @@ public class CategoryDAO implements CategoryInterface {
 		if(name != "") {
 			sql += " AND name like '%" + name + "%'";
 		}
+		
+		sql += " limit " + page * 10 + ", 10";
 
 		try {
 			Connection connection = DBConnect.getConnection();

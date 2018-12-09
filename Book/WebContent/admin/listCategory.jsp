@@ -19,26 +19,28 @@
 <body>
 	<!-- menu-top -->
 	<jsp:include page="include/menu-top.jsp"></jsp:include>
-	
-		
-		
+
+
+
 	<div class="container">
 		<div class="bg-while">
 			<div class="top">
 				<h3>Thể loại</h3>
-				<a href="${pageContext.request.contextPath}/admin/category?action=add">Thêm thể loại</a>
-			
+				<a
+					href="${pageContext.request.contextPath}/admin/category?action=add">Thêm
+					thể loại</a>
+
 			</div>
-			
-		
-		
-		<p style="color: red; font-size: 20px"><%= request.getAttribute("error") %></p>
-			
-		<p style="color: green; font-size: 20px"><%= request.getAttribute("success") %></p>
+
+
+
+			<p style="color: red; font-size: 20px"><%=request.getAttribute("error")%></p>
+
+			<p style="color: green; font-size: 20px"><%=request.getAttribute("success")%></p>
 
 			<form action="/Book/admin/category" method="get">
 
-<input type="hidden" name="action" value="list"/>
+				<input type="hidden" name="action" value="list" />
 
 				<div class="seach-content">
 
@@ -56,6 +58,9 @@
 			</form>
 		</div>
 
+		<h3 style="margin-bottom: 10px;">
+			Trang
+			<%=request.getAttribute("page")%></h3>
 		<div class="table-responsive">
 			<table class="table">
 				<thead>
@@ -63,7 +68,7 @@
 						<th>id</th>
 						<th>Thể loại</th>
 						<th>Đường dẫn</th>
-						<th></th>
+						<th style="width: 100px;"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -78,12 +83,15 @@
 						<td><%=c.getUrl()%></td>
 						<td style="width: 100px;">
 							<div class="table-feature">
-								<a href="${pageContext.request.contextPath}/admin/category?action=edit&id=<%=c.getId()%>" class="item tooltip">
-									<i class="fa fa-pencil-square"></i> <span class="tooltiptext">Sửa
-										thể loại</span>
-								</a> <a href="${pageContext.request.contextPath}/admin/category?action=delete&id=<%=c.getId()%>" onclick="return confirm('Bạn có muốn thực sự muốn xoá không')"  class="item tooltip">
-									<i class="fa fa-recycle"></i> <span class="tooltiptext">Xóa
-										thể loại</span>
+								<a
+									href="${pageContext.request.contextPath}/admin/category?action=edit&id=<%=c.getId()%>"
+									class="item tooltip"> <i class="fa fa-pencil-square"></i> <span
+									class="tooltiptext">Sửa thể loại</span>
+								</a> <a
+									href="${pageContext.request.contextPath}/admin/category?action=delete&id=<%=c.getId()%>"
+									onclick="return confirm('Bạn có muốn thực sự muốn xoá không')"
+									class="item tooltip"> <i class="fa fa-recycle"></i> <span
+									class="tooltiptext">Xóa thể loại</span>
 								</a>
 							</div>
 						</td>
@@ -94,6 +102,16 @@
 					%>
 				</tbody>
 			</table>
+
+			<ul class="pagination">
+				<li><a
+					href="${pageContext.request.contextPath}/admin/category?action=list&page=<%= ((int)request.getAttribute("page") - 1) %>&<%= request.getAttribute("url") %>"
+					class="prev"> Previous </a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/admin/category?action=list&page=<%= ((int)request.getAttribute("page") + 1) %>&<%= request.getAttribute("url") %>"
+					class="next"> Next </a></li>
+			</ul>
+
 		</div>
 	</div>
 </body>

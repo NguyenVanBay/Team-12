@@ -189,6 +189,12 @@
 					<tr class="spacer"></tr>
 				</tbody>
 			</table>
+			
+			<ul class="pagination">
+				<li><a href="${pageContext.request.contextPath}/admin/product?action=list&page=<%= ((int)request.getAttribute("page") - 1) %>&<%= request.getAttribute("url") %>" class="prev"> Previous </a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/product?action=list&page=<%= ((int)request.getAttribute("page") + 1) %>&<%= request.getAttribute("url") %>" class="next"> Next </a></li>
+			</ul>
+			
 		</div>
 	</div>
 </body>

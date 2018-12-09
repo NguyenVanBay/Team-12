@@ -58,7 +58,7 @@ public class LoginController extends HttpServlet {
 		switch (type) {
 		case "login":
 			if (new UserDAO().loginAdmin(email, password) == null) {
-				response.sendRedirect(url + "admin/Login?error=login");
+				response.sendRedirect(url + "admin/Login");
 			} else {
 
 				User u = new UserDAO().loginAdmin(email, password);

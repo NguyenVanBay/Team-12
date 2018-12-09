@@ -11,7 +11,11 @@
 %>
 
 <%
-	ArrayList<Product> products = (ArrayList) request.getAttribute("products");
+ArrayList<Product> products = (ArrayList) request.getAttribute("products");
+	ArrayList<Product> listNew = (ArrayList) request.getAttribute("listNew");
+ArrayList<Product> listHot = (ArrayList) request.getAttribute("listHot");
+ArrayList<Product> listsellMultiple = (ArrayList) request.getAttribute("listsellMultiple");
+
 %>
 
 <!DOCTYPE html>
@@ -43,12 +47,11 @@ style>.mySlides1 {
 
 	<h3 style="text-align: center; color: red; font-size: 25px;">
 		<%
-		
 			// thong bao.
 			String checkout = (request.getParameter("checkout") == null) ? "" : request.getParameter("checkout");
 			if (checkout.equals("success")) {
 				out.print("Đặt hàng thành công ! Chúng tôi sẽ giao hàng cho bạn sớm nhất !");
-			} else if(checkout.equals("error")) {
+			} else if (checkout.equals("error")) {
 				out.print("Bạn chưa mua sản phẩm nào của cửa hàng !");
 			}
 		%>
@@ -87,8 +90,7 @@ style>.mySlides1 {
 				<h3>Sản phẩm nổi bật</h3>
 
 				<%
-					for (Product p : products) {
-						if (p.getType().equals("hot")) {
+					for (Product p : listHot) {
 				%>
 				<div class="product ">
 					<div class="img-product view">
@@ -137,10 +139,15 @@ style>.mySlides1 {
 				</div>
 				<%
 					}
-					}
 				%>
-			</div>
 
+
+
+			</div>
+			<ul class="pagination">
+				<li><a href="${pageContext.request.contextPath}/?page=<%= ((int)request.getAttribute("page") - 1) %>" class="prev"> Previous </a></li>
+				<li><a href="${pageContext.request.contextPath}/?page=<%= ((int)request.getAttribute("page") + 1) %>" class="next"> Next </a></li>
+			</ul>
 			<!-- infomation -->
 			<jsp:include page="include/quangcao.jsp"></jsp:include>
 			<!-- end infomation -->
@@ -150,8 +157,7 @@ style>.mySlides1 {
 
 				<h3>Sản phẩm mới</h3>
 				<%
-					for (Product p : products) {
-						if (p.getType().equals("new")) {
+					for (Product p : listNew) {
 				%>
 				<div class="product ">
 					<div class="img-product view">
@@ -199,9 +205,13 @@ style>.mySlides1 {
 				</div>
 				<%
 					}
-					}
 				%>
 			</div>
+			
+			<ul class="pagination">
+				<li><a href="${pageContext.request.contextPath}/?page=<%= ((int)request.getAttribute("page") - 1) %>" class="prev"> Previous </a></li>
+				<li><a href="${pageContext.request.contextPath}/?page=<%= ((int)request.getAttribute("page") + 1) %>" class="next"> Next </a></li>
+			</ul>
 
 			<!-- infomation -->
 			<jsp:include page="include/quangcao.jsp"></jsp:include>
@@ -212,8 +222,7 @@ style>.mySlides1 {
 				<h3>Bán chạy</h3>
 
 				<%
-					for (Product p : products) {
-						if (p.getType().equals("sellMultiple")) {
+					for (Product p : listsellMultiple) {
 				%>
 				<div class="product ">
 					<div class="img-product view">
@@ -261,9 +270,13 @@ style>.mySlides1 {
 				</div>
 				<%
 					}
-					}
 				%>
 			</div>
+			<ul class="pagination">
+				<li><a href="${pageContext.request.contextPath}/?page=<%= ((int)request.getAttribute("page") - 1) %>" class="prev"> Previous </a></li>
+				<li><a href="${pageContext.request.contextPath}/?page=<%= ((int)request.getAttribute("page") + 1) %>" class="next"> Next </a></li>
+			</ul>
+			
 		</div>
 
 	</div>

@@ -149,7 +149,66 @@ public class ProductDAO implements ProductInterface {
 		ArrayList<Long> allCategory = new ArrayList<>();
 
 			Connection connection = DBConnect.getConnection();
-			String sql = "SELECT * FROM products";
+			String sql = "SELECT * FROM products ";
+			PreparedStatement ps;
+			try {
+				ps = connection.prepareCall(sql);
+				
+				ResultSet rs = ps.executeQuery();
+
+				while (rs.next()) {
+					Product p = new Product();
+					p.setId(rs.getLong("id"));
+					p.setName(rs.getString("name"));
+					p.setAuthor(rs.getString("author"));
+					p.setPublicAt(rs.getTimestamp("public"));
+					p.setCount(rs.getLong("count"));
+					p.setPrice(rs.getDouble("price"));
+					p.setTitle(rs.getString("title"));
+					p.setDescription(rs.getString("description"));
+					p.setType(rs.getString("type"));
+					p.setUrl(rs.getString("url"));
+					allProduct.add(p);
+					allCategory.add(rs.getLong("id_category"));
+					
+				}
+				connection.close();
+				
+				for (int i = 0; i < allCategory.size(); i++) {
+
+					Product p = allProduct.get(i);
+					
+					Category category = new CategoryDAO().getCategoryById(allCategory.get(i));
+					ArrayList<Image> listImage = new ImageDAO().getImageByProductIdAndType(p.getId(), 2);
+					
+					Image imagesThumbnail = new Image();
+					
+					for (Image image : new ImageDAO().getImageByProductIdAndType(p.getId(), 1)) {
+						p.setThumbnail(image);
+						imagesThumbnail = image;
+					}
+				
+					p.setCategory(category);
+					p.setListImage(listImage);
+					p.setThumbnail(imagesThumbnail);
+									
+					allProduct.set(i, p);
+				}
+				
+			} catch (SQLException e) {
+			}
+		return allProduct;
+	}
+	
+	public ArrayList<Product> getAllPage(int page) {
+
+
+		ArrayList<Product> allProduct = new ArrayList<>();
+		
+		ArrayList<Long> allCategory = new ArrayList<>();
+
+			Connection connection = DBConnect.getConnection();
+			String sql = "SELECT * FROM products limit " + page * 10 + " , 10";
 			PreparedStatement ps;
 			try {
 				ps = connection.prepareCall(sql);
@@ -333,7 +392,7 @@ public class ProductDAO implements ProductInterface {
 
 
 	public ArrayList<Product> getWhere(String name, String author, String title, String priceFrom, String priceTo,
-			String idCategory, String publicFrom, String publicTo) {
+			String idCategory, String publicFrom, String publicTo, int page) {
 		ArrayList<Product> allProduct = new ArrayList<>();
 		ArrayList<Long> allCategory = new ArrayList<>();
 
@@ -364,6 +423,8 @@ public class ProductDAO implements ProductInterface {
 			if(publicFrom != "" && publicTo != "") {
 				sql += " AND public BETWEEN '"+ publicFrom +"' AND '" + publicTo +"' ";
 			}
+			
+			sql += "limit " + page * 10 + " , 10";
 			
 			System.out.println("truy van " + sql);
 			

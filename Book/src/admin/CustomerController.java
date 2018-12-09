@@ -40,7 +40,13 @@ public class CustomerController extends HttpServlet {
 		switch (action) {
 		case "list":
 			
-			ArrayList<User> allUser = new UserDAO().getAllCustomer();
+			int page = 0;
+			if (request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+				if(page < 0) page = 0;
+			};
+			
+			ArrayList<User> allUser = new UserDAO().getAllCustomer(page);
 			String name = (request.getParameter("name") == null || request.getParameter("name") == "") ? ""
 					: request.getParameter("name");
 			String email = (request.getParameter("email") == null || request.getParameter("email") == "") ? ""
@@ -50,10 +56,15 @@ public class CustomerController extends HttpServlet {
 
 			//check điều kiện search.
 			if (name != "" || email != "" || phone != "") {
-				allUser = new UserDAO().getWhereCustomer(name, email, phone);
+				allUser = new UserDAO().getWhereCustomer(name, email, phone, page);
 			} else {
-				allUser = new UserDAO().getAllCustomer();
+				allUser = new UserDAO().getAllCustomer(page);
 			}
+			
+			String url = "name="+name+"&email="+email+"&phone="+phone;
+
+			request.setAttribute("url", url);
+			request.setAttribute("page", page);
 
 			request.setAttribute("users", allUser);
 			rd = getServletContext().getRequestDispatcher("/admin/listCustomer.jsp");
