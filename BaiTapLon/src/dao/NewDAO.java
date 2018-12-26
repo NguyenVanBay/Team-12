@@ -33,7 +33,7 @@ public class NewDAO {
 			Date d = new Date();
 			milliseconds = d.getTime();
 		} catch (Exception e) {
-			System.out.println("chưa nhập ngày");
+			System.out.println("chÆ°a nháº­p ngÃ y");
 		}
 		
 		try {
@@ -54,6 +54,8 @@ public class NewDAO {
 		}
 		return false;
 	}
+	
+	
 
 	// edit Category by id.
 	public boolean editNew(New n) {
@@ -106,6 +108,39 @@ public class NewDAO {
 		}
 		return n;
 	}
+	
+	public ArrayList<New> getAll(int page) {
+
+		ArrayList<New> allNew = new ArrayList<>();
+
+		try {
+			Connection connection = DBConnect.getConnection();
+			String sql = "SELECT * FROM tbl_news limit " + page * 10 + ", 10";
+			PreparedStatement ps = connection.prepareCall(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				New n = new New();
+				n.setPk_news_id(rs.getLong("pk_news_id"));
+				n.setFk_category_news_id(rs.getLong("fk_category_news_id"));
+				n.setC_content(rs.getString("c_content"));
+				n.setC_description(rs.getString("c_description"));
+				n.setC_img(rs.getString("c_img"));
+				n.setC_name(rs.getString("c_name"));
+				n.setC_hotnews(rs.getLong("c_hotnews"));
+				n.setC_latestnews(rs.getLong("c_latestnews"));
+				allNew.add(n);
+			}
+			connection.close();
+			return allNew;
+		} catch (SQLException ex) {
+			Logger.getLogger(NewDAO.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return allNew;
+	}
+	
+	
 
 	public ArrayList<New> getAll() {
 
@@ -114,6 +149,38 @@ public class NewDAO {
 		try {
 			Connection connection = DBConnect.getConnection();
 			String sql = "SELECT * FROM tbl_news";
+			PreparedStatement ps = connection.prepareCall(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				New n = new New();
+				n.setPk_news_id(rs.getLong("pk_news_id"));
+				n.setFk_category_news_id(rs.getLong("fk_category_news_id"));
+				n.setC_content(rs.getString("c_content"));
+				n.setC_description(rs.getString("c_description"));
+				n.setC_img(rs.getString("c_img"));
+				n.setC_name(rs.getString("c_name"));
+				n.setC_hotnews(rs.getLong("c_hotnews"));
+				n.setC_latestnews(rs.getLong("c_latestnews"));
+				allNew.add(n);
+			}
+			connection.close();
+			return allNew;
+		} catch (SQLException ex) {
+			Logger.getLogger(NewDAO.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return allNew;
+	}
+	
+	// lấy 3 tin phan dau trang.
+	public ArrayList<New> get3TinChinh() {
+
+		ArrayList<New> allNew = new ArrayList<>();
+
+		try {
+			Connection connection = DBConnect.getConnection();
+			String sql = "SELECT * FROM tbl_news limit 0, 3";
 			PreparedStatement ps = connection.prepareCall(sql);
 
 			ResultSet rs = ps.executeQuery();

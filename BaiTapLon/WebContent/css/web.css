@@ -240,3 +240,25 @@ body{
 	margin-top: 20px;
 }
 #text{padding-bottom: 20px;}
+
+
+/* css phan trang */
+.pagination a {
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    width: 100px;
+    background: #499e46;
+    margin-right: 36px;
+    padding: 8px 0px;
+}
+
+ul.pagination {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 11px;
+    background: #fff;
+    margin: 10px 0px;
+    list-style-type: none;
+}

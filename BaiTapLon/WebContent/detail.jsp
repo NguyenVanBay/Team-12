@@ -23,7 +23,7 @@
 		<div id="main">
 			<div class="menu">
 				<ul>
-					<li><a href="index.html">TRANG CHỦ</a></li>
+					<li><a href="${pageContext.request.contextPath}/">TRANG CHỦ</a></li>
 
 					<%
 						ArrayList<Category> categorys = (ArrayList) request.getAttribute("categorys");
@@ -38,24 +38,27 @@
 
 
 					<li><a href="contact.html">LIÊN HỆ</a></li>
-					<input type="text" id="search" placeholder="Search"
-						style="margin-left: 160px;">
+					<input type="text" id="search" placeholder="Search" style="margin-left: 160px;"/>
 					<li><a href=""><img src="img/search.png" alt=""
 							style="width: 20px; height: 20px; padding-top: 0px;"></a></li>
 				</ul>
 			</div>
 			<div class="main_top">
+
+				<%
+					ArrayList<New> BaTinDau = new NewDAO().get3TinChinh();
+				%>
+
 				<div class="top1" style="width: 757px; height: 450px;">
-					<a href=""><img src="img/top-post1.jpg" alt="">
-						<h5 id="text">tiêu dề bài viết 1</h5></a>
+					<a href="${pageContext.request.contextPath}/chi-tiet?id=<%= BaTinDau.get(0).getPk_news_id() %>"><img src="${pageContext.request.contextPath}/admin/upload/<%= BaTinDau.get(0).getC_img() %>" alt=""></a>
 
 				</div>
 				<div class="top2">
 					<div class="top21">
-						<a href="chitiet.html"><img src="img/top-post2.jpg" alt=""></a>
+						<a href="${pageContext.request.contextPath}/chi-tiet?id=<%= BaTinDau.get(1).getPk_news_id() %>"><img src="${pageContext.request.contextPath}/admin/upload/<%= BaTinDau.get(1).getC_img() %>" alt=""></a>
 					</div>
 					<div class="top21">
-						<a href="chitiet.html"><img src="img/top-post3.jpg" alt=""></a>
+						<a href="${pageContext.request.contextPath}/chi-tiet?id=<%= BaTinDau.get(2).getPk_news_id() %>"><img src="${pageContext.request.contextPath}/admin/upload/<%= BaTinDau.get(2).getC_img() %>" alt=""></a>
 					</div>
 				</div>
 				<div style="clear: both;"></div>
@@ -113,17 +116,12 @@
 				</div>
 
 				<div class="right-box">
-					<%
-						for (Category c : categorys) {
-					%>
-
 					<div id="right">
 						<div class="right-tin1" style="padding-top: 20px;">
-							<div class="text-header-right"><%=c.getC_name()%></div>
+							<div class="text-header-right">Tin cùng loại</div>
 
 							<%
-								long id = c.getPk_category_news_id();
-									for (New tin : new NewDAO().getNewByCategoryId(id)) {
+									for (New tin : new NewDAO().getByCategoryId(chitiet.getFk_category_news_id())) {
 							%>
 
 							<div class="right1">
@@ -142,9 +140,6 @@
 							%>
 						</div>
 					</div>
-					<%
-						}
-					%>
 					<div style="clear: both;"></div>
 					<div class="right1"></div>
 				</div>

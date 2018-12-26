@@ -23,7 +23,7 @@
             <%@ include file="/admin/include/menu.jsp" %>
 
             <div class="content">
-                web tin tá»©c.
+                web tin tức
             </div>
         </div>
 

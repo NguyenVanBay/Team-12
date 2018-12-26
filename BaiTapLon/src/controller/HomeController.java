@@ -30,12 +30,20 @@ public class HomeController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ArrayList<New> news = new NewDAO().getAll();
+		int page = 0;
+		if (request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+			if (page < 0)
+				page = 0;
+		}
+		
+		ArrayList<New> news = new NewDAO().getAll(page);
 		request.setAttribute("news", news);
 		
 		ArrayList<Category> categorys = new CategoryDAO().getAll();
 		request.setAttribute("categorys", categorys);
 		
+		request.setAttribute("page", page);
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
 		rd.forward(request, response);
 

@@ -15,7 +15,7 @@
 <body>
 	<div id="wrap">
 		<div id="top">
-			<a href="index.html"> <img src="img/logo.png" alt=""
+			<a href="${pageContext.request.contextPath}/"> <img src="img/logo.png" alt=""
 				style="padding: 20px 105px;">
 			</a>
 		</div>

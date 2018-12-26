@@ -3,7 +3,7 @@
   <display-name>BaiTapLon</display-name>
   <context-param>
     <param-name>contextPath</param-name>
-    <param-value>http://localhost:8088/BaiTapLon/</param-value>
+    <param-value>http://localhost:8080/BaiTapLon/</param-value>
   </context-param>
   <servlet>
     <servlet-name>HomeController</servlet-name>

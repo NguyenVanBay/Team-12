@@ -23,10 +23,12 @@
 		<div id="main">
 			<div class="menu">
 				<ul>
-					<li><a href="index.html">TRANG CHỦ</a></li>
+					<li><a href="${pageContext.request.contextPath}/">TRANG
+							CHỦ</a></li>
 
 					<%
 						ArrayList<Category> categorys = (ArrayList) request.getAttribute("categorys");
+						ArrayList<New> news = (ArrayList) request.getAttribute("news");
 
 						for (Category c : categorys) {
 					%>
@@ -45,17 +47,21 @@
 				</ul>
 			</div>
 			<div class="main_top">
+
+				<%
+					ArrayList<New> BaTinDau = new NewDAO().get3TinChinh();
+				%>
+
 				<div class="top1" style="width: 757px; height: 450px;">
-					<a href=""><img src="img/top-post1.jpg" alt="">
-						<h5 id="text">tiêu dề bài viết 1</h5></a>
+					<a href="${pageContext.request.contextPath}/chi-tiet?id=<%= BaTinDau.get(0).getPk_news_id() %>"><img src="${pageContext.request.contextPath}/admin/upload/<%= BaTinDau.get(0).getC_img() %>" alt=""></a>
 
 				</div>
 				<div class="top2">
 					<div class="top21">
-						<a href="chitiet.html"><img src="img/top-post2.jpg" alt=""></a>
+						<a href="${pageContext.request.contextPath}/chi-tiet?id=<%= BaTinDau.get(1).getPk_news_id() %>"><img src="${pageContext.request.contextPath}/admin/upload/<%= BaTinDau.get(1).getC_img() %>" alt=""></a>
 					</div>
 					<div class="top21">
-						<a href="chitiet.html"><img src="img/top-post3.jpg" alt=""></a>
+						<a href="${pageContext.request.contextPath}/chi-tiet?id=<%= BaTinDau.get(2).getPk_news_id() %>"><img src="${pageContext.request.contextPath}/admin/upload/<%= BaTinDau.get(2).getC_img() %>" alt=""></a>
 					</div>
 				</div>
 				<div style="clear: both;"></div>
@@ -65,35 +71,42 @@
 
 				<div id="left">
 
-					<%
-						for (Category c : categorys) {
-					%>
+
 
 					<div class="tin1">
-						<div class="text1">TIN MỚI NHÂT</div>
+						<div class="text1">Tin Tức trong ngày</div>
 						<%
-							long id = c.getPk_category_news_id();
-								for (New tin : new NewDAO().getNewByCategoryId(id)) {
+							for (New tin : news) {
 						%>
 						<div class="news">
-							<a href="${pageContext.request.contextPath}/chi-tiet?id=<%= tin.getPk_news_id() %>"><img src="${pageContext.request.contextPath}/admin/upload/<%= tin.getC_img() %>" alt=""></a>
+							<a
+								href="${pageContext.request.contextPath}/chi-tiet?id=<%= tin.getPk_news_id() %>"><img
+								src="${pageContext.request.contextPath}/admin/upload/<%= tin.getC_img() %>"
+								alt=""></a>
 							<div class="description">
 								<div class="text2" style="text-decoration: none;">
-									<a href="${pageContext.request.contextPath}/chi-tiet?id=<%= tin.getPk_news_id() %>"><%= tin.getC_name() %></a>
+									<a
+										href="${pageContext.request.contextPath}/chi-tiet?id=<%= tin.getPk_news_id() %>"><%=tin.getC_name()%></a>
 								</div>
-								<p><%= tin.getC_description() %></p>
+								<p><%=tin.getC_description()%></p>
 							</div>
 						</div>
 						<div style="clear: both;"></div>
 						<%
 							}
 						%>
+
 					</div>
+					<ul class="pagination">
+						<li><a
+							href="${pageContext.request.contextPath}/?page=<%= ((int)request.getAttribute("page") - 1) %>"
+							class="prev"> Previous </a></li>
+						<li><a
+							href="${pageContext.request.contextPath}?page=<%= ((int)request.getAttribute("page") + 1) %>"
+							class="next"> Next </a></li>
+					</ul>
 					<div style="clear: both;"></div>
-				
-				<%
-					}
-				%></div>
+				</div>
 
 				<div class="right-box">
 					<%
@@ -110,11 +123,14 @@
 							%>
 
 							<div class="right1">
-								<a href="${pageContext.request.contextPath}/chi-tiet?id=<%= tin.getPk_news_id() %>"><img
+								<a
+									href="${pageContext.request.contextPath}/chi-tiet?id=<%= tin.getPk_news_id() %>"><img
 									src="${pageContext.request.contextPath}/admin/upload/<%= tin.getC_img() %>"
 									alt=""></a>
 								<div class="text-right">
-									<a href="${pageContext.request.contextPath}/chi-tiet?id=<%= tin.getPk_news_id() %>" style="text-decoration: none;"> <%=tin.getC_description()%></a>
+									<a
+										href="${pageContext.request.contextPath}/chi-tiet?id=<%= tin.getPk_news_id() %>"
+										style="text-decoration: none;"> <%=tin.getC_description()%></a>
 								</div>
 							</div>
 							<%
