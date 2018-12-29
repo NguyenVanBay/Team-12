@@ -46,7 +46,7 @@ public class CheckoutController extends HttpServlet {
 
 		// check login. nếu chưa login sang trang login.
 		if (null == session.getAttribute("idUser")) {
-			session.setAttribute("url", "http://localhost:8088/Book/cart?command=list");
+			session.setAttribute("url", getServletContext().getInitParameter("contextPath") + "/Book/cart?command=list");
 			// User is not logged in.
 			response.sendRedirect("/Book/dang-nhap-dang-ki");
 			return;
