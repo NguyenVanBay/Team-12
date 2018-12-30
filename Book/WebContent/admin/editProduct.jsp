@@ -34,17 +34,23 @@
 				sửa sản phẩm :
 				<%=product.getName()%>
 			</h3>
-			<a href="${pageContext.request.contextPath}/admin/product?action=list">Danh sách sản phẩm</a>
+			<a
+				href="${pageContext.request.contextPath}/admin/product?action=list">Danh
+				sách sản phẩm</a>
 		</div>
 
-		<p style="color: red; font-size: 20px"><%="edit".equals(request.getParameter("error")) ? "Sửa không thành công" : ""%></p>
+		<p style="color: red; font-size: 20px">
+			<%="edit".equals(request.getParameter("error")) ? "Sửa không thành công" : ""%>
+		</p>
 
 
-		<form action="${pageContext.request.contextPath}/admin/product" method="post">
+		<form id="editProduct"
+			action="${pageContext.request.contextPath}/admin/product"
+			method="post"  enctype="multipart/form-data">
 
-<input type="hidden" name="action" value="edit"/>
+			<input type="hidden" name="action" value="edit" />
 			<input name="id" type="hidden" value="<%=product.getId()%>" />
-
+			<input name="idCategory" type="hidden" value="<%=product.getCategory().getId()%>" />
 			<div class="form-group">
 				<label for="text-input" class=" form-control-label">Tên sản
 					phẩm</label> <input type="text" id="text-input" name="name"
@@ -65,7 +71,8 @@
 					%>
 					<option
 						<%=(c.getId().equals(product.getCategory().getId())) ? "selected" : ""%>
-						value="<%=c.getId()%>">
+						value="
+						<%=c.getId()%>">
 						<%=c.getName()%>
 					</option>
 					<%
@@ -114,8 +121,8 @@
 			<div class=" form-group">
 				<label for="text-input" class=" form-control-label">Giới
 					thiệu</label> <input type="text" id="text-input" name="title"
-					value="<%=product.getTitle()%>"
-					placeholder="Giới thiệu tổng quan" class="form-control">
+					value="<%=product.getTitle()%>" placeholder="Giới thiệu tổng quan"
+					class="form-control">
 			</div>
 
 			<div class="form-group">
@@ -138,6 +145,85 @@
 						value="sellMultiple">Bán chạy</option>
 				</select>
 			</div>
+
+
+
+			<div>
+				<label>Cập nhật ảnh</label> <input type="radio" name="changeimg"
+					onchange="changeImg()" value="true" style="display: inline-block; margin-right: 20px;"> <label>Hủy cập
+					nhật ảnh</label> <input checked=""  type="radio" name="changeimg"
+					onchange="changeImg()" value="false"><br><br>
+			</div><br>
+
+			<div id="thumbnail" class=" form-group"></div>
+
+			<div id="imageDetail" class=" form-group"></div>
+
+			<script>
+				function changeImg() {
+
+					var status;
+					var radios = document.getElementsByName('changeimg');
+
+					for (var i = 0, length = radios.length; i < length; i++) {
+						if (radios[i].checked) {
+							status = radios[i].value;
+							break;
+						}
+					}
+
+					if (status == "false") {
+						document.getElementById("thumbnail").innerHTML = "";
+						document.getElementById("imageDetail").innerHTML = "";
+					} else {
+
+						//
+						var divTo = document.createElement("div");
+						divTo.setAttribute("class", "form-group");
+						divTo.setAttribute("id", "thumbnail");
+
+						var label = document.createElement("label");
+						var node = document.createTextNode("Thumbnail");
+						label.appendChild(node);
+						label.setAttribute("style", "margin-right: 5px");
+
+						var input = document.createElement("input");
+						input.setAttribute("type", "file");
+						input.setAttribute("name", "thumbnail");
+
+						divTo.appendChild(label);
+						divTo.appendChild(input);
+
+						var element = document.getElementById("editProduct");
+						var elementChild = document.getElementById("thumbnail");
+
+						element.replaceChild(divTo, elementChild);
+
+						// 
+						var divTo1 = document.createElement("div");
+						divTo1.setAttribute("class", "form-group");
+						divTo1.setAttribute("id", "imageDetail");
+
+						var label1 = document.createElement("label");
+
+						var node1 = document.createTextNode("Image Detail");
+						label1.appendChild(node1);
+						label1.setAttribute("style", "margin-right: 5px");
+
+						var input1 = document.createElement("input");
+						input1.setAttribute("type", "file");
+						input1.setAttribute("name", "imageDetail");
+
+						divTo1.appendChild(label1);
+						divTo1.appendChild(input1);
+
+						var elementChild1 = document
+								.getElementById("imageDetail");
+						element.replaceChild(divTo1, elementChild1);
+					}
+
+				}
+			</script>
 
 			<div class="form-group">
 				<label for="text-input" class=" form-control-label">Thumbnail</label>

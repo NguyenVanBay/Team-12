@@ -2,6 +2,9 @@ package admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -119,7 +122,13 @@ public class ProductController extends HttpServlet {
 			rd.forward(request, response);
 			return;
 		case "delete" :
+			
 			id = Long.parseLong(request.getParameter("id"));
+			Product productTemp = new ProductDAO().getProductById(id);
+			
+			Files.delete(new File(Constant.UPLOAD_DIRECTORY + "/" + productTemp.getThumbnail().getName()).toPath());
+			Files.delete(new File(Constant.UPLOAD_DIRECTORY + "/" + productTemp.getListImage().get(0).getName()).toPath());
+			
 			new ProductDAO().deleteById(id);
 			response.sendRedirect(this.getServletContext().getInitParameter("contextPath") + "admin/product?action=list");
 			return;
@@ -157,6 +166,7 @@ public class ProductController extends HttpServlet {
 		
 		// thêm sản phẩm
 		case "add":
+			
 			userName = request.getParameter("name");
 			idCategory = request.getParameter("idCategory");
 			author = request.getParameter("author");
@@ -266,8 +276,21 @@ public class ProductController extends HttpServlet {
 		product.setType(type);
 		product.setUrl(url);
 
-		new ProductDAO().editProduct(product);
-
+		if(new ProductDAO().editProduct(product)) {
+			if(request.getParameter("changeimg").equals("false")) {
+				System.out.println(product.getThumbnail().getName());
+				System.out.println(product.getListImage().get(0).getName());
+			} else {
+				
+				Part part1 = request.getPart("thumbnail");
+				Part part2 = request.getPart("imageDetail");
+				String savePath1 = Constant.UPLOAD_DIRECTORY + File.separator + product.getThumbnail().getName();
+				String savePath2 = Constant.UPLOAD_DIRECTORY + File.separator + product.getListImage().get(0).getName();
+			
+				part1.write(savePath1 + File.separator);
+				part2.write(savePath2 + File.separator);
+			}
+		}
 		response.sendRedirect("/Book/admin/product?action=list");
 		return;
 		}

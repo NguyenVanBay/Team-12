@@ -149,7 +149,7 @@ public class ProductDAO implements ProductInterface {
 		ArrayList<Long> allCategory = new ArrayList<>();
 
 			Connection connection = DBConnect.getConnection();
-			String sql = "SELECT * FROM products ";
+			String sql = "SELECT * FROM products ORDER BY id DESC limit ";
 			PreparedStatement ps;
 			try {
 				ps = connection.prepareCall(sql);
@@ -208,7 +208,7 @@ public class ProductDAO implements ProductInterface {
 		ArrayList<Long> allCategory = new ArrayList<>();
 
 			Connection connection = DBConnect.getConnection();
-			String sql = "SELECT * FROM products limit " + page * 10 + " , 10";
+			String sql = "SELECT * FROM products ORDER BY id DESC limit " + page * 10 + " , 10";
 			PreparedStatement ps;
 			try {
 				ps = connection.prepareCall(sql);
@@ -267,7 +267,7 @@ public class ProductDAO implements ProductInterface {
 
 		try {
 			Connection connection = DBConnect.getConnection();
-			String sql = "SELECT * FROM products where id_category = ?";
+			String sql = "SELECT * FROM products where id_category = ? ";
 			PreparedStatement ps = connection.prepareCall(sql);
 			ps.setLong(1, categoryId);
 			ResultSet rs = ps.executeQuery();
@@ -383,7 +383,6 @@ public class ProductDAO implements ProductInterface {
 			preparedStmt.execute();
 
 			connection.close();
-			
 
 		} catch (SQLException ex) {
 			Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -401,19 +400,19 @@ public class ProductDAO implements ProductInterface {
 			String sql = "SELECT * FROM products where 1 = 1 ";
 			
 			if(name != "") {
-				sql += " AND name like '%" + name + "%'";
+				sql += " AND name like '%" + name + "%' ";
 			}
 			
 			if(author != "") {
-				sql += " AND author like '%" + author + "%'";
+				sql += " AND author like '%" + author + "%' ";
 			}
 			
 			if(title != "") {
-				sql += " AND title like '%" + title + "%'";
+				sql += " AND title like '%" + title + "%' ";
 			}
 			
 			if(idCategory != "-1") {
-				sql += " AND id_category = " + idCategory + "";
+				sql += " AND id_category = " + idCategory + " ";
 			}
 			
 			if(priceFrom != "" && priceTo != "") {
@@ -424,9 +423,8 @@ public class ProductDAO implements ProductInterface {
 				sql += " AND public BETWEEN '"+ publicFrom +"' AND '" + publicTo +"' ";
 			}
 			
-			sql += "limit " + page * 10 + " , 10";
+			sql += " ORDER BY id DESC limit " + page * 10 + " , 10 ";
 			
-			System.out.println("truy van " + sql);
 			
 			PreparedStatement ps = connection.prepareCall(sql);
 
@@ -495,9 +493,8 @@ public class ProductDAO implements ProductInterface {
 			if(publicFrom != "" && publicTo != "") {
 				sql += " AND public BETWEEN '"+ publicFrom +"' AND '" + publicTo +"' ";
 			}
-			
+			sql += " ORDER BY id DESC ";
 			System.out.println(sql);
-			
 			PreparedStatement ps = connection.prepareCall(sql);
 
 			ResultSet rs = ps.executeQuery();
@@ -558,4 +555,14 @@ public class ProductDAO implements ProductInterface {
 		}
 		return false;
 	}
+	
+	public static void main(String[] args) {
+		ArrayList<Product> listProduct = new ProductDAO().getAll();
+	
+		for(Product pr : listProduct) {
+			System.out.println(pr.getName());
+		}
+		
+	}
 }
+
